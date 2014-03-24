@@ -7,4 +7,9 @@ class LcmsController extends BaseController {
         return View::make('lcms.main_panel');
 	}
 
+	public function pagesIndex()
+	{
+		return View::make('lcms.pages_index');
+	}
+
 }

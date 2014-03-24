@@ -50,3 +50,12 @@
 		}
 	}
 }
+
+.lcms_modal {
+	padding: 30px;
+	width: 700px;
+
+	@media(max-width: 700px) {
+		width: 450px;
+	}
+}

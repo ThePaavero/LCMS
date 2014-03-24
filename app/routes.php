@@ -13,3 +13,4 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('/lcms/get_main_panel', 'LcmsController@getMainPanel');
+Route::get('/lcms/pages', 'LcmsController@pagesIndex');

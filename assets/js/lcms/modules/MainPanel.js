@@ -2,6 +2,7 @@
 LCMS.Modules.MainPanel = function() {
 
 	var panel;
+	var main_links;
 
 	this.init = function()
 	{
@@ -9,6 +10,7 @@ LCMS.Modules.MainPanel = function() {
 
 		loadPanel(function()
 		{
+			main_links = panel.find('nav > ul > li > a').not('.noajax');
 			doListeners();
 		});
 	};
@@ -27,7 +29,13 @@ LCMS.Modules.MainPanel = function() {
 
 	var doListeners = function()
 	{
-		//
+		main_links.colorbox();
+		/*main_links.on('click', function(e)
+		{
+			e.preventDefault();
+			console.log(':D');
+			return false;
+		});*/
 	};
 
 	var createMainPanelContainer = function()
