@@ -37,13 +37,14 @@
 					padding: 0px 10px;
 					border-left: solid 1px #525252;
 					text-align: center;
+					text-decoration: none;
 				}
 
 				&:first-child {
 					//
 
 					a {
-						border: none;
+						border-left: none;
 					}
 				}
 			}

@@ -74,9 +74,10 @@
           color: #fff;
           padding: 0px 10px;
           border-left: solid 1px #525252;
-          text-align: center; }
+          text-align: center;
+          text-decoration: none; }
         #lcms_main_panel nav ul li:first-child a {
-          border: none; }
+          border-left: none; }
 
 .lcms_modal {
   padding: 30px;
