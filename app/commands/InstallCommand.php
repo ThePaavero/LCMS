@@ -5,11 +5,11 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Custom install script for xxx Laravel Framework
+ * Custom install script for Laravel CMS
  *
- * @author Pekka Siiriäinen <pekka.siiriainen@xxxx.com>
- * @package xxx Laravel Framework
- * @copyright 2013 xxxx
+ * @author Pekka Siiriäinen <pekka@astudios.org>
+ * @package Laravel CMS
+ * @copyright 2013 Pekka Siiriäinen, Jaakko Tepponen
  */
 class InstallCommand extends Command {
 
@@ -25,7 +25,7 @@ class InstallCommand extends Command {
 	 *
 	 * @var string
 	 */
-	protected $description = 'Custom install script for xxx Laravel Framework.';
+	protected $description = 'Custom install script for Laravel CMS Framewor';
 
 	/**
 	 * Create a new command instance
@@ -44,7 +44,7 @@ class InstallCommand extends Command {
 	 */
 	public function fire()
 	{
-		$this->info('xxx Laravel 4 Installer');
+		$this->info('Laravel CMS 4 Installer');
 		$this->info('---------------------------------');
 
 		$this->chmodStorageDir();
