@@ -12,4 +12,9 @@ class LcmsController extends BaseController {
 		return View::make('lcms.pages_index');
 	}
 
+	public function createPage()
+	{
+		echo '<pre>'; print_r($_POST); echo '</pre>';
+	}
+
 }

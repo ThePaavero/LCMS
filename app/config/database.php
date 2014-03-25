@@ -60,7 +60,7 @@ return array(
 			'password'  => '123',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
-			'prefix'    => 'laravel_template_',
+			'prefix'    => 'lcms_',
 		),
 
 		'pgsql' => array(
