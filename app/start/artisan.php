@@ -13,3 +13,4 @@
 
 Artisan::add(new ShowUsersCommand);
 Artisan::add(new InstallCommand);
+Artisan::add(new LcmsCommand);

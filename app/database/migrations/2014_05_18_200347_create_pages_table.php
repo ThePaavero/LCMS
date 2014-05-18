@@ -5,33 +5,22 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreatePagesTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
 	public function up()
 	{
 		Schema::create('pages', function(Blueprint $table) {
 			$table->increments('id');
-			$table->string('title');
-			$table->string('url');
-			$table->integer('lang');
-			$table->dateTime('published');
-			$table->softDeletes();
 			$table->timestamps();
+			$table->softDeletes();
+			$table->string('url', 80)->unique();
+			$table->string('title');
+			$table->text('description');
+			$table->integer('template')->unsigned()->index();
+			$table->datetime('published');
 		});
 	}
 
-
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
 	public function down()
 	{
 		Schema::drop('pages');
 	}
-
 }
