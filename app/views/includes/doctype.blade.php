@@ -27,8 +27,8 @@
 
     <script src='{{ URL::to('assets/js/autoloads.min.js') }}'></script>
 
-    @if(Sentry::check())
     <script src='{{ URL::to('assets/js/lcms.min.js') }}'></script>
-    @endif
+
+    <meta name='lcms_page_id' value='{{ isset($data['page_id']) ? $data['page_id'] : '0' }}'/>
 
 </head>

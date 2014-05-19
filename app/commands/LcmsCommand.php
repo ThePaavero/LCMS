@@ -118,7 +118,7 @@ class LcmsCommand extends Command {
 END;
 		file_put_contents($path, $content);
 
-		$this->info('Done.');
+		$this->info('Database row and template file created.');
 	}
 
 }

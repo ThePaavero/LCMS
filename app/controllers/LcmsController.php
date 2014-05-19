@@ -2,19 +2,41 @@
 
 class LcmsController extends BaseController {
 
-	public function getMainPanel()
+	public function getMainPanel($page_id = 0)
 	{
+		$data = null;
+
+		if($page_id > 0)
+		{
+			$data = Page::find($page_id);
+		}
+
         return View::make('lcms.main_panel');
 	}
 
-	public function pagesIndex()
+	public function createNewPage($page_id = 0)
 	{
-		return View::make('lcms.pages_index');
+		$data = null;
+
+		if($page_id > 0)
+		{
+			$data = Page::find($page_id);
+		}
+
+		return View::make('lcms.new_page_form')->with(array('data' => $data));
 	}
 
-	public function createPage()
+	public function createNewPageSubmit()
 	{
-		echo '<pre>'; print_r($_POST); echo '</pre>';
+		$page           = new Page;
+		$page->title    = Input::get('title');
+		$page->url      = Input::get('url');
+		$page->template = Input::get('template');
+		$page->published = new DateTime;
+		$page->save();
+
+		Alert::success('Page created')->flash();
+		return Redirect::back();
 	}
 
 }
