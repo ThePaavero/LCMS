@@ -48,9 +48,7 @@ class LcmsController extends BaseController {
 
 	public function loadPage($uri = '')
 	{
-		$output = $this->cms->renderPage($uri);
-
-		echo '<pre>'; print_r($output); echo '</pre>';
+		echo (string) $this->cms->renderPage($uri);
 	}
 
 }

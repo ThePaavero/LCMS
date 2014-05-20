@@ -1,4 +1,4 @@
-<h1>{{ $content['title'] }}</h1>
-<div class='content'>
-	{{ $content['body'] }}
-</div><!-- content -->
+
+<h1>{{ $data['blocks']['Title']['contents'] }}</h1>
+
+<p>{{ $data['blocks']['Body']['contents'] }}</p>

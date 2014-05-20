@@ -42,6 +42,7 @@ class CMS {
 
 		// Pull data for this page
 		$page = Page::find($page_id);
+		$page_data = $page->get()->toArray();
 
 		// Gather all blocks for this page
 		$blocks = $page->blocks()->get()->toArray();
@@ -55,11 +56,22 @@ class CMS {
 			$rendered_blocks[$type['name']] = $this->tempRender($i);
 		}
 
-		echo '<pre>'; print_r($rendered_blocks); echo '</pre>';
-
 		// Get the template
+		$template_data      = $page->template()->get()->toArray()[0];
+		$template_file_path = app_path() . '/views/lcms/templates/' . $template_data['name'] . '.blade.php';
+
+		if( ! file_exists($template_file_path))
+		{
+			die('lol 500, template file does not exist');
+		}
+
 		// Throw all of our rendered output to the template
+		$to_template = [
+			'blocks' => $rendered_blocks
+		];
+
 		// Return the rendered template's output
+		return View::make('lcms/templates/' . $template_data['name'], array('data' => $to_template));
 	}
 
 	public function uriToPageId($uri = '')

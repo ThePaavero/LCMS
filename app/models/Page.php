@@ -14,7 +14,7 @@ class Page extends Eloquent {
 
 	public function template()
 	{
-		return $this->hasOne('Template', 'page');
+		return $this->belongsTo('Template', 'template');
 	}
 
 }
