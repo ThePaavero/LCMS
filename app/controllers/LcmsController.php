@@ -2,6 +2,13 @@
 
 class LcmsController extends BaseController {
 
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->cms = new CMS;
+	}
+
 	public function getMainPanel($page_id = 0)
 	{
 		$data = null;
@@ -37,6 +44,13 @@ class LcmsController extends BaseController {
 
 		Alert::success('Page created')->flash();
 		return Redirect::back();
+	}
+
+	public function loadPage($uri = '')
+	{
+		$output = $this->cms->renderPage($uri);
+
+		echo '<pre>'; print_r($output); echo '</pre>';
 	}
 
 }
