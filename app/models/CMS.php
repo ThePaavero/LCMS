@@ -42,18 +42,17 @@ class CMS {
 
 		// Pull data for this page
 		$page = Page::find($page_id);
-		$page_data = $page->get()->toArray();
+		$page_data = $page->toArray();
 
 		// Gather all blocks for this page
 		$blocks = $page->blocks()->get()->toArray();
-
 		$rendered_blocks = array();
 
 		// Iterate them and render their output
 		foreach($blocks as $i)
 		{
 			$type = BlockType::find($i['type']);
-			$rendered_blocks[$type['name']] = $this->tempRender($i);
+			$rendered_blocks[$type['name']] = $this->renderBlockType($type['name'], $i);
 		}
 
 		// Get the template
@@ -71,7 +70,12 @@ class CMS {
 		];
 
 		// Return the rendered template's output
-		return View::make('lcms/templates/' . $template_data['name'], array('data' => $to_template));
+		$page_view = View::make('lcms/templates/' . $template_data['name'], array('data' => $to_template));
+
+		return View::make('maintemplate', array(
+			'page'  => 'pages.lcms_container',
+			'title' => $page_data['title'],
+		))->with(array('cms_template' => $page_view));
 	}
 
 	public function uriToPageId($uri = '')
@@ -86,10 +90,19 @@ class CMS {
 		return $data[0]['id'];
 	}
 
-	public function tempRender($block)
+	public function renderBlockType($type_name, $block)
 	{
-		// @todo This is just a temp method, these will have their own
-		// "plugin" classes for each block type...
+		$model_class_name = 'Render' . $type_name;
+
+		if( ! class_exists($model_class_name))
+		{
+			$block['contents'] = '[ERROR: Render class "' . $model_class_name . '" does not exist]';
+			return $block;
+		}
+
+		$renderer = new $model_class_name($block);
+		return $renderer->returnBlock();
+
 		return $block;
 	}
 
