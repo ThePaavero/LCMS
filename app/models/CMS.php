@@ -48,11 +48,14 @@ class CMS {
 		$blocks = $page->blocks()->get()->toArray();
 		$rendered_blocks = array();
 
+		// Set editable flag
+		$editable = true; // @todo This should be true only if admin is logged
+
 		// Iterate them and render their output
 		foreach($blocks as $i)
 		{
 			$type = BlockType::find($i['type']);
-			$rendered_blocks[$type['name']] = $this->renderBlockType($type['name'], $i);
+			$rendered_blocks[$type['name']] = $this->renderBlockType($type['name'], $i, $editable);
 		}
 
 		// Get the template
@@ -90,7 +93,7 @@ class CMS {
 		return $data[0]['id'];
 	}
 
-	public function renderBlockType($type_name, $block)
+	public function renderBlockType($type_name, $block, $editable = false)
 	{
 		$model_class_name = 'Render' . $type_name;
 
@@ -100,10 +103,15 @@ class CMS {
 			return $block;
 		}
 
-		$renderer = new $model_class_name($block);
+		$renderer = new $model_class_name($block, $editable);
 		return $renderer->returnBlock();
 
 		return $block;
+	}
+
+	public function getBlockOfType($type_name)
+	{
+		return ':D';
 	}
 
 }
