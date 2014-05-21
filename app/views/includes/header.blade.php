@@ -1,7 +1,5 @@
 <header id='common_header'>
 
-	<h1>Common Header</h1>
-
-	{{-- LCMS::getMainNavigation() --}}
+	<h1>{{ CMS::block(6) }}</h1>
 
 </header><!-- header -->

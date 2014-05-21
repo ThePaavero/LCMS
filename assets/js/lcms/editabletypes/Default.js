@@ -24,6 +24,11 @@ LCMS.EditableTypes.Default = function() {
 
 	var makeEditable = function()
 	{
+		if( ! block.attr('id'))
+		{
+			block.attr('id', 'u_' +  Date.now());
+		}
+
 		tools = new LCMS.Modules.BlockTools(block, [
 			{
 				fn   : actionSave,
@@ -34,6 +39,11 @@ LCMS.EditableTypes.Default = function() {
 				fn   : actionCancel,
 				slug : 'cancel',
 				title: 'Cancel'
+			},
+			{
+				fn   : actionToRich,
+				slug : 'rich',
+				title: 'Rich Editor'
 			}
 		]);
 
@@ -70,6 +80,13 @@ LCMS.EditableTypes.Default = function() {
 		restoreContent();
 		undoEditable();
 		tools.destroy();
+	};
+
+	var actionToRich = function()
+	{
+		tinymce.init({
+			selector: '#' + block.attr('id')
+		});
 	};
 
 	var restoreContent = function()

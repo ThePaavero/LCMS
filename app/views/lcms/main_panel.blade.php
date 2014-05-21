@@ -1,5 +1,5 @@
 
-<h2>LCMS Main Panel</h2>
+<h2>CMS</h2>
 
 <nav>
 	<ul>
