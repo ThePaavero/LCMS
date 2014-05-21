@@ -3,10 +3,12 @@ LCMS.EditableTypes.Default = function() {
 
 	var block;
 	var tools;
+	var block_id;
 
 	this.init = function(_block)
 	{
-		block = _block;
+		block    = _block;
+		block_id = block.attr('data-id');
 
 		doEditableListener();
 		doOnBlurListener();
@@ -21,15 +23,15 @@ LCMS.EditableTypes.Default = function() {
 	{
 		tools = new LCMS.Modules.BlockTools(block, [
 			{
-				fn   : save,
+				fn   : actionSave,
 				slug : 'save',
 				title: 'Save'
 			},
 			{
-				fn   : cancel,
+				fn   : actionCancel,
 				slug : 'cancel',
 				title: 'Cancel'
-			},
+			}
 		]);
 		tools.init();
 
@@ -48,15 +50,48 @@ LCMS.EditableTypes.Default = function() {
 		block.attr('contenteditable', false);
 	};
 
-	var save = function()
+	var actionSave = function()
 	{
 		console.log('Saving...');
+		var new_content = block.html();
+		updateContent(new_content, function()
+		{
+			undoEditable();
+			tools.destroy();
+		});
 	};
 
-	var cancel = function()
+	var actionCancel = function()
 	{
 		undoEditable();
 		tools.destroy();
+	};
+
+	var updateContent = function(content, callback)
+	{
+		var data = JSON.stringify({
+			'content': content,
+			'block_id': block_id
+		});
+
+		$.ajax({
+			url         : _root + 'lcms/update_content',
+			type        : 'POST',
+			contentType : 'application/json',
+			data        : data,
+			dataType    : 'json',
+			success     : function(response)
+			{
+				if(response.success)
+				{
+					block.html(response.content_received);
+					callback();
+					return;
+				}
+
+				console.error('Failed to update content on server for some reason.');
+			}
+		});
 	};
 
 };

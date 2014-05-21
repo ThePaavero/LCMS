@@ -114,4 +114,11 @@ class CMS {
 		return ':D';
 	}
 
+	public function updateContent($block_id, $new_content)
+	{
+		$block = Block::find($block_id);
+		$block->contents = $new_content;
+		$block->save();
+	}
+
 }
