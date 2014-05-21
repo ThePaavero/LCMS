@@ -1,5 +1,5 @@
 <footer id='common_footer'>
 
-	<p>Common Footer</p>
+	{{ CMS::block(5) }}
 
 </footer><!-- common_footer -->

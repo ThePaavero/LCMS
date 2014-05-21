@@ -2,6 +2,8 @@
 
 class CMS {
 
+	public static $user_can_edit = true; // @todo Actually check for this...
+
 	public function __construct()
 	{
 		// TODO...
@@ -130,6 +132,18 @@ class CMS {
 		$archived->block = $block_id;
 		$archived->contents = $current_content;
 		$archived->save();
+	}
+
+	public static function block($id)
+	{
+		$block = Block::find($id);
+
+		if(self::$user_can_edit)
+		{
+			$block->contents = '<span class="cms_editable" data-id="' . $block->id . '" data-type="Default">' . $block->contents . '</span>';
+		}
+
+		return $block->contents;
 	}
 
 }
