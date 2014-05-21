@@ -6,35 +6,23 @@ LCMS.Modules.Editables = function() {
 	this.init = function()
 	{
 		blocks = $('.cms_editable');
-
-		doListeners();
+		blocks.each(render);
 	};
 
-	var doListeners = function()
+	var render = function()
 	{
-		blocks.on('dblclick', makeEditable);
-	};
-
-	var makeEditable = function(e)
-	{
-		e.preventDefault();
 		var type = $(this).attr('data-type');
 
-		var instance;
-
-		try
+		if(typeof LCMS.EditableTypes[type] === 'undefined')
 		{
-			var editabletype = LCMS.EditableTypes[type];
-			instance = new editabletype();
-		}
-		catch(exception)
-		{
-			console.error('Does the EditableType "' + type + '" exist?');
-			console.error(exception);
-			return;
+			console.warn('Type "' + type + '" does not exist, falling back to default text...');
+			type = 'Default';
 		}
 
-		instance.init();
+		var editabletype = LCMS.EditableTypes[type];
+		var instance = new editabletype();
+
+		instance.init($(this));
 	};
 
 };

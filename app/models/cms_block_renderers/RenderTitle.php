@@ -4,7 +4,7 @@ class RenderTitle {
 
 	public function __construct($block, $editable = false)
 	{
-		$this->block     = $block;
+		$this->block    = $block;
 		$this->editable = $editable;
 	}
 
