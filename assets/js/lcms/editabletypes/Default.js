@@ -4,11 +4,14 @@ LCMS.EditableTypes.Default = function() {
 	var block;
 	var tools;
 	var block_id;
+	var revert_content_to;
 
 	this.init = function(_block)
 	{
 		block    = _block;
 		block_id = block.attr('data-id');
+
+		revert_content_to = block.html();
 
 		doEditableListener();
 		doOnBlurListener();
@@ -63,8 +66,14 @@ LCMS.EditableTypes.Default = function() {
 
 	var actionCancel = function()
 	{
+		restoreContent();
 		undoEditable();
 		tools.destroy();
+	};
+
+	var restoreContent = function()
+	{
+		block.html(revert_content_to);
 	};
 
 	var updateContent = function(content, callback)
