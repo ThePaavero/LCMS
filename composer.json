@@ -20,10 +20,10 @@
 			"app/commands",
 			"app/controllers",
 			"app/models",
+			"app/models/cms_block_renderers",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php",
-			"app/lib/DemoLib"
+			"app/tests/TestCase.php"
 		],
 		"files": [
 			"app/helpers/general_helpers.php"

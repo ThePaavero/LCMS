@@ -14,5 +14,7 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('/lcms/get_main_panel', 'LcmsController@getMainPanel');
-Route::get('/lcms/pages', 'LcmsController@pagesIndex');
-Route::post('/lcms/create_page', 'LcmsController@createPage');
+Route::get('/lcms/create_page/{page_id?}', 'LcmsController@createNewPage');
+Route::post('/lcms/create_page/{page_id?}', 'LcmsController@createNewPageSubmit');
+
+Route::get('/{segments}', 'LcmsController@loadPage')->where('segments', '(.*)');

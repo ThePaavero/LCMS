@@ -13,7 +13,7 @@ class CreatePagesTable extends Migration {
 			$table->softDeletes();
 			$table->string('url', 80)->unique();
 			$table->string('title');
-			$table->text('description');
+			$table->text('description')->nullable();
 			$table->integer('template')->unsigned()->index();
 			$table->datetime('published');
 		});

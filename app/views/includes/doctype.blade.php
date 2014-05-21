@@ -9,7 +9,7 @@
 
     <meta charset=UTF-8>
 
-    <title>{{ (isset($data['title']) ? (htmlspecialchars($data['title']) . ' | ') : '') . htmlspecialchars(Config::get('app.site_name')) }}</title>
+    <title>{{ (isset($title) ? (htmlspecialchars($title) . ' | ') : '') . htmlspecialchars(Config::get('app.site_name')) }}</title>
 
     <link rel='stylesheet' href='{{ URL::to('assets/css/project.min.css') }}'>
     {{-- <meta name='viewport' content='width=device-width,initial-scale=1'> --}}
@@ -27,8 +27,8 @@
 
     <script src='{{ URL::to('assets/js/autoloads.min.js') }}'></script>
 
-    @if(Sentry::check())
     <script src='{{ URL::to('assets/js/lcms.min.js') }}'></script>
-    @endif
+
+    <meta name='lcms_page_id' value='{{ isset($data['page_id']) ? $data['page_id'] : '0' }}'/>
 
 </head>

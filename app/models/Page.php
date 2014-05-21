@@ -7,14 +7,14 @@ class Page extends Eloquent {
 	protected $softDelete = true;
 	protected $fillable = array('url', 'title', 'description', 'template', 'published');
 
-	public function hasBlocks()
+	public function blocks()
 	{
-		return $this->hasMany('Block', 'id');
+		return $this->hasMany('Block', 'page');
 	}
 
-	public function hasTemplate()
+	public function template()
 	{
-		return $this->hasOne('Template', 'id');
+		return $this->belongsTo('Template', 'template');
 	}
 
 }

@@ -11,9 +11,9 @@ class CreateBlocksTable extends Migration {
 			$table->increments('id');
 			$table->timestamps();
 			$table->softDeletes();
-			$table->string('name', 30)->unique();
 			$table->integer('type')->unsigned()->index();
 			$table->integer('page')->unsigned()->index();
+			$table->text('contents');
 		});
 	}
 

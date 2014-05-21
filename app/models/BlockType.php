@@ -1,6 +1,6 @@
 <?php
 
-class BlockTypes extends Eloquent {
+class BlockType extends Eloquent {
 
 	protected $table = 'block_types';
 	public $timestamps = true;

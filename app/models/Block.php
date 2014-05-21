@@ -5,16 +5,11 @@ class Block extends Eloquent {
 	protected $table = 'blocks';
 	public $timestamps = true;
 	protected $softDelete = true;
-	protected $fillable = array('name', 'type', 'page');
-
-	public function getContents()
-	{
-		return $this->hasMany('Content', 'block');
-	}
+	protected $fillable = array('type', 'page', 'contents');
 
 	public function belongsToType()
 	{
-		return $this->belongsTo('BlockTypes', 'id');
+		return $this->belongsTo('BlockType', 'id');
 	}
 
 	public function belongsToPage()

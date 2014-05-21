@@ -4,11 +4,15 @@ class TemplateTableSeeder extends Seeder {
 
 	public function run()
 	{
-		//DB::table('templates')->delete();
+		DB::table('templates')->delete();
 
-		// template_seeder
 		Template::create(array(
-				'name' => 'default'
+				'name'        => 'basic',
+				'description' => 'Basic Template'
+			));
+		Template::create(array(
+				'name'        => 'landing_page',
+				'description' => 'Landing Page'
 			));
 	}
 }

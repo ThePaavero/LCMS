@@ -12,6 +12,7 @@ class CreateTemplatesTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 			$table->string('name', 30);
+			$table->text('description')->nullable();
 		});
 	}
 
