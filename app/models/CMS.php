@@ -121,4 +121,15 @@ class CMS {
 		$block->save();
 	}
 
+	public function cloneBlockToHistory($block_id)
+	{
+		$current = Block::find($block_id);
+		$current_content = $current->contents;
+
+		$archived = new BlockHistory;
+		$archived->block = $block_id;
+		$archived->contents = $current_content;
+		$archived->save();
+	}
+
 }

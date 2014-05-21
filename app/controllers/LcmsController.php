@@ -56,6 +56,8 @@ class LcmsController extends BaseController {
 		$block_id    = Input::get('block_id');
 		$new_content = Input::get('content');
 
+		$this->cms->cloneBlockToHistory($block_id);
+
 		$this->cms->updateContent($block_id, $new_content);
 
 		return Response::json([
