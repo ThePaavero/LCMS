@@ -15,7 +15,6 @@ LCMS.Modules.Editables = function() {
 
 		if(typeof LCMS.EditableTypes[type] === 'undefined')
 		{
-			console.warn('Type "' + type + '" does not exist, falling back to default text...');
 			type = 'Default';
 		}
 

@@ -36,6 +36,7 @@ LCMS.EditableTypes.Default = function() {
 				title: 'Cancel'
 			}
 		]);
+
 		tools.init();
 
 		block.addClass('contenteditable');
@@ -94,6 +95,7 @@ LCMS.EditableTypes.Default = function() {
 				if(response.success)
 				{
 					block.html(response.content_received);
+					revert_content_to = response.content_received;
 					callback();
 					return;
 				}
