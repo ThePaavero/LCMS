@@ -19,7 +19,18 @@ LCMS.EditableTypes.Default = function() {
 
 	var makeEditable = function()
 	{
-		tools = new LCMS.Modules.BlockTools(block);
+		tools = new LCMS.Modules.BlockTools(block, [
+			{
+				fn   : save,
+				slug : 'save',
+				title: 'Save'
+			},
+			{
+				fn   : cancel,
+				slug : 'cancel',
+				title: 'Cancel'
+			},
+		]);
 		tools.init();
 
 		block.addClass('contenteditable');
@@ -35,6 +46,17 @@ LCMS.EditableTypes.Default = function() {
 	{
 		block.removeClass('contenteditable');
 		block.attr('contenteditable', false);
+	};
+
+	var save = function()
+	{
+		console.log('Saving...');
+	};
+
+	var cancel = function()
+	{
+		undoEditable();
+		tools.destroy();
 	};
 
 };

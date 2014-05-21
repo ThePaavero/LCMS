@@ -1,7 +1,8 @@
 
-LCMS.Modules.BlockTools = function(_block) {
+LCMS.Modules.BlockTools = function(_block, _actions) {
 
-	var block = _block;
+	var block   = _block;
+	var actions = _actions;
 	var box;
 	var block_id;
 
@@ -12,6 +13,11 @@ LCMS.Modules.BlockTools = function(_block) {
 		block_id = block.attr('data-id');
 		removePossibleOldBox();
 		createBox();
+	};
+
+	this.destroy = function()
+	{
+		$(box).remove();
 	};
 
 	var removePossibleOldBox = function()
@@ -26,9 +32,15 @@ LCMS.Modules.BlockTools = function(_block) {
 		$(box).attr('data-block_id', block_id);
 
 		var html = '';
-		html += '<a href="#save">Save</a>';
-		html += '<a href="#cancel">Cancel</a>';
-		html += '<a href="#history">History</a>';
+
+		for(var i in actions)
+		{
+			var a     = actions[i];
+			var slug  = a.slug;
+			var title = a.title;
+			html += '<a href="#' + slug + '">' + title + '</a>';
+		}
+
 		html += '</div>';
 
 		box.innerHTML = html;
@@ -56,22 +68,14 @@ LCMS.Modules.BlockTools = function(_block) {
 	{
 		e.preventDefault();
 		var action = $(this).attr('href').split('#')[1];
-		self[action]();
-	};
-
-	this.save = function()
-	{
-		console.log('Saving');
-	};
-
-	this.cancel = function()
-	{
-		console.log('Canceling');
-	};
-
-	this.history = function()
-	{
-		console.log('History');
+		for(var i in actions)
+		{
+			if(actions[i].slug === action)
+			{
+				var fn = actions[i].fn;
+				fn();
+			}
+		}
 	};
 
 };
