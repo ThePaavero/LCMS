@@ -43,20 +43,21 @@ module.exports = function(grunt) {
 		cssmin: {
 			project: {
 				files: {
-					'.tmp/assets/css/project.min.css': [
+					'.tmp/assets/css/project.css': [
 						'.tmp/assets/css/project.css'
 					]
 				}
 			},
 			lcms: {
 				files: {
-					'.tmp/assets/css/lcms.min.css': [
+					'.tmp/assets/css/lcms.css': [
 						'.tmp/assets/css/lcms.css'
 					]
 				}
 			}
 		},
 
+		/* Only Dev */
 		concat: {
 			lcms: {
 				src: ['assets/lcms/js/lcms.js', 'assets/lcms/js/**/*.js'],
@@ -94,9 +95,16 @@ module.exports = function(grunt) {
 			colorbox: {
 				files: [
 					{
-						src: 'bower_components/jquery-colorbox/example1/**/*',
+						src: 'bower_components/jquery-colorbox/example1/*.css',
 						expand: true,
 						dest: 'public_html/assets/lib/jquery-colorbox/',
+						flatten: true,
+						filter: 'isFile'
+					},
+					{
+						src: 'bower_components/jquery-colorbox/example1/images/*',
+						expand: true,
+						dest: 'public_html/assets/lib/jquery-colorbox/images/',
 						flatten: true,
 						filter: 'isFile'
 					}
@@ -152,7 +160,7 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('quickbuild', [
-		'newer:sass',
+		'sass',
 		'newer:concat',
 		'copy'
 	]);
