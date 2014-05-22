@@ -22,7 +22,7 @@
         var _root = "{{ URL::to('') }}/";
     </script>
 
-    <script src="{{ URL::to('assets/js/prject.min.js') }}"></script>
+    <script src="{{ URL::to('assets/js/project.min.js') }}"></script>
 
     <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
     <script src="{{ URL::to('assets/js/lcms.min.js') }}"></script>
