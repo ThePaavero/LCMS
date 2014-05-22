@@ -69,12 +69,23 @@ module.exports = function(grunt) {
 		},
 
 		copy: {
-			assets: {
+			assets_css: {
 				files: [
 					{
-						src: '.tmp/assets/*',
+						src: '.tmp/assets/css/*',
 						expand: true,
-						dest: 'public_html/assets/',
+						dest: 'public_html/assets/css/',
+						flatten: true,
+						filter: 'isFile'
+					}
+				]
+			},
+			assets_js: {
+				files: [
+					{
+						src: '.tmp/assets/js/*',
+						expand: true,
+						dest: 'public_html/assets/js/',
 						flatten: true,
 						filter: 'isFile'
 					}
@@ -110,7 +121,8 @@ module.exports = function(grunt) {
 		},
 
 		clean: [
-			'.tmp/'
+			'.tmp/',
+			'public_html/assets/*'
 		],
 
 		watch: {
@@ -146,6 +158,7 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('build', [
+		'clean',
 		'bower',
 		'uglify',
 		'sass',
