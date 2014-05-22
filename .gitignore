@@ -5,3 +5,4 @@ phpmyadmin
 .sass-cache
 vagrant
 .tmp
+public_html/assets/*
