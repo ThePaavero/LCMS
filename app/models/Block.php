@@ -17,4 +17,9 @@ class Block extends Eloquent {
 		return $this->belongsTo('Page', 'id');
 	}
 
+	public function hasHistory()
+	{
+		return $this->hasMany('BlockHistory');
+	}
+
 }

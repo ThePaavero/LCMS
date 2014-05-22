@@ -25,6 +25,7 @@
     <script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
     <script src="{{ URL::to('assets/js/project.min.js') }}"></script>
 
+    {{-- todo: Check user permissions before this --}}
     @include('lcms.asset_includes')
 
     <meta name='lcms_page_id' value="{{ isset($data['page_id']) ? $data['page_id'] : '0' }}"/>
