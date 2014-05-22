@@ -12,6 +12,7 @@
     <title>{{ (isset($title) ? (htmlspecialchars($title) . ' | ') : '') . htmlspecialchars(Config::get('app.site_name')) }}</title>
 
     <link rel='stylesheet' href="{{ URL::to('assets/css/project.css') }}">
+    <link rel='stylesheet' href="{{ URL::to('assets/lib/jquery-colorbox/colorbox.css') }}">
     {{-- <meta name='viewport' content='width=device-width,initial-scale=1'> --}}
 
     <!--[if lt IE 9]>
@@ -22,9 +23,11 @@
         var _root = "{{ URL::to('') }}/";
     </script>
 
+    <script src="{{ URL::to('assets/lib/jquery/jquery.js') }}"></script>
+    <script src="{{ URL::to('assets/lib/jquery-colorbox/jquery.colorbox.js') }}"></script>
+
     <script src="{{ URL::to('assets/js/project.min.js') }}"></script>
 
-    <script src="{{ URL::to('assets/lib/jquery/jquery.js') }}"></script>
     <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
     <script src="{{ URL::to('assets/js/lcms.min.js') }}"></script>
 
