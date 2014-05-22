@@ -26,5 +26,15 @@ class BlocksTableSeeder extends Seeder {
 				'page'     => 0,
 				'contents' => 'Editable Footer'
 			));
+		Block::create(array(
+				'type'     => 1,
+				'page'     => 4,
+				'contents' => 'Title for Landing Page'
+			));
+		Block::create(array(
+				'type'     => 2,
+				'page'     => 4,
+				'contents' => 'Body for Landing Page'
+			));
 	}
 }

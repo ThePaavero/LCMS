@@ -29,5 +29,13 @@ class PageTableSeeder extends Seeder {
 				'description' => '',
 				'published'   => new DateTime
 			));
+
+		Page::create(array(
+				'title'       => 'Landing Page',
+				'url'         => 'landing_page_test',
+				'template'    => 2,
+				'description' => 'Landing Page Test Description',
+				'published'   => new DateTime
+			));
 	}
 }
