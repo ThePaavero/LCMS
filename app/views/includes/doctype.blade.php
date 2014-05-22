@@ -24,9 +24,7 @@
     <script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
     <script src="{{ URL::to('assets/js/project.min.js') }}"></script>
 
-    <link rel='stylesheet' href='{{ URL::to('assets/css/lcms.css') }}'>
-    <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
-    <script src="{{ URL::to('assets/js/lcms.min.js') }}"></script>
+    @include('lcms.asset_includes')
 
     <meta name='lcms_page_id' value="{{ isset($data['page_id']) ? $data['page_id'] : '0' }}"/>
 

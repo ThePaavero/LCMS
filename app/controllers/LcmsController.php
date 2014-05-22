@@ -66,4 +66,12 @@ class LcmsController extends BaseController {
 			]);
 	}
 
+	public function getHistoryForBlock($block_id)
+	{
+		$history = new BlockHistory;
+		$data    = $history->belongsToBlock($block_id)->get()->toArray();
+
+		return View::make('lcms.history_for_block')->with(array('data' => $data));
+	}
+
 }

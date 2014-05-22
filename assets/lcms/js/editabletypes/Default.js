@@ -44,6 +44,11 @@ LCMS.EditableTypes.Default = function() {
 				fn   : actionToRich,
 				slug : 'rich',
 				title: 'Rich Editor'
+			},
+			{
+				fn   : actionHistory,
+				slug : 'history',
+				title: 'History'
 			}
 		]);
 
@@ -87,6 +92,11 @@ LCMS.EditableTypes.Default = function() {
 		tinymce.init({
 			selector: '#' + block.attr('id')
 		});
+	};
+
+	var actionHistory = function()
+	{
+		$.colorbox({href: _root + 'lcms/get_history_for_block/' + block_id});
 	};
 
 	var restoreContent = function()
