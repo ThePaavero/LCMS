@@ -95,18 +95,12 @@ module.exports = function(grunt) {
 			colorbox: {
 				files: [
 					{
-						src: 'bower_components/jquery-colorbox/example1/*.css',
+						src: '**',
 						expand: true,
 						dest: 'public_html/assets/lib/jquery-colorbox/',
-						flatten: true,
-						filter: 'isFile'
-					},
-					{
-						src: 'bower_components/jquery-colorbox/example1/images/*',
-						expand: true,
-						dest: 'public_html/assets/lib/jquery-colorbox/images/',
-						flatten: true,
-						filter: 'isFile'
+						flatten: false,
+						filter: 'isFile',
+						cwd: 'bower_components/jquery-colorbox/example1/'
 					}
 				]
 			}
