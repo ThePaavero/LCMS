@@ -1,54 +1,155 @@
 
 module.exports = function(grunt) {
 
+	require('time-grunt')(grunt);
+	require('jit-grunt')(grunt, {
+		bower: 'grunt-bower-task'
+	});
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		banner: '/*! <%= pkg.name %>\n <%= grunt.template.today("yyyy-mm-dd") %>\n Author:<%= pkg.author %>\n License: <%= pkg.license %>\n*/\n',
+
 		uglify: {
-			'options': {
-			},
-			'minify-custom-scripts': {
+			lcms: {
 				files: {
-					'public_html/assets/js/autoloads.min.js': ['assets/js/main.js', 'assets/js/autoload/**/*.js'],
-					'public_html/assets/js/lcms.min.js': ['assets/js/lcms.js', ['assets/js/lcms/lcms.js', 'assets/js/lcms/**/*.js']]
+					'.tmp/assets/js/lcms.min.js': ['assets/lcms/js/lcms.js', 'assets/lcms/js/**/*.js']
+				}
+			},
+			project: {
+				files: {
+					'.tmp/assets/js/project.min.js': ['assets/project/js/main.js', 'assets/project/js/autoload/**/*.js'],
 				}
 			}
 		},
+
 		sass: {
-			dist: {
+			lcms: {
 				files: {
-					'assets/css/project.css': ['assets/scss/project.scss']
+					'.tmp/assets/css/lcms.css': [
+						'assets/lcms/scss/lcms.scss'
+					]
+				}
+			},
+			project: {
+				files: {
+					'.tmp/assets/css/project.css': [
+						'assets/project/scss/project.scss',
+					]
 				}
 			}
 		},
+
 		cssmin: {
-			combine: {
+			project: {
 				files: {
-					'public_html/assets/css/project.min.css': ['assets/css/project.css']
+					'.tmp/assets/css/project.min.css': [
+						'.tmp/assets/css/project.css'
+					]
+				}
+			},
+			lcms: {
+				files: {
+					'.tmp/assets/css/lcms.min.css': [
+						'.tmp/assets/css/lcms.css'
+					]
 				}
 			}
 		},
+
+		concat: {
+			lcms: {
+				src: ['assets/lcms/js/lcms.js', 'assets/lcms/js/**/*.js'],
+				dest: '.tmp/assets/js/lcms.min.js'
+			},
+			project: {
+				src: ['assets/project/js/main.js', 'assets/project/js/autoload/**/*.js'],
+				dest: '.tmp/assets/js/project.min.js'
+			}
+		},
+
+		copy: {
+			assets: {
+				files: [
+					{
+						src: '.tmp/assets/*',
+						expand: true,
+						dest: 'public_html/assets/',
+						flatten: true,
+						filter: 'isFile'
+					}
+				]
+			},
+			colorbox: {
+				files: [
+					{
+						src: 'bower_components/jquery-colorbox/example1/**/*',
+						expand: true,
+						dest: 'public_html/assets/lib/jquery-colorbox/',
+						flatten: true,
+						filter: 'isFile'
+					}
+				]
+			}
+		},
+
+		bower: {
+			src: {
+				options: {
+					targetDir: 'public_html/assets/lib/',
+					layout: 'byComponent',
+					install: false,
+					verbose: true,
+					cleanTargetDir: true,
+					cleanBowerDir: false,
+					bowerOptions: {
+						production: true
+					}
+				}
+			}
+		},
+
+		clean: [
+			'.tmp/'
+		],
+
 		watch: {
-			scss: {
-				files: 'assets/scss/**/*.scss',
-				tasks: ['sass']
-			},
-			css: {
-				files: 'assets/css/*.css',
-				tasks: ['cssmin']
-			},
-			js: {
-				files: ['assets/js/**/*.js'],
-				tasks : ['uglify']
+			dev: {
+				files: [
+					'assets/js/**/*.js',
+					'assets/scss/**/*.scss',
+				],
+				tasks : ['quickbuild']
 			},
 			options: {
 				livereload: false
 			}
 		}
+
 	});
 
-	require('load-grunt-tasks')(grunt);
+	grunt.registerTask('default', [
+		'build'
+	]);
 
-	grunt.registerTask('default', ['uglify', 'sass', 'cssmin']);
-	grunt.registerTask('dev', ['watch']);
+	grunt.registerTask('dev', [
+		'clean',
+		'bower',
+		'quickbuild',
+		'watch'
+	]);
+
+	grunt.registerTask('quickbuild', [
+		'newer:sass',
+		'newer:concat',
+		'copy'
+	]);
+
+	grunt.registerTask('build', [
+		'bower',
+		'uglify',
+		'sass',
+		'cssmin',
+		'copy'
+	]);
 };

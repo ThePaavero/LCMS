@@ -19,17 +19,14 @@
     <![endif]-->
 
     <script>
-    var _root = '{{ URL::to('') }}/';
+        var _root = "{{ URL::to('') }}/";
     </script>
 
-    <script src='//ajax.googleapis.com/ajax/libs/jquery/{{ Config::get('app.jquery_version') }}/jquery.min.js'></script>
-    <script>window.jQuery || document.write('<script src="{{ URL::to('assets/js/lib/jquery-' . Config::get('app.jquery_version') . '.min.js') }}"><\/script>')</script>
+    <script src="{{ URL::to('assets/js/prject.min.js') }}"></script>
 
-    <script src='{{ URL::to('assets/js/autoloads.min.js') }}'></script>
+    <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+    <script src="{{ URL::to('assets/js/lcms.min.js') }}"></script>
 
-    <script src='//tinymce.cachefly.net/4.0/tinymce.min.js'></script>
-    <script src='{{ URL::to('assets/js/lcms.min.js') }}'></script>
-
-    <meta name='lcms_page_id' value='{{ isset($data['page_id']) ? $data['page_id'] : '0' }}'/>
+    <meta name='lcms_page_id' value="{{ isset($data['page_id']) ? $data['page_id'] : '0' }}"/>
 
 </head>
