@@ -1,0 +1,21 @@
+{
+  "name": "LCMS",
+  "version": "0.0.0",
+  "authors": [
+    "Pekka Siiriäinen",
+    "Jaakko Tepponen"
+  ],
+  "license": "All Rights Reserved",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "jquery-colorbox": "~1.5.9"
+  }
+}
