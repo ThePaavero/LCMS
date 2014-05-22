@@ -128,8 +128,8 @@ module.exports = function(grunt) {
 		watch: {
 			dev: {
 				files: [
-					'assets/js/**/*.js',
-					'assets/scss/**/*.scss',
+					'assets/**/*.js',
+					'assets/**/*.scss',
 				],
 				tasks : ['quickbuild']
 			},

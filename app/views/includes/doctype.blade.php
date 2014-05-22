@@ -11,7 +11,7 @@
 
     <title>{{ (isset($title) ? (htmlspecialchars($title) . ' | ') : '') . htmlspecialchars(Config::get('app.site_name')) }}</title>
 
-    <link rel='stylesheet' href='{{ URL::to('assets/css/project.min.css') }}'>
+    <link rel='stylesheet' href='{{ URL::to('assets/css/project.css') }}'>
     {{-- <meta name='viewport' content='width=device-width,initial-scale=1'> --}}
 
     <!--[if lt IE 9]>
@@ -21,9 +21,10 @@
     <script>
         var _root = "{{ URL::to('') }}/";
     </script>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+    <script src="{{ URL::to('assets/js/project.min.js') }}"></script>
 
-    <script src="{{ URL::to('assets/js/prject.min.js') }}"></script>
-
+    <link rel='stylesheet' href='{{ URL::to('assets/css/lcms.css') }}'>
     <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
     <script src="{{ URL::to('assets/js/lcms.min.js') }}"></script>
 
