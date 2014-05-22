@@ -6,7 +6,7 @@ return array(
 	 * Site name -- human form, e.g. 'Project N'. Used in <title> and maybe
 	 * other places.
 	 */
-	'site_name' => 'Laravel 4 Template',
+	'site_name' => 'Laravel 4 CMS Proto',
 
 	/**
 	 * jQuery version to be included.

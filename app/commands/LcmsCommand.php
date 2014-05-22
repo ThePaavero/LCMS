@@ -48,6 +48,10 @@ class LcmsCommand extends Command {
 			case 'template':
 				$this->createTemplate();
 				break;
+
+			case 'block':
+				$this->createBlock();
+				break;
 		}
 	}
 
@@ -119,6 +123,29 @@ END;
 		file_put_contents($path, $content);
 
 		$this->info('Database row and template file created.');
+	}
+
+	public function createBlock()
+	{
+		$content = trim($this->ask('Initial content?'));
+
+		if(empty($content))
+		{
+			$content = '---';
+		}
+
+		$this->info('Creating block...');
+
+		$block = new Block;
+
+		$block->contents = $content;
+		$block->type     = 0;
+		$block->page     = 0;
+
+		$block->save();
+		$id = $block->id;
+
+		$this->info('Block ID: ' . $id);
 	}
 
 }

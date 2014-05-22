@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 			'minify-custom-scripts': {
 				files: {
 					'public_html/assets/js/autoloads.min.js': ['assets/js/main.js', 'assets/js/autoload/**/*.js'],
-					'public_html/assets/js/lcms.min.js': ['assets/js/lcms.js', 'assets/js/lcms/**/*.js']
+					'public_html/assets/js/lcms.min.js': ['assets/js/lcms.js', ['assets/js/lcms/lcms.js', 'assets/js/lcms/**/*.js']]
 				}
 			}
 		},

@@ -22,6 +22,11 @@ class CreateForeignKeys extends Migration {
 						->onDelete('restrict')
 						->onUpdate('restrict');
 		});
+		Schema::table('block_history', function(Blueprint $table) {
+			$table->foreign('block')->references('id')->on('blocks')
+						->onDelete('restrict')
+						->onUpdate('restrict');
+		});
 	}
 
 	public function down()
@@ -34,6 +39,9 @@ class CreateForeignKeys extends Migration {
 		});
 		Schema::table('blocks', function(Blueprint $table) {
 			$table->dropForeign('blocks_page_foreign');
+		});
+		Schema::table('block_history', function(Blueprint $table) {
+			$table->dropForeign('block_history_block_foreign');
 		});
 	}
 }

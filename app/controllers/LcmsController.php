@@ -51,4 +51,19 @@ class LcmsController extends BaseController {
 		echo (string) $this->cms->renderPage($uri);
 	}
 
+	public function updateContent()
+	{
+		$block_id    = Input::get('block_id');
+		$new_content = Input::get('content');
+
+		$this->cms->cloneBlockToHistory($block_id);
+
+		$this->cms->updateContent($block_id, $new_content);
+
+		return Response::json([
+				'success'          => true,
+				'content_received' => $new_content
+			]);
+	}
+
 }

@@ -2,6 +2,8 @@
 
 class CMS {
 
+	public static $user_can_edit = true; // @todo Actually check for this...
+
 	public function __construct()
 	{
 		// TODO...
@@ -48,11 +50,14 @@ class CMS {
 		$blocks = $page->blocks()->get()->toArray();
 		$rendered_blocks = array();
 
+		// Set editable flag
+		$editable = true; // @todo This should be true only if admin is logged
+
 		// Iterate them and render their output
 		foreach($blocks as $i)
 		{
 			$type = BlockType::find($i['type']);
-			$rendered_blocks[$type['name']] = $this->renderBlockType($type['name'], $i);
+			$rendered_blocks[$type['name']] = $this->renderBlockType($type['name'], $i, $editable);
 		}
 
 		// Get the template
@@ -90,7 +95,7 @@ class CMS {
 		return $data[0]['id'];
 	}
 
-	public function renderBlockType($type_name, $block)
+	public function renderBlockType($type_name, $block, $editable = false)
 	{
 		$model_class_name = 'Render' . $type_name;
 
@@ -100,10 +105,45 @@ class CMS {
 			return $block;
 		}
 
-		$renderer = new $model_class_name($block);
+		$renderer = new $model_class_name($block, $editable);
 		return $renderer->returnBlock();
 
 		return $block;
+	}
+
+	public function getBlockOfType($type_name)
+	{
+		return ':D';
+	}
+
+	public function updateContent($block_id, $new_content)
+	{
+		$block = Block::find($block_id);
+		$block->contents = $new_content;
+		$block->save();
+	}
+
+	public function cloneBlockToHistory($block_id)
+	{
+		$current = Block::find($block_id);
+		$current_content = $current->contents;
+
+		$archived = new BlockHistory;
+		$archived->block = $block_id;
+		$archived->contents = $current_content;
+		$archived->save();
+	}
+
+	public static function block($id)
+	{
+		$block = Block::find($id);
+
+		if(self::$user_can_edit)
+		{
+			$block->contents = '<span class="cms_editable" data-id="' . $block->id . '" data-type="Default">' . $block->contents . '</span>';
+		}
+
+		return $block->contents;
 	}
 
 }
