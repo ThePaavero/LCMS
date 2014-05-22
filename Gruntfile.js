@@ -43,20 +43,21 @@ module.exports = function(grunt) {
 		cssmin: {
 			project: {
 				files: {
-					'.tmp/assets/css/project.min.css': [
+					'.tmp/assets/css/project.css': [
 						'.tmp/assets/css/project.css'
 					]
 				}
 			},
 			lcms: {
 				files: {
-					'.tmp/assets/css/lcms.min.css': [
+					'.tmp/assets/css/lcms.css': [
 						'.tmp/assets/css/lcms.css'
 					]
 				}
 			}
 		},
 
+		/* Only Dev */
 		concat: {
 			lcms: {
 				src: ['assets/lcms/js/lcms.js', 'assets/lcms/js/**/*.js'],
@@ -152,7 +153,7 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('quickbuild', [
-		'newer:sass',
+		'sass',
 		'newer:concat',
 		'copy'
 	]);
