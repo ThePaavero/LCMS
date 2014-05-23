@@ -11,6 +11,11 @@ class BaseController extends Controller {
 		 * @var Object
 		 */
 		$this->user = Sentry::getUser();
+
+		App::bind('CMS', function()
+		{
+			return new CMS;
+		});
 	}
 
 	/**

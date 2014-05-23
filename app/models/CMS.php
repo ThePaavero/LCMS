@@ -2,7 +2,7 @@
 
 class CMS {
 
-	public static $user_can_edit = true; // @todo Actually check for this...
+	public $user_can_edit = true; // @todo Actually check for this...
 
 	public function __construct()
 	{
@@ -32,6 +32,88 @@ class CMS {
 	public function getBlock($id = 0)
 	{
 		// TODO...
+	}
+
+	public function getNestedSitemapArray()
+	{
+		$pages = Page::all()->toArray();
+		$nested = array();
+
+		// Sort the pages array by the page's depth (amount of "/"s)
+		foreach($pages as $key => $i)
+		{
+			$depth                = substr_count($i['url'], '/');
+			$pages[$key]['depth'] = $depth;
+		}
+
+		$pages = subval_sort($pages, 'depth', true);
+
+		// Get ready to grab IDs of pages we'll want to get rid of later on
+		// (from the first level of depth in our pages array)
+		$ids_to_remove_from_base_array = array();
+
+		// Do an all-times-all iteration...
+		foreach($pages as $key_a => $a)
+		{
+			// What level are we on?
+			$level_a = substr_count($a['url'], '/');
+
+			// Loop through all pages...
+			foreach($pages as $key_b => $b)
+			{
+				// What level are we on?
+				$level_b = substr_count($b['url'], '/');
+
+				// B must be at correct depth for us (our depth plus one)
+				if($level_b != $level_a + 1)
+				{
+					// Can't be our kid, next please...
+					continue;
+				}
+
+				// What indicates that B is a child of A?
+				$look_for = $a['url'] . '/';
+
+				if(strstr($b['url'], $look_for))
+				{
+					// B is a child of A
+					$pages[$key_b]['parent'] = $a['id'];
+				}
+			}
+		}
+
+		// Move each page with a parent under its parent
+		foreach($pages as $key => $i)
+		{
+			foreach($pages as $xkey => $x)
+			{
+				if( ! isset($x['parent']))
+				{
+					continue;
+				}
+
+				if($i['id'] === $x['parent'])
+				{
+					$pages[$key]['children'][] = $x;
+					$ids_to_remove_from_base_array[] = $x['id'];
+				}
+			}
+		}
+
+		// Get rid of all pages that have parents from the first level of
+		// the pages array
+		foreach($ids_to_remove_from_base_array as $id)
+		{
+			foreach($pages as $key => $i)
+			{
+				if($i['id'] === $id)
+				{
+					unset($pages[$key]);
+				}
+			}
+		}
+
+		return $pages;
 	}
 
 	public function renderPage($uri = '')
@@ -134,16 +216,23 @@ class CMS {
 		$archived->save();
 	}
 
-	public static function block($id)
+	public function block($id)
 	{
 		$block = Block::find($id);
 
-		if(self::$user_can_edit)
+		if($this->user_can_edit)
 		{
 			$block->contents = '<span class="cms_editable" data-id="' . $block->id . '" data-type="Default">' . $block->contents . '</span>';
 		}
 
 		return $block->contents;
+	}
+
+	public function sitemapAsNavigation()
+	{
+		$sitemap = $this->getNestedSitemapArray();
+
+		//
 	}
 
 }
