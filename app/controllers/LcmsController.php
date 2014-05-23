@@ -39,10 +39,13 @@ class LcmsController extends BaseController {
 	public function createNewPageSubmit()
 	{
 
-		$page            = new Page;
-		$page->title     = Input::get('title');
-		$page->url       = Input::get('url');
-		$page->template  = Input::get('template');
+		$template_id = Input::get('template');
+
+		$page           = new Page;
+		$page->title    = Input::get('title');
+		$page->url      = Input::get('url');
+		$page->template = $template_id;
+
 		$page->published = new DateTime;
 
 		// Parent? If so, prepend its URL to ours
@@ -53,6 +56,26 @@ class LcmsController extends BaseController {
 		}
 
 		$page->save();
+
+		$template = Template::find($template_id);
+
+		$template_blocktypes = TemplateBlockTypeLink::where('template', $template_id)->get()->toArray();
+
+		foreach($template_blocktypes as $template_blocktype)
+		{
+			$block_type_id = $template_blocktype['id'];
+
+			$block = new Block;
+			$block->type = $block_type_id;
+			$block->contents = BlockType::find($block_type_id)->name;
+			$block->page = $page->id;
+			$block->save();
+
+			$template_blocktype_link = new TemplateBlockTypeLink;
+			$template_blocktype_link->type = $template_blocktype['id'];
+			$template_blocktype_link->template = $template->id;
+			$template_blocktype_link->save();
+		}
 
 		Alert::success('Page created')->flash();
 		return Redirect::back();
