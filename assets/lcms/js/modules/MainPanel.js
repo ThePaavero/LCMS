@@ -12,6 +12,28 @@ LCMS.Modules.MainPanel = function() {
 		{
 			main_links = panel.find('nav > ul > li > a').not('.noajax');
 			doListeners();
+
+			var panel_state = localStorage.getItem('lcms_panel_state');
+			if(panel_state === 'open') {
+				$(panel).addClass('open');
+			}
+
+			// We don't want to animate the initial state
+			setTimeout(function(){
+				$(panel).addClass('animate');
+			}, 200);
+
+			panel.find('.handle').click(function(e){
+				e.preventDefault();
+
+				if($(panel).hasClass('open')){
+					$(panel).removeClass('open');
+					localStorage.setItem('lcms_panel_state', 'closed');
+				} else {
+					$(panel).addClass('open');
+					localStorage.setItem('lcms_panel_state', 'open');
+				}
+			});
 		});
 	};
 
