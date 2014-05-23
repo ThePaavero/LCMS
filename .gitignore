@@ -7,3 +7,4 @@ vagrant
 .tmp
 public_html/assets/*
 vendor/
+app/database/*.sqlite
