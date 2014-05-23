@@ -164,8 +164,9 @@ class CMS {
 		$page_view = View::make('lcms/templates/' . $template_data['name'], array('data' => $to_template));
 
 		return View::make('maintemplate', array(
-			'page'  => 'pages.lcms_container',
-			'title' => $page_data['title'],
+			'page'    => 'pages.lcms_container',
+			'title'   => $page_data['title'],
+			'page_id' => $page_data['id'],
 		))->with(array('cms_template' => $page_view));
 	}
 
@@ -225,11 +226,16 @@ class CMS {
 		return $block->contents;
 	}
 
-	public function sitemapAsNavigation()
+	public function sitemapAsNavigation($home = false)
 	{
 		$this->sitemap = $this->getNestedSitemapArray();
 
 		$html = '<ul>';
+
+		if($home === true)
+		{
+			$html .= '<li><a href="' . URL::to('') . '">Home</a></li>';
+		}
 
 		foreach($this->sitemap as $i)
 		{
@@ -254,6 +260,14 @@ class CMS {
 	{
 		// TODO...
 		return '';
+	}
+
+	public function getUrlForPage($id)
+	{
+		$data = Page::find($id)->toArray();
+		$url  = $data['url'];
+
+		return $url;
 	}
 
 }

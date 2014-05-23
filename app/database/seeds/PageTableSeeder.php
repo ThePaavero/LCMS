@@ -7,6 +7,14 @@ class PageTableSeeder extends Seeder {
 		DB::table('pages')->delete();
 
 		Page::create(array(
+				'title'       => 'Home',
+				'url'         => 'home',
+				'template'    => 1,
+				'description' => '',
+				'published'   => new DateTime
+			));
+
+		Page::create(array(
 				'title'       => 'About Us',
 				'url'         => 'about_us',
 				'template'    => 1,

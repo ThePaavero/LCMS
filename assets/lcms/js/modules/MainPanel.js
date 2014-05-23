@@ -22,7 +22,9 @@ LCMS.Modules.MainPanel = function() {
 			createMainPanelContainer();
 		}
 
-		var url = _root + 'lcms/get_main_panel';
+		var page_id = getCurrentPageId();
+
+		var url = _root + 'lcms/get_main_panel/' + page_id;
 
 		panel.load(url, callback);
 	};
@@ -42,6 +44,11 @@ LCMS.Modules.MainPanel = function() {
 	{
 		$('body').prepend('<div id="lcms_main_panel"></div>');
 		panel = $('#lcms_main_panel');
+	};
+
+	var getCurrentPageId = function()
+	{
+		return $('meta[name=lcms_page_id]').attr('value');
 	};
 
 };

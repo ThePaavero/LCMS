@@ -19,7 +19,10 @@
 		</p>
 		<p><label>Title<input type='text' name='title'></label></p>
 		<p><label>URL<input type='text' name='url'></label></p>
-		<p><input type='submit' value='Save'></p>
+		<p>
+			<input type='submit' value='Save'>
+			<input type='hidden' name='parent_id' value='{{ $data['parent'] }}'>
+		</p>
 	{{ Form::close() }}
 
 </div><!-- lcms_modal -->
