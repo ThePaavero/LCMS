@@ -23,13 +23,13 @@ $panel_width: 300px;
 	}
 
 	.handle {
+		text-decoration: none;
 		$handle_size: 40px;
 		display: block;
 		background: $lcms_gray;
 		float: right;
 		text-align: center;
 		margin-right: $handle_size * -1;
-		border-radius: 0px 7px 7px 0px;
 
 		.handle_content {
 			width: $handle_size;
@@ -37,10 +37,6 @@ $panel_width: 300px;
 			display: block;
 			color: #fff;
 			padding: 10px 0 5px;
-		}
-
-		.handle_content:before {
-			content:'\2261';
 			font-size: 20px;
 		}
 	}

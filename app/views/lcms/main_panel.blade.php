@@ -1,5 +1,5 @@
 <a href="#" class="handle">
-    <span class="handle_content"></span>
+    <span class="handle_content">≡</span>
 </a>
 
 <div class="content">
