@@ -13,7 +13,7 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/lcms/get_main_panel', 'LcmsController@getMainPanel');
+Route::get('/lcms/get_main_panel/{page_id?}', 'LcmsController@getMainPanel');
 Route::get('/lcms/create_page/{page_id?}', 'LcmsController@createNewPage');
 Route::post('/lcms/create_page/{page_id?}', 'LcmsController@createNewPageSubmit');
 Route::post('/lcms/update_content', 'LcmsController@updateContent');

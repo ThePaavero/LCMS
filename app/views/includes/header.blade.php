@@ -1,9 +1,10 @@
+
 <header id='common_header'>
 
 	<div class='cms_navigation'>
-		{{ $CMS->sitemapAsNavigation() }}
+		{{ $CMS->sitemapAsNavigation(false) }}
 	</div><!-- cms_navigation -->
 
-	<h1>{{ $CMS->block(3) }}</h1>
+	<h1>{{ $CMS->block(5) }}</h1>
 
 </header><!-- header -->

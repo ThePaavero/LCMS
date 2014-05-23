@@ -19,7 +19,7 @@ class LcmsController extends BaseController {
 			$data = Page::find($page_id);
 		}
 
-        return View::make('lcms.main_panel');
+        return View::make('lcms.main_panel')->with(array('data' => $data, 'page_id' => $page_id));
 	}
 
 	public function createNewPage($page_id = 0)
@@ -30,7 +30,7 @@ class LcmsController extends BaseController {
 
 		if($page_id > 0)
 		{
-			$data = Page::find($page_id);
+			$data['parent'] = $page_id;
 		}
 
 		return View::make('lcms.new_page_form')->with(array('data' => $data));
@@ -38,11 +38,20 @@ class LcmsController extends BaseController {
 
 	public function createNewPageSubmit()
 	{
-		$page           = new Page;
-		$page->title    = Input::get('title');
-		$page->url      = Input::get('url');
-		$page->template = Input::get('template');
+
+		$page            = new Page;
+		$page->title     = Input::get('title');
+		$page->url       = Input::get('url');
+		$page->template  = Input::get('template');
 		$page->published = new DateTime;
+
+		// Parent? If so, prepend its URL to ours
+		$parent_id = (int) Input::get('parent_id');
+		if($parent_id > 0)
+		{
+			$page->url = $this->cms->getUrlForPage($parent_id) . '/' . $page->url;
+		}
+
 		$page->save();
 
 		Alert::success('Page created')->flash();

@@ -28,6 +28,6 @@
     {{-- todo: Check user permissions before this --}}
     @include('lcms.asset_includes')
 
-    <meta name='lcms_page_id' value="{{ isset($data['page_id']) ? $data['page_id'] : '0' }}"/>
+    <meta name='lcms_page_id' value="{{ isset($page_id) ? $page_id : '0' }}"/>
 
 </head>
