@@ -6,3 +6,4 @@ phpmyadmin
 vagrant
 .tmp
 public_html/assets/*
+vendor/
