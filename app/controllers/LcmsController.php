@@ -50,7 +50,7 @@ class LcmsController extends BaseController {
 
 	public function loadPage($uri = '')
 	{
-		echo (string) $this->cms->renderPage($uri);
+		return (string) $this->cms->renderPage($uri);
 	}
 
 	public function updateContent()
