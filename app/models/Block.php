@@ -19,7 +19,7 @@ class Block extends Eloquent {
 
 	public function hasHistory()
 	{
-		return $this->hasMany('BlockHistory');
+		return $this->hasMany('BlockHistory', 'block');
 	}
 
 }

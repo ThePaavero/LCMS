@@ -70,10 +70,18 @@ class LcmsController extends BaseController {
 
 	public function getHistoryForBlock($block_id)
 	{
-		$history = new BlockHistory;
-		$data    = $history->belongsToBlock($block_id)->get()->toArray();
+		$data = array(
+				'history'     => Block::find($block_id)->hasHistory()->get()->toArray(),
+				'block_id'    => $block_id,
+				'instance_id' => 'history_' . $block_id
+			);
 
 		return View::make('lcms.history_for_block')->with(array('data' => $data));
+	}
+
+	public function getVersionForBlock($history_id)
+	{
+		return BlockHistory::find($history_id)->toJson();
 	}
 
 }
