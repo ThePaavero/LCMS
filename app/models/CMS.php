@@ -229,18 +229,31 @@ class CMS {
 	{
 		$this->sitemap = $this->getNestedSitemapArray();
 
+		$html = '<ul>';
+
 		foreach($this->sitemap as $i)
 		{
 			if(strstr($i['url'], '/'))
 			{
-				//
+				// We only want the first level pages first
+				continue;
 			}
+
+			$html .= '<li>';
+			$html .= '<a href="' . URL::to($i['url']) . '">' . $i['title'] . '</a>';
+			$html .= $this->childrenAsList($i['id']);
+			$html .= '</li>';
 		}
+
+		$html .= '</ul>';
+
+		return $html;
 	}
 
 	public function childrenAsList($id)
 	{
 		// TODO...
+		return '';
 	}
 
 }
