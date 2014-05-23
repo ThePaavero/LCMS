@@ -15,26 +15,38 @@ LCMS.Modules.MainPanel = function() {
 
 			var panel_state = localStorage.getItem('lcms_panel_state');
 			if(panel_state === 'open') {
-				$(panel).addClass('open');
+				openPanel();
 			}
 
 			// We don't want to animate the initial state
 			setTimeout(function(){
 				$(panel).addClass('animate');
+				$('#container').addClass('animate');
 			}, 200);
+
 
 			panel.find('.handle').click(function(e){
 				e.preventDefault();
 
 				if($(panel).hasClass('open')){
-					$(panel).removeClass('open');
-					localStorage.setItem('lcms_panel_state', 'closed');
+					closePanel();
 				} else {
-					$(panel).addClass('open');
-					localStorage.setItem('lcms_panel_state', 'open');
+					openPanel();
 				}
 			});
 		});
+	};
+
+	var openPanel = function() {
+		$('#container').addClass('open');
+		$(panel).addClass('open');
+		localStorage.setItem('lcms_panel_state', 'open');
+	};
+
+	var closePanel = function() {
+		$(panel).removeClass('open');
+		$('#container').removeClass('open');
+		localStorage.setItem('lcms_panel_state', 'closed');
 	};
 
 	var loadPanel = function(callback)

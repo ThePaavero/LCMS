@@ -85,6 +85,15 @@ $panel_width: 300px;
 	}
 }
 
+#container {
+	&.animate {
+		transition: 0.2s ease-in-out;
+	}
+	&.open {
+		transform: translateX($panel_width);
+	}
+}
+
 .lcms_modal {
 	padding: 30px;
 	width: 700px;
