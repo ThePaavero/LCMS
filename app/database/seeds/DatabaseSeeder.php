@@ -17,5 +17,8 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('BlocksTableSeeder');
 		$this->command->info('Blocks table seeded!');
+
+		$this->call('TemplateBlockTypeLinkTableSeeder');
+		$this->command->info('Template Block Type Link seeded');
 	}
 }
