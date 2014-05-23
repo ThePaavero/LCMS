@@ -3,6 +3,7 @@
 class CMS {
 
 	public $user_can_edit = true; // @todo Actually check for this...
+	public $sitemap;
 
 	public function __construct()
 	{
@@ -11,31 +12,32 @@ class CMS {
 
 	public function getAllPages()
 	{
-		// TODO...
+		return Page::all()->toArray();
 	}
 
 	public function getAllTemplates()
 	{
-		// TODO...
+		return Template::all()->toArray();
 	}
 
 	public function getAllBlockTypes()
 	{
-		// TODO...
+		return BlockType::all()->toArray();
 	}
 
-	public function getBlockType($id = 0)
-	{
-		// TODO...
-	}
-
-	public function getBlock($id = 0)
-	{
-		// TODO...
-	}
-
+	/**
+	 * Get an hierarchical array with all pages
+	 * Note: This was pretty much cloned from Q2
+	 *
+	 * @return array
+	 */
 	public function getNestedSitemapArray()
 	{
+		if(isset($this->sitemap))
+		{
+			return $this->sitemap;
+		}
+
 		$pages = Page::all()->toArray();
 		$nested = array();
 
@@ -113,6 +115,8 @@ class CMS {
 			}
 		}
 
+		$this->sitemap = $pages; // "Cache" this
+
 		return $pages;
 	}
 
@@ -189,13 +193,6 @@ class CMS {
 
 		$renderer = new $model_class_name($block, $editable);
 		return $renderer->returnBlock();
-
-		return $block;
-	}
-
-	public function getBlockOfType($type_name)
-	{
-		return ':D';
 	}
 
 	public function updateContent($block_id, $new_content)
@@ -230,9 +227,20 @@ class CMS {
 
 	public function sitemapAsNavigation()
 	{
-		$sitemap = $this->getNestedSitemapArray();
+		$this->sitemap = $this->getNestedSitemapArray();
 
-		//
+		foreach($this->sitemap as $i)
+		{
+			if(strstr($i['url'], '/'))
+			{
+				//
+			}
+		}
+	}
+
+	public function childrenAsList($id)
+	{
+		// TODO...
 	}
 
 }
