@@ -75,16 +75,14 @@ LCMS.EditableTypes.Default = function() {
 		var new_content = block.html();
 		updateContent(new_content, function()
 		{
-			undoEditable();
-			tools.destroy();
+			stopEditing();
 		});
 	};
 
 	var actionCancel = function()
 	{
 		restoreContent();
-		undoEditable();
-		tools.destroy();
+		stopEditing();
 	};
 
 	var actionToRich = function()
@@ -102,6 +100,13 @@ LCMS.EditableTypes.Default = function() {
 	var restoreContent = function()
 	{
 		block.html(revert_content_to);
+	};
+
+	var stopEditing = function()
+	{
+		undoEditable();
+		tools.destroy();
+		tinymce.remove('#' + block.attr('id'));
 	};
 
 	var updateContent = function(content, callback)
