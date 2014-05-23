@@ -3,11 +3,12 @@
 class CMS {
 
 	public $user_can_edit = true; // @todo Actually check for this...
+	public $pages;
 	public $sitemap;
 
 	public function __construct()
 	{
-		// TODO...
+		$this->pages = Page::all()->toArray();
 	}
 
 	public function getAllPages()
@@ -39,85 +40,40 @@ class CMS {
 		}
 
 		$pages = Page::all()->toArray();
-		$nested = array();
+		$depth_array = array();
 
-		// Sort the pages array by the page's depth (amount of "/"s)
-		foreach($pages as $key => $i)
+		foreach($pages as $page)
 		{
-			$depth                = substr_count($i['url'], '/');
-			$pages[$key]['depth'] = $depth;
+			$depth = substr_count($page['url'], '/');
+			$depth_array[$depth][] = $page;
 		}
 
-		$pages = subval_sort($pages, 'depth', true);
+		$depth_array = array_reverse($depth_array);
 
-		// Get ready to grab IDs of pages we'll want to get rid of later on
-		// (from the first level of depth in our pages array)
-		$ids_to_remove_from_base_array = array();
-
-		// Do an all-times-all iteration...
-		foreach($pages as $key_a => $a)
+		foreach($depth_array as $pages)
 		{
-			// What level are we on?
-			$level_a = substr_count($a['url'], '/');
+			$segments = explode('/', $page['url']);
+			array_pop($segments);
+			$parent_uri = implode('/', $segments);
 
-			// Loop through all pages...
-			foreach($pages as $key_b => $b)
-			{
-				// What level are we on?
-				$level_b = substr_count($b['url'], '/');
+			$parent = $this->getPageByUrl($parent_uri);
 
-				// B must be at correct depth for us (our depth plus one)
-				if($level_b != $level_a + 1)
-				{
-					// Can't be our kid, next please...
-					continue;
-				}
-
-				// What indicates that B is a child of A?
-				$look_for = $a['url'] . '/';
-
-				if(strstr($b['url'], $look_for))
-				{
-					// B is a child of A
-					$pages[$key_b]['parent'] = $a['id'];
-				}
-			}
-		}
-
-		// Move each page with a parent under its parent
-		foreach($pages as $key => $i)
-		{
-			foreach($pages as $xkey => $x)
-			{
-				if( ! isset($x['parent']))
-				{
-					continue;
-				}
-
-				if($i['id'] === $x['parent'])
-				{
-					$pages[$key]['children'][] = $x;
-					$ids_to_remove_from_base_array[] = $x['id'];
-				}
-			}
-		}
-
-		// Get rid of all pages that have parents from the first level of
-		// the pages array
-		foreach($ids_to_remove_from_base_array as $id)
-		{
-			foreach($pages as $key => $i)
-			{
-				if($i['id'] === $id)
-				{
-					unset($pages[$key]);
-				}
-			}
+			//$pages[$xkey]['parent'] = $parent;
 		}
 
 		$this->sitemap = $pages; // "Cache" this
-
 		return $pages;
+	}
+
+	public function getPageByUrl($url)
+	{
+		foreach($this->pages as $page)
+		{
+			if($page['url'] === $url)
+			{
+				return $page;
+			}
+		}
 	}
 
 	public function renderPage($uri = '')
@@ -247,7 +203,7 @@ class CMS {
 
 			$html .= '<li>';
 			$html .= '<a href="' . URL::to($i['url']) . '">' . $i['title'] . '</a>';
-			$html .= $this->childrenAsList($i['url']);
+			$html .= $this->childrenAsList($i); // This is where recursivity kicks in
 			$html .= '</li>';
 		}
 
@@ -256,16 +212,26 @@ class CMS {
 		return $html;
 	}
 
-	public function childrenAsList($url)
+	public function childrenAsList($parent)
 	{
-		$html = '';
+		if(empty($parent['children']))
+		{
+			return '';
+		}
 
-		// $this->CI->db->select('*');
-		// $this->CI->db->from($this->table['pages']);
-		// $this->CI->db->like('uri', $uri . '/');
-		// $kids = $this->CI->db->get()->result_array();
+		$html = '<ul>';
 
-		return '';
+		foreach($parent['children'] as $child)
+		{
+			$html .= '<li>';
+			$html .= '<a href="' . $child['url'] . '">' . $child['title'] . '</a>';
+			$html .= $this->childrenAsList($child);
+			$html .= '</li>';
+		}
+
+		$html .= '</ul>';
+
+		return $html;
 	}
 
 	public function getUrlForPage($id)
