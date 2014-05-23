@@ -23,7 +23,9 @@ class LcmsController extends BaseController {
 
 	public function createNewPage($page_id = 0)
 	{
-		$data = null;
+		$data = array(
+				'templates' => Template::all()->toArray()
+			);
 
 		if($page_id > 0)
 		{
