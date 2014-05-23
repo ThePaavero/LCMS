@@ -57,6 +57,16 @@ module.exports = function(grunt) {
 			}
 		},
 
+		autoprefixer: {
+			options: {
+				browsers: ['last 2 version']
+			},
+			prefix: {
+				src: '.tmp/assets/css/*.css'
+			},
+		},
+
+
 		/* Only Dev */
 		concat: {
 			lcms: {
@@ -155,6 +165,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('quickbuild', [
 		'sass',
+		'autoprefixer',
 		'newer:concat',
 		'copy'
 	]);
@@ -164,6 +175,7 @@ module.exports = function(grunt) {
 		'bower',
 		'uglify',
 		'sass',
+		'autoprefixer',
 		'cssmin',
 		'copy'
 	]);
