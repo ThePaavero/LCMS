@@ -4,18 +4,9 @@ class BaseController extends Controller {
 
 	public function __construct()
 	{
-		/**
-		 * Create a common user instance for quicker
-		 * user stuff in your controllers.
-		 *
-		 * @var Object
-		 */
 		$this->user = Sentry::getUser();
-
-		App::bind('CMS', function()
-		{
-			return new CMS;
-		});
+		$this->cms = new CMS;
+		View::share('CMS', $this->cms);
 	}
 
 	/**

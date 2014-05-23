@@ -5,9 +5,6 @@ class LcmsController extends BaseController {
 	public function __construct()
 	{
 		parent::__construct();
-
-		$this->cms = new CMS;
-		View::share('CMS', $this->cms);
 	}
 
 	public function getMainPanel($page_id = 0)
