@@ -21,7 +21,7 @@
 		<p><label>URL<input type='text' name='url'></label></p>
 		<p>
 			<input type='submit' value='Save'>
-			<input type='hidden' name='parent_id' value='{{ $data['parent'] }}'>
+			<input type='hidden' name='parent_id' value='{{ isset($data['parent']) ? $data['parent'] : 0 }}'>
 		</p>
 	{{ Form::close() }}
 

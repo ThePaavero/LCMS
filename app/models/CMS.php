@@ -247,7 +247,7 @@ class CMS {
 
 			$html .= '<li>';
 			$html .= '<a href="' . URL::to($i['url']) . '">' . $i['title'] . '</a>';
-			$html .= $this->childrenAsList($i['id']);
+			$html .= $this->childrenAsList($i['url']);
 			$html .= '</li>';
 		}
 
@@ -256,9 +256,15 @@ class CMS {
 		return $html;
 	}
 
-	public function childrenAsList($id)
+	public function childrenAsList($url)
 	{
-		// TODO...
+		$html = '';
+
+		// $this->CI->db->select('*');
+		// $this->CI->db->from($this->table['pages']);
+		// $this->CI->db->like('uri', $uri . '/');
+		// $kids = $this->CI->db->get()->result_array();
+
 		return '';
 	}
 
