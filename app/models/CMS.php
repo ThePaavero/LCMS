@@ -40,29 +40,36 @@ class CMS {
 		}
 
 		$pages = Page::all()->toArray();
-		$depth_array = array();
+		$new_pages = [];
 
-		foreach($pages as $page)
-		{
-			$depth = substr_count($page['url'], '/');
-			$depth_array[$depth][] = $page;
-		}
-
-		$depth_array = array_reverse($depth_array);
-
-		foreach($depth_array as $pages)
-		{
+		foreach ($pages as $page) {
 			$segments = explode('/', $page['url']);
-			array_pop($segments);
-			$parent_uri = implode('/', $segments);
 
-			$parent = $this->getPageByUrl($parent_uri);
+			$current = $segments[0];
 
-			//$pages[$xkey]['parent'] = $parent;
+			if(!isset($new_pages[$segments[0]])) {
+				$new_pages[$segments[0]] = [];
+			}
+
+			$curr = &$new_pages;
+			for ($i=0; $i < count($segments); $i++) {
+
+				$segment = $segments[$i];
+				if(!isset($curr[$segment])) {
+					$curr[$segment] = [];
+				}
+
+				if($i === count($segments)-1) {
+					array_push($curr[$segment], $page);
+				}
+
+				$curr = &$curr[$segment];
+			}
+
 		}
 
-		$this->sitemap = $pages; // "Cache" this
-		return $pages;
+		$this->sitemap = $new_pages; // "Cache" this
+		return $new_pages;
 	}
 
 	public function getPageByUrl($url)
@@ -185,6 +192,11 @@ class CMS {
 	public function sitemapAsNavigation($home = false)
 	{
 		$this->sitemap = $this->getNestedSitemapArray();
+
+		return ;
+
+		// TODO
+		// This needs to be changed to the new sitemap structure
 
 		$html = '<ul>';
 
