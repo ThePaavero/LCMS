@@ -40,66 +40,37 @@ class CMS {
 
 		$pages = Page::all()->toArray();
 
-		// Sort the pages array by the page's depth (amount of "/"s)
-		foreach($pages as $key => $i)
-		{
-			$depth                = substr_count($i['url'], '/');
-			$pages[$key]['depth'] = $depth;
-		}
+		$new_pages = [];
 
-		$pages = subval_sort($pages, 'depth', true);
+		foreach ($pages as $page) {
+			$segments = explode('/', $page['url']);
 
-		// Get ready to grab IDs of pages we'll want to get rid of later on
-		// (from the first level of depth in our pages array)
-		$ids_to_remove_from_base_array = array();
+			$current = $segments[0];
 
-		// Do an all-times-all iteration...
-		foreach($pages as $key_a => $a)
-		{
-			// What level are we on?
-			$level_a = substr_count($a['url'], '/');
-
-			// Loop through all pages...
-			foreach($pages as $key_b => $b)
-			{
-				// What level are we on?
-				$level_b = substr_count($b['url'], '/');
-
-				// B must be at correct depth for us (our depth plus one)
-				if($level_b != $level_a + 1)
-				{
-					// Can't be our kid, next please...
-					continue;
-				}
-
-				// What indicates that B is a child of A?
-				$look_for = $a['url'] . '/';
-
-				if(strstr($b['url'], $look_for))
-				{
-					// B is a child of A
-					$pages[$key_b]['parent'] = $a['id'];
-				}
+			if(!isset($new_pages[$segments[0]])) {
+				$new_pages[$segments[0]] = [];
 			}
-		}
 
-		// Move each page with a parent under its parent
-		foreach($pages as $key => $i)
-		{
-			foreach($pages as $xkey => $x)
-			{
-				if( ! isset($x['parent']))
-				{
-					continue;
+			$curr = &$new_pages;
+			for ($i=0; $i < count($segments); $i++) {
+
+				$segment = $segments[$i];
+				if(!isset($curr[$segment])) {
+					$curr[$segment] = [];
 				}
 
-				if($i['id'] === $x['parent'])
-				{
-					$pages[$key]['children'][] = $x;
-					$ids_to_remove_from_base_array[] = $x['id'];
+				if($i === count($segments)-1) {
+					array_push($curr[$segment], $page);
 				}
+
+				$curr = &$curr[$segment];
 			}
+
 		}
+
+		$this->sitemap = $new_pages; // "Cache" this
+		return $new_pages;
+	}
 
 		// Get rid of all pages that have parents from the first level of
 		// the pages array
@@ -228,6 +199,11 @@ class CMS {
 	public function sitemapAsNavigation($home = false)
 	{
 		$this->sitemap = $this->getNestedSitemapArray();
+
+		return ;
+
+		// TODO
+		// This needs to be changed to the new sitemap structure
 
 		$html = '<ul>';
 

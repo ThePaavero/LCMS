@@ -115,6 +115,7 @@ $panel_width: 300px;
 	background: $lcms_gray;
 	padding: 4px;
 	font-size: 11px;
+	z-index: 2;
 
 	a {
 		text-decoration: none;
