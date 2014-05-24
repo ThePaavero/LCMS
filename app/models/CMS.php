@@ -72,24 +72,6 @@ class CMS {
 		return $new_pages;
 	}
 
-		// Get rid of all pages that have parents from the first level of
-		// the pages array
-		foreach($ids_to_remove_from_base_array as $id)
-		{
-			foreach($pages as $key => $i)
-			{
-				if($i['id'] === $id)
-				{
-					unset($pages[$key]);
-				}
-			}
-		}
-
-		$this->sitemap = $pages; // "Cache" this
-
-		return $pages;
-	}
-
 	public function renderPage($uri = '')
 	{
 		// Make sure this is a valid URI
