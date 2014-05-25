@@ -380,7 +380,7 @@ class Application extends Container implements HttpKernelInterface, ResponsePrep
     }
     public static function getBootstrapFile()
     {
-        return 'D:\\vagrant\\ubuntu1310\\shared\\lcms\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation' . '/start.php';
+        return '/var/www/lcms/vendor/laravel/framework/src/Illuminate/Foundation' . '/start.php';
     }
     public function startExceptionHandling()
     {
@@ -1369,7 +1369,6 @@ class Request
                 return $format;
             }
         }
-        return null;
     }
     public function setFormat($format, $mimeTypes)
     {
@@ -2049,7 +2048,6 @@ interface SessionInterface
 namespace Symfony\Component\HttpFoundation\Session\Storage;
 
 use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
-use Symfony\Component\HttpFoundation\Session\Storage\MetadataBag;
 interface SessionStorageInterface
 {
     public function start();
@@ -2093,7 +2091,6 @@ use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 class Session implements SessionInterface, \IteratorAggregate, \Countable
 {
@@ -2204,7 +2201,6 @@ namespace Symfony\Component\HttpFoundation\Session\Storage;
 
 use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeSessionHandler;
-use Symfony\Component\HttpFoundation\Session\Storage\MetadataBag;
 use Symfony\Component\HttpFoundation\Session\Storage\Proxy\NativeProxy;
 use Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy;
 use Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy;
@@ -2795,17 +2791,17 @@ class SessionHandlerProxy extends AbstractProxy implements \SessionHandlerInterf
         $this->active = false;
         return (bool) $this->handler->close();
     }
-    public function read($id)
+    public function read($sessionId)
     {
-        return (string) $this->handler->read($id);
+        return (string) $this->handler->read($sessionId);
     }
-    public function write($id, $data)
+    public function write($sessionId, $data)
     {
-        return (bool) $this->handler->write($id, $data);
+        return (bool) $this->handler->write($sessionId, $data);
     }
-    public function destroy($id)
+    public function destroy($sessionId)
     {
-        return (bool) $this->handler->destroy($id);
+        return (bool) $this->handler->destroy($sessionId);
     }
     public function gc($maxlifetime)
     {
@@ -3010,9 +3006,11 @@ class ExceptionHandler
         if (!$exception instanceof FlattenException) {
             $exception = FlattenException::create($exception);
         }
-        header(sprintf('HTTP/1.0 %s', $exception->getStatusCode()));
-        foreach ($exception->getHeaders() as $name => $value) {
-            header($name . ': ' . $value, false);
+        if (!headers_sent()) {
+            header(sprintf('HTTP/1.0 %s', $exception->getStatusCode()));
+            foreach ($exception->getHeaders() as $name => $value) {
+                header($name . ': ' . $value, false);
+            }
         }
         echo $this->decorate($this->getContent($exception), $this->getStylesheet($exception));
     }
@@ -3045,8 +3043,7 @@ class ExceptionHandler
                             <h2><span>%d/%d</span> %s: %s</h2>
                         </div>
                         <div class="block">
-                            <ol class="traces list_exception">
-', $ind, $total, $class, $message);
+                            <ol class="traces list_exception">', $ind, $total, $class, $message);
                     foreach ($e['trace'] as $trace) {
                         $content .= '       <li>';
                         if ($trace['function']) {
@@ -3075,7 +3072,7 @@ class ExceptionHandler
                 }
             }
         }
-        return "            <div id=\"sf-resetcontent\" class=\"sf-reset\">\r\n                <h1>{$title}</h1>\r\n                {$content}\r\n            </div>";
+        return "            <div id=\"sf-resetcontent\" class=\"sf-reset\">\n                <h1>{$title}</h1>\n                {$content}\n            </div>";
     }
     public function getStylesheet(FlattenException $exception)
     {
@@ -3132,7 +3129,7 @@ class ExceptionHandler
     }
     private function decorate($content, $css)
     {
-        return "<!DOCTYPE html>\r\n<html>\r\n    <head>\r\n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\r\n        <meta name=\"robots\" content=\"noindex,nofollow\" />\r\n        <style>\r\n            /* Copyright (c) 2010, Yahoo! Inc. All rights reserved. Code licensed under the BSD License: http://developer.yahoo.com/yui/license.html */\r\n            html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}\r\n\r\n            html { background: #eee; padding: 10px }\r\n            img { border: 0; }\r\n            #sf-resetcontent { width:970px; margin:0 auto; }\r\n            {$css}\r\n        </style>\r\n    </head>\r\n    <body>\r\n        {$content}\r\n    </body>\r\n</html>";
+        return "<!DOCTYPE html>\n<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\n        <meta name=\"robots\" content=\"noindex,nofollow\" />\n        <style>\n            /* Copyright (c) 2010, Yahoo! Inc. All rights reserved. Code licensed under the BSD License: http://developer.yahoo.com/yui/license.html */\n            html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}\n\n            html { background: #eee; padding: 10px }\n            img { border: 0; }\n            #sf-resetcontent { width:970px; margin:0 auto; }\n            {$css}\n        </style>\n    </head>\n    <body>\n        {$content}\n    </body>\n</html>";
     }
     private function abbrClass($class)
     {
@@ -3691,7 +3688,13 @@ class ErrorHandler
         }
         if ($this->displayErrors && error_reporting() & $level && $this->level & $level) {
             if (!class_exists('Symfony\\Component\\Debug\\Exception\\ContextErrorException')) {
-                require 'D:\\vagrant\\ubuntu1310\\shared\\lcms\\vendor\\symfony\\debug\\Symfony\\Component\\Debug' . '/Exception/ContextErrorException.php';
+                require '/var/www/lcms/vendor/symfony/debug/Symfony/Component/Debug' . '/Exception/ContextErrorException.php';
+            }
+            if (!class_exists('Symfony\\Component\\Debug\\Exception\\FlattenException')) {
+                require '/var/www/lcms/vendor/symfony/debug/Symfony/Component/Debug' . '/Exception/FlattenException.php';
+            }
+            if (PHP_VERSION_ID < 50400 && isset($context['GLOBALS']) && is_array($context)) {
+                unset($context['GLOBALS']);
             }
             $exception = new ContextErrorException(sprintf('%s: %s in %s line %d', isset($this->levels[$level]) ? $this->levels[$level] : $level, $message, $file, $line), 0, $level, $file, $line, $context);
             $exceptionHandler = set_exception_handler(function () {
@@ -3701,7 +3704,7 @@ class ErrorHandler
             if (is_array($exceptionHandler) && $exceptionHandler[0] instanceof ExceptionHandler) {
                 $exceptionHandler[0]->handle($exception);
                 if (!class_exists('Symfony\\Component\\Debug\\Exception\\DummyException')) {
-                    require 'D:\\vagrant\\ubuntu1310\\shared\\lcms\\vendor\\symfony\\debug\\Symfony\\Component\\Debug' . '/Exception/DummyException.php';
+                    require '/var/www/lcms/vendor/symfony/debug/Symfony/Component/Debug' . '/Exception/DummyException.php';
                 }
                 set_exception_handler(function (\Exception $e) use($exceptionHandler) {
                     if (!$e instanceof DummyException) {
@@ -7274,6 +7277,10 @@ class Logger implements LoggerInterface
         }
         return array_shift($this->handlers);
     }
+    public function getHandlers()
+    {
+        return $this->handlers;
+    }
     public function pushProcessor($callback)
     {
         if (!is_callable($callback)) {
@@ -7287,6 +7294,10 @@ class Logger implements LoggerInterface
             throw new \LogicException('You tried to pop from an empty processor stack.');
         }
         return array_shift($this->processors);
+    }
+    public function getProcessors()
+    {
+        return $this->processors;
     }
     public function addRecord($level, $message, array $context = array())
     {
@@ -7559,7 +7570,8 @@ class StreamHandler extends AbstractProcessingHandler
     protected $stream;
     protected $url;
     private $errorMessage;
-    public function __construct($stream, $level = Logger::DEBUG, $bubble = true)
+    protected $filePermission;
+    public function __construct($stream, $level = Logger::DEBUG, $bubble = true, $filePermission = null)
     {
         parent::__construct($level, $bubble);
         if (is_resource($stream)) {
@@ -7567,6 +7579,7 @@ class StreamHandler extends AbstractProcessingHandler
         } else {
             $this->url = $stream;
         }
+        $this->filePermission = $filePermission;
     }
     public function close()
     {
@@ -7577,13 +7590,16 @@ class StreamHandler extends AbstractProcessingHandler
     }
     protected function write(array $record)
     {
-        if (null === $this->stream) {
+        if (!is_resource($this->stream)) {
             if (!$this->url) {
                 throw new \LogicException('Missing stream url, the stream can not be opened. This may be caused by a premature call to close().');
             }
             $this->errorMessage = null;
             set_error_handler(array($this, 'customErrorHandler'));
             $this->stream = fopen($this->url, 'a');
+            if ($this->filePermission !== null) {
+                @chmod($this->url, $this->filePermission);
+            }
             restore_error_handler();
             if (!is_resource($this->stream)) {
                 $this->stream = null;
@@ -7608,14 +7624,14 @@ class RotatingFileHandler extends StreamHandler
     protected $nextRotation;
     protected $filenameFormat;
     protected $dateFormat;
-    public function __construct($filename, $maxFiles = 0, $level = Logger::DEBUG, $bubble = true)
+    public function __construct($filename, $maxFiles = 0, $level = Logger::DEBUG, $bubble = true, $filePermission = null)
     {
         $this->filename = $filename;
         $this->maxFiles = (int) $maxFiles;
         $this->nextRotation = new \DateTime('tomorrow');
         $this->filenameFormat = '{filename}-{date}';
         $this->dateFormat = 'Y-m-d';
-        parent::__construct($this->getTimedFilename(), $level, $bubble);
+        parent::__construct($this->getTimedFilename(), $level, $bubble, $filePermission);
     }
     public function close()
     {
@@ -7628,6 +7644,8 @@ class RotatingFileHandler extends StreamHandler
     {
         $this->filenameFormat = $filenameFormat;
         $this->dateFormat = $dateFormat;
+        $this->url = $this->getTimedFilename();
+        $this->close();
     }
     protected function write(array $record)
     {
@@ -9679,7 +9697,6 @@ class Response
         if (null !== $this->getExpires()) {
             return $this->getExpires()->format('U') - $this->getDate()->format('U');
         }
-        return null;
     }
     public function setMaxAge($value)
     {
@@ -9697,7 +9714,6 @@ class Response
         if (null !== ($maxAge = $this->getMaxAge())) {
             return $maxAge - $this->getAge();
         }
-        return null;
     }
     public function setTtl($seconds)
     {
@@ -9788,10 +9804,14 @@ class Response
     }
     public function getVary()
     {
-        if (!($vary = $this->headers->get('Vary'))) {
+        if (!($vary = $this->headers->get('Vary', null, false))) {
             return array();
         }
-        return is_array($vary) ? $vary : preg_split('/[\\s,]+/', $vary);
+        $ret = array();
+        foreach ($vary as $item) {
+            $ret = array_merge($ret, preg_split('/[\\s,]+/', $item));
+        }
+        return $ret;
     }
     public function setVary($headers, $replace = true)
     {
@@ -9857,7 +9877,7 @@ class Response
     }
     public function isEmpty()
     {
-        return in_array($this->statusCode, array(201, 204, 304));
+        return in_array($this->statusCode, array(204, 304));
     }
     protected function ensureIEOverSSLCompatibility(Request $request)
     {
@@ -10353,7 +10373,7 @@ class PrettyPageHandler extends Handler
             return Handler::DONE;
         }
         if (!($resources = $this->getResourcesPath())) {
-            $resources = 'D:\\vagrant\\ubuntu1310\\shared\\lcms\\vendor\\filp\\whoops\\src\\Whoops\\Handler' . '/../Resources';
+            $resources = '/var/www/lcms/vendor/filp/whoops/src/Whoops/Handler' . '/../Resources';
         }
         $templateFile = "{$resources}/pretty-template.php";
         $cssFile = "{$resources}/pretty-page.css";

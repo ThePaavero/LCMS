@@ -131,9 +131,10 @@ return array(
 		'Prologue\Alerts\AlertsServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
 		'Profiler\ProfilerServiceProvider',
-		'Former\FormerServiceProvider',
-		'Cartalyst\Sentry\SentryServiceProvider',
+		// 'Former\FormerServiceProvider',
+		// 'Cartalyst\Sentry\SentryServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
+		'Barryvdh\Elfinder\ElfinderServiceProvider'
 
 	),
 
@@ -202,8 +203,8 @@ return array(
 		'Alert'        => 'Prologue\Alerts\Facades\Alert',
 		'Image'        => 'Intervention\Image\Facades\Image',
 		'Profiler'     => 'Profiler\Facades\Profiler',
-		'Former'       => 'Former\Facades\Former',
-		'Sentry'       => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+		// 'Former'       => 'Former\Facades\Former',
+		// 'Sentry'       => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 	),
 
 );

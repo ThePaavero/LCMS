@@ -4,7 +4,6 @@ class BaseController extends Controller {
 
 	public function __construct()
 	{
-		$this->user = Sentry::getUser();
 		$this->cms = new CMS;
 		View::share('CMS', $this->cms);
 	}

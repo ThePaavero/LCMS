@@ -20,4 +20,7 @@ Route::post('/lcms/update_content', 'LcmsController@updateContent');
 Route::get('/lcms/get_history_for_block/{block_id}', 'LcmsController@getHistoryForBlock');
 Route::get('/lcms/get_version_of_block/{history_id}', 'LcmsController@getVersionForBlock');
 
+Route::get('/elfinder/tinymce', 'Barryvdh\Elfinder\ElfinderController@showTinyMCE4');
+Route::get('/elfinder/connector', 'Barryvdh\Elfinder\ElfinderController@showConnector');
+
 Route::get('/{segments}', 'LcmsController@loadPage')->where('segments', '(.*)');

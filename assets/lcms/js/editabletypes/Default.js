@@ -88,7 +88,12 @@ LCMS.EditableTypes.Default = function() {
 	var actionToRich = function()
 	{
 		tinymce.init({
-			selector: '#' + block.attr('id')
+			plugins: ["link", "image"],
+			selector: '#' + block.attr('id'),
+			file_browser_callback : elFinderBrowser,
+			toolbar: [
+				"undo redo | styleselect | bold italic | link image | alignleft aligncenter alignright"
+			]
 		});
 	};
 
@@ -135,6 +140,22 @@ LCMS.EditableTypes.Default = function() {
 				console.error('Failed to update content on server for some reason.');
 			}
 		});
+	};
+
+	var elFinderBrowser = function(field_name, url, type, win)
+	{
+		tinymce.activeEditor.windowManager.open({
+			file: _root + 'elfinder/tinymce',// use an absolute path!
+			title: 'elFinder 2.0',
+			width: 900,
+			height: 450,
+			resizable: 'yes'
+		}, {
+			setUrl: function (url) {
+				win.document.getElementById(field_name).value = url;
+			}
+		});
+		return false;
 	};
 
 };
