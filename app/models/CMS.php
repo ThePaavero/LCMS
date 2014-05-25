@@ -217,28 +217,6 @@ class CMS {
 		return $html;
 	}
 
-	public function childrenAsList($parent)
-	{
-		if(empty($parent['children']))
-		{
-			return '';
-		}
-
-		$html = '<ul>';
-
-		foreach($parent['children'] as $child)
-		{
-			$html .= '<li>';
-			$html .= '<a href="' . $child['url'] . '">' . $child['title'] . '</a>';
-			$html .= $this->childrenAsList($child);
-			$html .= '</li>';
-		}
-
-		$html .= '</ul>';
-
-		return $html;
-	}
-
 	public function getUrlForPage($id)
 	{
 		$data = Page::find($id)->toArray();
