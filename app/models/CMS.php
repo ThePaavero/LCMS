@@ -191,7 +191,7 @@ class CMS {
         	if(isset($item['title']))
         	{
         		$html .= "<li>\n";
-        		$html .= "<a href='/" . $item['url'] . "'>\n";
+        		$html .= "<a href='" . URL::to($item['url']) . "'>\n";
         		$html .= $item['title'];
         		$html .= "</a>\n";
         		$html .= "</li>\n";
