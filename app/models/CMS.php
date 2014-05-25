@@ -194,7 +194,7 @@ class CMS {
         	{
         		$html .= "<li>\n";
         		$html .= "<a href='" . URL::to($item['url']) . "'>\n";
-        		$html .= $item['title'];
+        		$html .= $item['title'] . "\n";
         		$html .= "</a>\n";
         		$html .= "</li>\n";
         	}
@@ -203,9 +203,9 @@ class CMS {
             {
                 if(is_array($child))
                 {
-                	if(isset($child[0]['title']) && count($child) > 1) $html .= "<ul>\n"; // TODO: This is ugly clean up lated
+                	if(isset($child[0]['title'])) $html .= "<ul>\n"; // TODO: This is ugly clean up lated
                     $html .= echoChildren($child, $nestlevel+1, '');
-                    if(isset($child[0]['title']) && count($child) > 1) $html .= "</ul>\n"; // TODO: This is ugly clean up lated
+                    if(isset($child[0]['title'])) $html .= "</ul>\n"; // TODO: This is ugly clean up lated
                 }
 			}
 
