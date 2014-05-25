@@ -186,6 +186,8 @@ class CMS {
 	{
 		$this->sitemap = $this->getNestedSitemapArray();
 
+		//echo '<pre>'; print_r($this->sitemap); echo'</pre>';
+
         function echoChildren($item, $nestlevel, $html)
         {
         	if(isset($item['title']))
@@ -201,9 +203,9 @@ class CMS {
             {
                 if(is_array($child))
                 {
-                	if(isset($child[0]['title'])) $html .= "<ul>\n"; // TODO: This is ugly clean up lated
+                	if(isset($child[0]['title']) && count($child) > 1) $html .= "<ul>\n"; // TODO: This is ugly clean up lated
                     $html .= echoChildren($child, $nestlevel+1, '');
-                    if(isset($child[0]['title'])) $html .= "</ul>\n"; // TODO: This is ugly clean up lated
+                    if(isset($child[0]['title']) && count($child) > 1) $html .= "</ul>\n"; // TODO: This is ugly clean up lated
                 }
 			}
 
