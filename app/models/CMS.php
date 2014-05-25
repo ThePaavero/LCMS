@@ -190,29 +190,29 @@ class CMS {
         {
         	if(isset($item['title']))
         	{
-        		$html .= "<li>";
-        		$html .= "<a href='/" . $item['url'] . "'>";
+        		$html .= "<li>\n";
+        		$html .= "<a href='/" . $item['url'] . "'>\n";
         		$html .= $item['title'];
-        		$html .= "</a>";
-        		$html .= "</li>";
+        		$html .= "</a>\n";
+        		$html .= "</li>\n";
         	}
 
 			foreach ($item as $child)
             {
                 if(is_array($child))
                 {
-                	$html .= "<ul>";
+                	if(isset($child[0]['title'])) $html .= "<ul>\n"; // TODO: This is ugly clean up lated
                     $html .= echoChildren($child, $nestlevel+1, '');
-                    $html .= "</ul>";
+                    if(isset($child[0]['title'])) $html .= "</ul>\n"; // TODO: This is ugly clean up lated
                 }
 			}
 
 			return $html;
 		}
 
-		$html = "<ul>";
+		$html = "<ul>\n";
 		$html .= echoChildren($this->sitemap, 0, '');
-		$html .= "</ul>";
+		$html .= "</ul>\n";
 
 		return $html;
 	}
