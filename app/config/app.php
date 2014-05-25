@@ -133,7 +133,6 @@ return array(
 		'Profiler\ProfilerServiceProvider',
 		'Former\FormerServiceProvider',
 		'Cartalyst\Sentry\SentryServiceProvider',
-		'Stevemo\Cpanel\CpanelServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 
 	),
