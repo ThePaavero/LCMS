@@ -196,7 +196,11 @@ class CMS {
                     {
                         if(isset($subchild['title']))
                         {
-                            $html .= "<li>" . $subchild['title'] . "<br/>";
+                            $html .= "<li>";
+                            $html .= "<a href='/" . $subchild['url'] . "'>";
+                            $html .= $subchild['title'];
+                            $html .= "</a>";
+                            $html .= "</li>";
                         }
                         else
                         {
