@@ -188,27 +188,22 @@ class CMS {
 
         function echoChildren($item, $nestlevel, $html)
         {
+        	if(isset($item['title']))
+        	{
+        		$html .= "<li>";
+        		$html .= "<a href='/" . $item['url'] . "'>";
+        		$html .= $item['title'];
+        		$html .= "</a>";
+        		$html .= "</li>";
+        	}
+
 			foreach ($item as $child)
             {
                 if(is_array($child))
                 {
-                    foreach($child as $subchild)
-                    {
-                        if(isset($subchild['title']))
-                        {
-                            $html .= "<li>";
-                            $html .= "<a href='/" . $subchild['url'] . "'>";
-                            $html .= $subchild['title'];
-                            $html .= "</a>";
-                            $html .= "</li>";
-                        }
-                        else
-                        {
-                        	$html .= "<ul>";
-                            $html .= echoChildren($child, $nestlevel+1, '');
-                            $html .= "</ul>";
-                        }
-                    }
+                	$html .= "<ul>";
+                    $html .= echoChildren($child, $nestlevel+1, '');
+                    $html .= "</ul>";
                 }
 			}
 

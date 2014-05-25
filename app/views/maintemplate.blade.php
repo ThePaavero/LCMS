@@ -4,11 +4,11 @@
 
 	@include("includes.alerts")
 
-    <div class='cms_navigation'>
-        {{ $CMS->sitemapAsNavigation(false) }}
-    </div><!-- cms_navigation -->
-
     <div id='container'>
+
+        <div class='cms_navigation'>
+            {{ $CMS->sitemapAsNavigation(false) }}
+        </div><!-- cms_navigation -->
 
 		@include("includes.header")
 

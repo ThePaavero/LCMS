@@ -61,10 +61,20 @@ class LcmsController extends BaseController {
 		foreach($template_blocktypes as $template_blocktype)
 		{
 			$block_type_id = $template_blocktype['id'];
+			$block_type = BlockType::find($block_type_id);
+
+			if(isset($block_type))
+			{
+				$block_type_name = $block_type->name;
+			}
+			else
+			{
+				$block_type_name = "what happened?";
+			}
 
 			$block = new Block;
 			$block->type = $block_type_id;
-			$block->contents = BlockType::find($block_type_id)->name;
+			$block->contents = $block_type_name;
 			$block->page = $page->id;
 			$block->save();
 
