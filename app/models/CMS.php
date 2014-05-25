@@ -43,27 +43,31 @@ class CMS {
 		$new_pages = [];
 
 		foreach ($pages as $page) {
-			$segments = explode('/', $page['url']);
+            $segments = explode('/', $page['url']);
 
-			$current = $segments[0];
+            if(!isset($page['children']))
+            {
+                $page['children'] = [];
+            }
 
-			if(!isset($new_pages[$segments[0]])) {
+            if(!isset($new_pages[$segments[0]]))
+            {
 				$new_pages[$segments[0]] = [];
 			}
 
-			$curr = &$new_pages;
+			$current = &$new_pages;
 			for ($i=0; $i < count($segments); $i++) {
 
 				$segment = $segments[$i];
-				if(!isset($curr[$segment])) {
-					$curr[$segment] = [];
+				if(!isset($current[$segment])) {
+					$current[$segment] = [];
 				}
 
 				if($i === count($segments)-1) {
-					array_push($curr[$segment], $page);
+					array_push($current[$segment], $page);
 				}
 
-				$curr = &$curr[$segment];
+				$current = &$current[$segment];
 			}
 
 		}
@@ -182,33 +186,34 @@ class CMS {
 	{
 		$this->sitemap = $this->getNestedSitemapArray();
 
-		return ;
-
-		// TODO
-		// This needs to be changed to the new sitemap structure
-
-		$html = '<ul>';
-
-		if($home === true)
-		{
-			$html .= '<li><a href="' . URL::to('') . '">Home</a></li>';
-		}
-
-		foreach($this->sitemap as $i)
-		{
-			if(strstr($i['url'], '/'))
-			{
-				// We only want the first level pages first
-				continue;
+        function echoChildren($item, $nestlevel, $html)
+        {
+			foreach ($item as $child)
+            {
+                if(is_array($child))
+                {
+                    foreach($child as $subchild)
+                    {
+                        if(isset($subchild['title']))
+                        {
+                            $html .= "<li>" . $subchild['title'] . "<br/>";
+                        }
+                        else
+                        {
+                        	$html .= "<ul>";
+                            $html .= echoChildren($child, $nestlevel+1, '');
+                            $html .= "</ul>";
+                        }
+                    }
+                }
 			}
 
-			$html .= '<li>';
-			$html .= '<a href="' . URL::to($i['url']) . '">' . $i['title'] . '</a>';
-			$html .= $this->childrenAsList($i); // This is where recursivity kicks in
-			$html .= '</li>';
+			return $html;
 		}
 
-		$html .= '</ul>';
+		$html = "<ul>";
+		$html .= echoChildren($this->sitemap, 0, '');
+		$html .= "</ul>";
 
 		return $html;
 	}
@@ -244,3 +249,4 @@ class CMS {
 	}
 
 }
+
