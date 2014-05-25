@@ -144,8 +144,9 @@ class CMS {
 
 		if( ! class_exists($model_class_name))
 		{
-			$block['contents'] = '[ERROR: Render class "' . $model_class_name . '" does not exist]';
-			return $block;
+			// $block['contents'] = '[ERROR: Render class "' . $model_class_name . '" does not exist]';
+			// return $block;
+			$model_class_name = 'RenderDefault';
 		}
 
 		$renderer = new $model_class_name($block, $editable);
