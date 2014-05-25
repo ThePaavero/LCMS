@@ -4,7 +4,7 @@ class LcmsController extends BaseController {
 
 	public function __construct()
 	{
-		parent::__construct();
+        parent::__construct();
 	}
 
 	public function getMainPanel($page_id = 0)
@@ -115,3 +115,4 @@ class LcmsController extends BaseController {
 	}
 
 }
+
