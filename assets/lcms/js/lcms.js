@@ -10,4 +10,7 @@ $(function()
 
 	var editables = new LCMS.Modules.Editables();
 	editables.init();
+
+	var sortablesitemap = new LCMS.Modules.SortableSitemap();
+	sortablesitemap.init();
 });

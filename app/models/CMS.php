@@ -144,8 +144,6 @@ class CMS {
 
 		if( ! class_exists($model_class_name))
 		{
-			// $block['contents'] = '[ERROR: Render class "' . $model_class_name . '" does not exist]';
-			// return $block;
 			$model_class_name = 'RenderDefault';
 		}
 
@@ -186,8 +184,6 @@ class CMS {
 	public function sitemapAsNavigation($home = false)
 	{
 		$this->sitemap = $this->getNestedSitemapArray();
-
-		//echo '<pre>'; print_r($this->sitemap); echo'</pre>';
 
         function echoChildren($item, $nestlevel, $html)
         {
