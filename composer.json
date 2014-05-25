@@ -8,8 +8,7 @@
 		"way/phpunit-wrappers": "dev-master",
 		"prologue/alerts": "dev-master",
 		"intervention/image": "dev-master",
-		"loic-sharma/profiler": "1.1.*",
-		"stevemo/cpanel": "dev-develop"
+		"loic-sharma/profiler": "1.1.*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "3.8.*",
