@@ -21,8 +21,11 @@ class LcmsController extends BaseController {
 
 	public function createNewPage($page_id = 0)
 	{
+		$date = new DateTime;
+		$published = $date->format('Y-m-d H:i:s');
 		$data = array(
-				'templates' => Template::all()->toArray()
+				'templates' => Template::all()->toArray(),
+				'published' => $published
 			);
 
 		if($page_id > 0)
