@@ -11,7 +11,7 @@ LCMS.Modules.SortableSitemap = function() {
 
 	var makeSortable = function()
 	{
-		// @todo This isn't working for some reason :/
+		// @todo Stuff
 		ul.sortable({
 			'tolerance'  :'intersect',
 			'cursor'     :'pointer',

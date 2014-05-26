@@ -109,6 +109,7 @@ LCMS.Modules.MainPanel = function() {
 			removeDynamicContent();
 		});
 		panelSizeWide();
+		onPanelContentChange();
 	};
 
 	var removeDynamicContent = function() {
@@ -145,6 +146,12 @@ LCMS.Modules.MainPanel = function() {
 	var getCurrentPageId = function()
 	{
 		return $('meta[name=lcms_page_id]').attr('value');
+	};
+
+	var onPanelContentChange = function()
+	{
+		var newpageform = new LCMS.Modules.NewPageForm();
+		newpageform.init();
 	};
 
 };

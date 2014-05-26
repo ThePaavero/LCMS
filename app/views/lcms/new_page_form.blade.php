@@ -1,5 +1,5 @@
 
-<div class='lcms_modal'>
+<div class='lcms_modal create_new_page'>
 
 	<h1>Pages Index</h1>
 
