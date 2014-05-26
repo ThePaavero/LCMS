@@ -200,9 +200,13 @@ class CMS {
             {
                 if(is_array($child))
                 {
-                	if(isset($child[0]['title'])) $html .= "<ul>\n"; // TODO: This is ugly clean up lated
+                	$is_new_list = isset($child[0]['title']) && $nestlevel > 0;
+
+                	if($is_new_list) $html .= "<ul>\n";
+
                     $html .= echoChildren($child, $nestlevel+1, '');
-                    if(isset($child[0]['title'])) $html .= "</ul>\n"; // TODO: This is ugly clean up lated
+
+                    if($is_new_list) $html .= "</ul>\n";
                 }
 			}
 
