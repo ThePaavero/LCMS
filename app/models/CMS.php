@@ -38,6 +38,8 @@ class CMS {
 			return $this->sitemap;
 		}
 
+		Profiler::startTimer('LCMS getNestedSitemapArray');
+
 		$pages = Page::all()->toArray();
 
 		$new_pages = [];
@@ -73,11 +75,16 @@ class CMS {
 		}
 
 		$this->sitemap = $new_pages; // "Cache" this
+
+		Profiler::endTimer('LCMS getNestedSitemapArray');
+
 		return $new_pages;
 	}
 
 	public function renderPage($uri = '')
 	{
+		Profiler::startTimer('LCMS Rendering of page');
+
 		// Make sure this is a valid URI
 		if( ! $page_id = $this->uriToPageId($uri))
 		{
@@ -119,6 +126,8 @@ class CMS {
 		// Return the rendered template's output
 		$page_view = View::make('lcms/templates/' . $template_data['name'], array('data' => $to_template));
 
+		Profiler::endTimer('LCMS Rendering of page');
+
 		return View::make('maintemplate', array(
 			'page'    => 'pages.lcms_container',
 			'title'   => $page_data['title'],
@@ -128,12 +137,16 @@ class CMS {
 
 	public function uriToPageId($uri = '')
 	{
+		Profiler::startTimer('LCMS uriToPageId');
+
 		$data = Page::where('url', $uri)->get()->toArray();
 
 		if(empty($data[0]))
 		{
 			return false;
 		}
+
+		Profiler::endTimer('LCMS uriToPageId');
 
 		return $data[0]['id'];
 	}

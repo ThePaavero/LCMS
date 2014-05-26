@@ -35,7 +35,6 @@ class LcmsController extends BaseController {
 
 	public function createNewPageSubmit()
 	{
-
 		$template_id = Input::get('template');
 
 		$page           = new Page;
