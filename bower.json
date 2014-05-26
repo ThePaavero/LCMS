@@ -18,6 +18,7 @@
     "jquery": "2.1.1",
     "jquery-colorbox": "1.5.9",
     "tinymce-builded": "4.0.23",
-    "jquery-ui": "1.10.3"
+    "jquery-ui": "1.10.3",
+    "datetimepicker": "2.2.8"
   }
 }

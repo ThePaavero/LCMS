@@ -23,7 +23,8 @@
 			</label>
 		</p>
 		<p><label>Title<input type='text' name='title'></label></p>
-		<p><label>URL<input type='text' name='url'></label></p>
+		<p><label>URL segment<input type='text' name='url'></label></p>
+		<p><label>Publish date<input type='text' name='published' class='datepicker'></label></p>
 		<p>
 			<input type='submit' value='Save'>
 			<input type='hidden' name='parent_id' value='{{ isset($data['parent']) ? $data['parent'] : 0 }}'>

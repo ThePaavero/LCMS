@@ -152,6 +152,10 @@ LCMS.Modules.MainPanel = function() {
 	{
 		var newpageform = new LCMS.Modules.NewPageForm();
 		newpageform.init();
+
+		$('.datepicker').datetimepicker({
+			format: 'Y-m-d H:i:s'
+		});
 	};
 
 };

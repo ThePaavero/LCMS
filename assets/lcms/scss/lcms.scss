@@ -151,3 +151,17 @@ $panel_wide_width: 100%;
 		color: #fff;
 	}
 }
+
+
+/* css for datepicker */
+.ui-datepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-datepicker-div dl { text-align: left; }
+.ui-datepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
+.ui-datepicker-div dl dd { margin: 0 10px 10px 45%; }
+.ui-datepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+.ui-datepicker-rtl{ direction: rtl; }
+.ui-datepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
+.ui-datepicker-rtl dl dt{ float: right; clear: right; }
+.ui-datepicker-rtl dl dd { margin: 0 45% 10px 10px; }

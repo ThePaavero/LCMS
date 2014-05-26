@@ -38,12 +38,13 @@ class LcmsController extends BaseController {
 	{
 		$template_id = Input::get('template');
 
-		$page           = new Page;
-		$page->title    = Input::get('title');
-		$page->url      = Input::get('url');
-		$page->template = $template_id;
+		$page            = new Page;
+		$page->title     = Input::get('title');
+		$page->url       = Input::get('url');
+		$page->published = Input::get('published');
+		$page->template  = $template_id;
 
-		$page->published = new DateTime;
+		// $page->published = new DateTime;
 
 		// Parent? If so, prepend its URL to ours
 		$parent_id = (int) Input::get('parent_id');

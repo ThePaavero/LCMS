@@ -15,6 +15,11 @@ class CMS {
 		return Page::all()->toArray();
 	}
 
+	public function getPublicPages()
+	{
+		return Page::where('published', '<=', new DateTime)->get()->toArray();
+	}
+
 	public function getAllTemplates()
 	{
 		return Template::all()->toArray();
@@ -40,7 +45,7 @@ class CMS {
 
 		Profiler::startTimer('LCMS getNestedSitemapArray');
 
-		$pages = Page::all()->toArray();
+		$pages = $this->getPublicPages();
 
 		$new_pages = [];
 
