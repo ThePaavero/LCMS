@@ -3,9 +3,16 @@
 
 	<h1>Pages Index</h1>
 
-	<h1>Create a new page</h1>
 
-	<?php // echo '<pre>'; print_r($data); echo '</pre>'; ?>
+	@if (isset($data['parent_url']))
+	<p>
+		<h2>Create a new page under:</h2>
+		<h3>{{ $data['parent_url'] }}</h3>
+	</p>
+	@else
+		<h2>Create a new page</h2>
+	@endif
+
 
 	{{ Form::open(array('url' => 'lcms/create_page')) }}
 		<p>

@@ -28,6 +28,7 @@ class LcmsController extends BaseController {
 		if($page_id > 0)
 		{
 			$data['parent'] = $page_id;
+			$data['parent_url'] = Page::find($page_id)->url;
 		}
 
 		return View::make('lcms.new_page_form')->with(array('data' => $data));
