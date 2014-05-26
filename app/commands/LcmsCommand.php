@@ -52,6 +52,10 @@ class LcmsCommand extends Command {
 			case 'block':
 				$this->createBlock();
 				break;
+
+			case 'nukedb':
+				$this->nukeDb();
+				break;
 		}
 	}
 
@@ -146,6 +150,18 @@ END;
 		$id = $block->id;
 
 		$this->info('Block ID: ' . $id);
+	}
+
+	public function nukeDb()
+	{
+		if( ! $this->confirm('Really reset entire database? [yes|no]'))
+		{
+			$this->info('Aborted.');
+			return;
+		}
+
+		$this->call('migrate:refresh');
+		$this->call('db:seed');
 	}
 
 }
