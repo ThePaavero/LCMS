@@ -95,8 +95,19 @@ $panel_wide_width: 100%;
 		display: block;
 
 		.close_dyn_content {
-			color: #fff;
+			font-weight: bold;
 			text-decoration: none;
+			float: right;
+			color: #fff;
+			padding: 10px 15px;
+			margin: 5px;
+			border: 1px solid #fa503a;
+
+			&:hover {
+				color: $lcms_gray;
+				border: 1px solid $lcms_gray;
+				background: #fa503a;
+			}
 		}
 	}
 }
