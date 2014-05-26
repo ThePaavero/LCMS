@@ -1,6 +1,7 @@
 
 $lcms_gray: #333;
 $panel_width: 300px;
+$panel_wide_width: 600px;
 
 #lcms_main_panel {
 	font-family: Arial, sans-serif;
@@ -9,15 +10,21 @@ $panel_width: 300px;
 	position: absolute;
 	top: 0;
 	left: 0px;
-	width: $panel_width;
 	height: 100%;
 	color: #fff;
-	transform: translateX($panel_width*-1);
+	z-index: 3;
 
 	&.animate {
 		transition: 0.2s ease-in-out;
 	}
-
+	&.orig {
+		width: $panel_width;
+		transform: translateX($panel_width*-1);
+	}
+	&.wide {
+		width: $panel_wide_width;
+		transform: translateX($panel_wide_width*-1);
+	}
 	&.open {
 		transform: translateX(0px);
 	}
@@ -81,6 +88,15 @@ $panel_width: 300px;
 					}
 				}
 			}
+		}
+	}
+
+	.dyn_content {
+		display: block;
+
+		.close_dyn_content {
+			color: #fff;
+			text-decoration: none;
 		}
 	}
 }
