@@ -3,7 +3,6 @@
 
 	<h1>Pages Index</h1>
 
-
 	@if (isset($data['parent_url']))
 	<p>
 		<h2>Create a new page under:</h2>
@@ -12,7 +11,6 @@
 	@else
 		<h2>Create a new page</h2>
 	@endif
-
 
 	{{ Form::open(array('url' => 'lcms/create_page')) }}
 		<p>
