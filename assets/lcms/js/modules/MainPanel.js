@@ -101,6 +101,7 @@ LCMS.Modules.MainPanel = function() {
 	};
 
 	var addDynamicContent = function(content) {
+		removeDynamicContent();
 		dyn_content.append(content);
 		dyn_content.prepend('<a class="close_dyn_content" href="#">X</a>');
 		dyn_content.find('.close_dyn_content').click(function(e){
