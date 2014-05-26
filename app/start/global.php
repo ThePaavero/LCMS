@@ -73,7 +73,7 @@ App::missing(function($exception)
 {
     return Response::make(View::make('maintemplate', array(
 			'page'  => 'pages.404',
-			'title' => 'Home'
+			'title' => '404 - Page Not Found'
 		)), 404);
 });
 
