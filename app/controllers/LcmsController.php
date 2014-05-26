@@ -93,6 +93,15 @@ class LcmsController extends BaseController {
 		return (string) $this->cms->renderPage($uri);
 	}
 
+	public function deletePage($page_id)
+	{
+		$page = Page::find($page_id);
+		$page->delete();
+
+		Alert::success('Page deleted')->flash();
+		return Redirect::to('');
+	}
+
 	public function updateContent()
 	{
 		$block_id    = Input::get('block_id');

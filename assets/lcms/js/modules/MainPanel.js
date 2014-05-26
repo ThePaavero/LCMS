@@ -66,12 +66,14 @@ LCMS.Modules.MainPanel = function() {
 	var doListeners = function()
 	{
 		main_links.colorbox();
-		/*main_links.on('click', function(e)
+		var confirms = panel.find('.confirm');
+		confirms.on('click', function(e)
 		{
-			e.preventDefault();
-			console.log(':D');
-			return false;
-		});*/
+			if( ! window.confirm('Are you sure?'))
+			{
+				e.preventDefault();
+			}
+		});
 	};
 
 	var createMainPanelContainer = function()
