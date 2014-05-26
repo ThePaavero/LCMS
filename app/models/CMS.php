@@ -81,7 +81,7 @@ class CMS {
 		// Make sure this is a valid URI
 		if( ! $page_id = $this->uriToPageId($uri))
 		{
-			die('lol 404, uri does not exist.');
+			App::abort(404, 'Page not found');
 		}
 
 		// Pull data for this page
