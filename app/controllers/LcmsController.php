@@ -76,11 +76,6 @@ class LcmsController extends BaseController {
 			$block->contents = $block_type_name;
 			$block->page = $page->id;
 			$block->save();
-
-			$template_blocktype_link = new TemplateBlockTypeLink;
-			$template_blocktype_link->type = $template_blocktype['id'];
-			$template_blocktype_link->template = $template->id;
-			$template_blocktype_link->save();
 		}
 
 		Alert::success('Page created')->flash();
