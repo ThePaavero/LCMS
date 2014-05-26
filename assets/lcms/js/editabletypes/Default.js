@@ -88,11 +88,11 @@ LCMS.EditableTypes.Default = function() {
 	var actionToRich = function()
 	{
 		tinymce.init({
-			plugins: ["link", "image"],
+			plugins: ['link', 'image'],
 			selector: '#' + block.attr('id'),
 			file_browser_callback : elFinderBrowser,
 			toolbar: [
-				"undo redo | styleselect | bold italic | link image | alignleft aligncenter alignright"
+				'undo redo | styleselect | bold italic | link image | alignleft aligncenter alignright'
 			]
 		});
 	};
