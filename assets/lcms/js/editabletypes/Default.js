@@ -88,11 +88,11 @@ LCMS.EditableTypes.Default = function() {
 	var actionToRich = function()
 	{
 		tinymce.init({
-			plugins: ['link', 'image'],
+			plugins: ['link', 'image', 'code', 'table'],
 			selector: '#' + block.attr('id'),
 			file_browser_callback : elFinderBrowser,
 			toolbar: [
-				'undo redo | styleselect | bold italic | link image | alignleft aligncenter alignright'
+				'undo redo | styleselect | bold italic | link image | alignleft aligncenter alignright | inserttable'
 			]
 		});
 	};
@@ -145,13 +145,14 @@ LCMS.EditableTypes.Default = function() {
 	var elFinderBrowser = function(field_name, url, type, win)
 	{
 		tinymce.activeEditor.windowManager.open({
-			file: _root + 'elfinder/tinymce',// use an absolute path!
+			file: _root + 'elfinder/tinymce', // use an absolute path!
 			title: 'elFinder 2.0',
 			width: 900,
 			height: 450,
 			resizable: 'yes'
 		}, {
 			setUrl: function (url) {
+				console.log(url);
 				win.document.getElementById(field_name).value = url;
 			}
 		});
