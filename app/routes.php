@@ -14,10 +14,16 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('/lcms/get_main_panel/{page_id?}', 'LcmsController@getMainPanel');
+
 Route::get('/lcms/create_page/{page_id?}', 'LcmsController@createNewPage');
+Route::post('/lcms/create_page/{page_id?}', 'LcmsController@createNewPageSubmit');
+
 Route::get('/lcms/unpublish_page/{page_id}', 'LcmsController@unpublishPage');
 Route::get('/lcms/delete_page/{page_id}', 'LcmsController@deletePage');
-Route::post('/lcms/create_page/{page_id?}', 'LcmsController@createNewPageSubmit');
+
+Route::get('/lcms/edit_page_properties/{page_id}', 'LcmsController@editPageProperties');
+Route::post('/lcms/update_page', 'LcmsController@editPagePropertiesSubmit');
+
 Route::post('/lcms/update_content', 'LcmsController@updateContent');
 Route::get('/lcms/get_history_for_block/{block_id}', 'LcmsController@getHistoryForBlock');
 Route::get('/lcms/get_version_of_block/{history_id}', 'LcmsController@getVersionForBlock');

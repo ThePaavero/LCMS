@@ -74,7 +74,7 @@ class LcmsController extends BaseController {
 		}
 
 		Alert::success('Page created')->flash();
-		return Redirect::back();
+		return Redirect::to($page->url);
 	}
 
 	public function loadPage($uri = '')
@@ -130,6 +130,30 @@ class LcmsController extends BaseController {
 	public function getVersionForBlock($history_id)
 	{
 		return BlockHistory::find($history_id)->toJson();
+	}
+
+	public function editPageProperties($page_id)
+	{
+		$data = $this->cms->getPageProperties($page_id);
+		return View::make('lcms.page_properties')->with(array('data' => $data));
+	}
+
+	public function editPagePropertiesSubmit()
+	{
+		$page_id = Input::get('page_id');
+
+		$page = Page::find($page_id);
+
+		$page->url         = Input::get('url');
+		$page->title       = Input::get('title');
+		$page->description = Input::get('description');
+		$page->template    = Input::get('template');
+		$page->published   = Input::get('published');
+
+		$page->save();
+
+		Alert::success('Page properties updated')->flash();
+		return Redirect::to($page->url);
 	}
 
 }

@@ -5,7 +5,7 @@ LCMS.Modules.NewPageForm = function() {
 
 	this.init = function()
 	{
-		form = $('.lcms_modal.create_new_page > form');
+		form = $('.lcms_page_form_wrapper > form');
 
 		doListeners();
 	};

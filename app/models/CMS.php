@@ -262,5 +262,16 @@ class CMS {
 		return $url;
 	}
 
+	public function getPageProperties($page_id)
+	{
+		$page = Page::find($page_id)->toArray();
+		$templates = $this->getAllTemplates();
+
+		return array(
+				'page' => $page,
+				'templates' => $templates
+			);
+	}
+
 }
 
