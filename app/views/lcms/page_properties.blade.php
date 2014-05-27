@@ -10,7 +10,7 @@
 				<label>Template
 					<select name='template'>
 						@foreach($data['templates'] as $i)
-						<option value='{{ $i['id'] }}'>{{ $i['description'] }}</option>
+						<option value='{{ $i['id'] }}'@if($i['id'] === $data['page']['template']) selected @endif>{{ $i['description'] }}</option>
 						@endforeach
 					</select>
 				</label>

@@ -47,8 +47,6 @@ class LcmsController extends BaseController {
 		$page->published = Input::get('published');
 		$page->template  = $template_id;
 
-		// $page->published = new DateTime;
-
 		// Parent? If so, prepend its URL to ours
 		$parent_id = (int) Input::get('parent_id');
 		if($parent_id > 0)
