@@ -17,7 +17,16 @@ class CMS {
 
 	public function getPublicPages()
 	{
-		return Page::where('published', '<=', new DateTime)->get()->toArray();
+		if($this->user_can_edit)
+		{
+			$pages = Page::all()->toArray();
+		}
+		else
+		{
+			$pages = Page::where('published', '<=', new DateTime)->get()->toArray();
+		}
+
+		return $pages;
 	}
 
 	public function getAllTemplates()
@@ -144,7 +153,14 @@ class CMS {
 	{
 		Profiler::startTimer('LCMS uriToPageId');
 
-		$data = Page::where('url', $uri)->get()->toArray();
+		if($this->user_can_edit)
+		{
+			$data = Page::where('url', $uri)->get()->toArray();
+		}
+		else
+		{
+			$data = Page::where('url', $uri)->where('published', '<=', new DateTime)->get()->toArray();
+		}
 
 		if(empty($data[0]))
 		{
