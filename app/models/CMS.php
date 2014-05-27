@@ -292,6 +292,25 @@ class CMS {
 		return $deleted;
 	}
 
+	public function unpublishChildrenOf($parent_id)
+	{
+		$kids = $this->getChildrenOf($parent_id);
+		$unpublished = 0;
+
+		if(empty($kids))
+		{
+			return $unpublished;
+		}
+
+		foreach($kids as $i)
+		{
+			$this->unpublishPage($i['id']);
+			$unpublished ++;
+		}
+
+		return $unpublished;
+	}
+
 	public function getChildrenOf($id)
 	{
 		$parent = Page::find($id);
@@ -313,6 +332,19 @@ class CMS {
 		$page->delete();
 
 		return $kids_deleted;
+	}
+
+	public function unpublishPage($page_id)
+	{
+		// Get my kids and unpublish them first
+		$kids_unpublished = $this->unpublishChildrenOf($page_id);
+
+		// Then, unpublish myself
+		$page = Page::find($page_id);
+        $page->published = '9999-1-1 00:00:00';
+        $page->save();
+
+        return $kids_unpublished;
 	}
 
 }

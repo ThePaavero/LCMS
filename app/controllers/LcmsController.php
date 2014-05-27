@@ -90,11 +90,9 @@ class LcmsController extends BaseController {
 
     public function unpublishPage($page_id)
     {
-        $page = Page::find($page_id);
-        $page->published = '9999-1-1 00:00:00';
-        $page->save();
+        $kids_unpublished = $this->cms->unpublishPage($page_id);
 
-        Alert::success('Page unpublished')->flash();
+        Alert::success('Page unpublished (and ' . $kids_unpublished . ' children)')->flash();
         return Redirect::back();
     }
 
