@@ -41,7 +41,6 @@ class CMS {
 
 	/**
 	 * Get an hierarchical array with all pages
-	 * Note: This was pretty much cloned from Q2
 	 *
 	 * @return array
 	 */
@@ -311,6 +310,43 @@ class CMS {
 		return $unpublished;
 	}
 
+	public function updateParentUrlForChildrenOf($parent_id, $parent_url)
+	{
+		$kids = $this->getChildrenOf($parent_id);
+		$updated = 0;
+
+		if(empty($kids))
+		{
+			return $updated;
+		}
+
+		foreach($kids as $i)
+		{
+			$this->updateParentUrl($i['id'], $parent_url);
+			$updated ++;
+		}
+
+		return $updated;
+	}
+
+	public function updateParentUrl($id, $parent_url)
+	{
+		// Get me first
+		$me = Page::find($id);
+
+		// Break up my URL to segments
+		$segments = explode('/', $me->url);
+
+		// Get the last segment, that's our own slug
+		$last_segment = end($segments);
+
+		// Replace everything before our own slug with $parent_url
+		$my_new_url = $parent_url . '/' . $last_segment;
+
+		$me->url = $my_new_url;
+		$me->save();
+	}
+
 	public function getChildrenOf($id)
 	{
 		$parent = Page::find($id);
@@ -345,6 +381,17 @@ class CMS {
         $page->save();
 
         return $kids_unpublished;
+	}
+
+	public function updatePage($id, $data)
+	{
+		// Get my kids and update their URLs first
+		$kids_updated = $this->updateParentUrlForChildrenOf($id, $data['url']);
+
+		// Then, update my data
+		$page = Page::find($id);
+		$page->fill($data);
+		$page->save();
 	}
 
 }

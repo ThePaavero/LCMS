@@ -137,18 +137,16 @@ class LcmsController extends BaseController {
 	{
 		$page_id = Input::get('page_id');
 
-		$page = Page::find($page_id);
-
-		$page->url         = Input::get('url');
-		$page->title       = Input::get('title');
-		$page->description = Input::get('description');
-		$page->template    = Input::get('template');
-		$page->published   = Input::get('published');
-
-		$page->save();
+		$this->cms->updatePage($page_id, array(
+				'url'         => Input::get('url'),
+				'title'       => Input::get('title'),
+				'description' => Input::get('description'),
+				'template'    => Input::get('template'),
+				'published'   => Input::get('published')
+			));
 
 		Alert::success('Page properties updated')->flash();
-		return Redirect::to($page->url);
+		return Redirect::to(Input::get('url'));
 	}
 
 }
