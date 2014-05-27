@@ -160,6 +160,8 @@ END;
 			return;
 		}
 
+		Cache::forget('lcms_sitemap');
+
 		$db_path = app_path() . '/database/production.sqlite';
 
 		if(file_exists($db_path))
