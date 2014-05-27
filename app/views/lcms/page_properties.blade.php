@@ -1,7 +1,7 @@
 
 <div class='lcms_modal page_properties'>
 
-	<h1>Pages Properties</h1>
+	<h1>Page Properties</h1>
 
 	<div class='lcms_page_form_wrapper'>
 		{{ Form::open(array('url' => 'lcms/update_page')) }}
@@ -16,7 +16,7 @@
 				</label>
 			</p>
 			<p><label><span class ="label">Title</span><input type='text' name='title' value='{{ $data['page']['title'] }}'></label></p>
-			<p><label><span class="label">URL segment</span><input type='text' name='url' value='{{ $data['page']['url'] }}'></label></p>
+			<p><label><span class="label">URL</span><input type='text' name='url' value='{{ $data['page']['url'] }}'></label></p>
 			<p><label><span class="label">Publish date</span><input type='text' name='published' class='datepicker' value='{{ $data['page']['published'] }}'></label></p>
 			<p>
 				<input type='submit' value='Save'>

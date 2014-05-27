@@ -1,15 +1,12 @@
 
 <div class='lcms_modal create_new_page'>
 
-	<h1>Pages Index</h1>
+	<h1>Create New Page</h1>
 
 	@if (isset($data['parent_url']))
-	<p>
-		<h2>Create a new page under:</h2>
-		<h3>{{ $data['parent_url'] }}</h3>
-	</p>
+	<h2>Create a new page under "{{ $data['parent_url'] }}"</h2>
 	@else
-		<h2>Create a new page</h2>
+	<h2>Create a new page</h2>
 	@endif
 
 	<div class='lcms_page_form_wrapper'>

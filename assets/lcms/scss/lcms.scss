@@ -2,6 +2,7 @@
 $lcms_gray: #333;
 $panel_width: 300px;
 $panel_wide_width: 100%;
+$orange: #fa503a;
 
 #lcms_main_panel {
 	font-family: Arial, sans-serif;
@@ -56,7 +57,7 @@ $panel_wide_width: 100%;
 			font-size: 16px;
 			font-weight: bold;
 			display: inline-block;
-			color: #fa503a;
+			color: $orange;
 			display: block;
 		}
 
@@ -101,12 +102,12 @@ $panel_wide_width: 100%;
 			color: #fff;
 			padding: 10px 15px;
 			margin: 5px;
-			border: 1px solid #fa503a;
+			border: 1px solid $orange;
 
 			&:hover {
 				color: $lcms_gray;
 				border: 1px solid $lcms_gray;
-				background: #fa503a;
+				background: $orange;
 			}
 		}
 	}
@@ -152,15 +153,6 @@ $panel_wide_width: 100%;
 	}
 }
 
-.create_new_page {
-    span.label {
-        display: block;
-        float: left;
-        width: 120px;
-    }
-}
-
-
 /* css for datepicker */
 .ui-datepicker-div .ui-widget-header { margin-bottom: 8px; }
 .ui-datepicker-div dl { text-align: left; }
@@ -174,3 +166,29 @@ $panel_wide_width: 100%;
 .ui-datepicker-rtl dl dt{ float: right; clear: right; }
 .ui-datepicker-rtl dl dd { margin: 0 45% 10px 10px; }
 
+.lcms_page_form_wrapper {
+
+	form {
+
+		input[type=text] {
+			display: block;
+			background: #1c1c1c;
+			padding: 5px;
+			width: 80%;
+			max-width: 600px;
+			font-size: 12px;
+			color: #fff;
+			border: solid 1px #525252;
+		}
+
+		input[type=submit] {
+			background: $orange;
+			display: inline-block;
+			padding: 5px 10px;
+			color: #000;
+			border: none;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+	}
+}
