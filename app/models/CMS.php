@@ -2,7 +2,7 @@
 
 class CMS {
 
-	public $user_can_edit = true; // @todo Actually check for this...
+	public $user_can_edit = false; // @todo Actually check for this...
 	public $sitemap;
 
 	public function __construct()

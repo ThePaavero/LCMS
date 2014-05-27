@@ -4,6 +4,14 @@ $panel_width: 300px;
 $panel_wide_width: 100%;
 $orange: #fa503a;
 
+@mixin lcms_panel_link_with_icon {
+	display: block;
+	background-size: contain;
+	text-indent: 33px;
+	background-repeat: no-repeat;
+	background-position: center left;
+}
+
 #lcms_main_panel {
 	font-family: Arial, sans-serif;
 	font-size: 13px;
@@ -84,7 +92,7 @@ $orange: #fa503a;
 						outline: none;
 
 						&:hover {
-							background: #666;
+							background-color: #666;
 						}
 					}
 				}
@@ -191,4 +199,25 @@ $orange: #fa503a;
 			font-weight: bold;
 		}
 	}
+}
+
+.icon_create_new_page {
+	@include lcms_panel_link_with_icon;
+	background-image: url('../lcms/img/icons/appbar.page.add.png');
+}
+.icon_page_properties {
+	@include lcms_panel_link_with_icon;
+	background-image: url('../lcms/img/icons/appbar.page.edit.png');
+}
+.icon_unpublish_page {
+	@include lcms_panel_link_with_icon;
+	background-image: url('../lcms/img/icons/appbar.noentry.png');
+}
+.icon_delete_page {
+	@include lcms_panel_link_with_icon;
+	background-image: url('../lcms/img/icons/appbar.page.delete.png');
+}
+.icon_flush_caches {
+	@include lcms_panel_link_with_icon;
+	background-image: url('../lcms/img/icons/appbar.clean.png');
 }

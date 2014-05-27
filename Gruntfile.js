@@ -102,6 +102,17 @@ module.exports = function(grunt) {
 					}
 				]
 			},
+			assets_img: {
+				files: [
+					{
+						src: 'assets/lcms/img/*',
+						expand: true,
+						dest: 'public_html/assets/lcms/img/',
+						flatten: false,
+						filter: 'isFile'
+					}
+				]
+			},
 			colorbox: {
 				files: [
 					{

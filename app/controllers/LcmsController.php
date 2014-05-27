@@ -149,5 +149,13 @@ class LcmsController extends BaseController {
 		return Redirect::to(Input::get('url'));
 	}
 
+	public function flushAllCaches()
+	{
+		Cache::flush();
+
+		Alert::success('All caches flushed')->flash();
+		return Redirect::back();
+	}
+
 }
 
