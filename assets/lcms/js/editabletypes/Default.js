@@ -72,6 +72,7 @@ LCMS.EditableTypes.Default = function() {
 	var actionSave = function()
 	{
 		console.log('Saving...');
+		tinymce.remove('#' + block.attr('id'));
 		var new_content = block.html();
 		updateContent(new_content, function()
 		{
