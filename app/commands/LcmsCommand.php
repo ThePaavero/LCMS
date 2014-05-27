@@ -160,7 +160,16 @@ END;
 			return;
 		}
 
-		$this->call('migrate:refresh');
+		$db_path = app_path() . '/database/production.sqlite';
+
+		if(file_exists($db_path))
+		{
+			unlink($db_path);
+		}
+
+		touch($db_path);
+
+		$this->call('migrate');
 		$this->call('db:seed');
 	}
 
