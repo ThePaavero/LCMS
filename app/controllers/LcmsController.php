@@ -82,10 +82,9 @@ class LcmsController extends BaseController {
 
 	public function deletePage($page_id)
 	{
-		$page = Page::find($page_id);
-		$page->delete();
+		$kids_deleted = $this->cms->deletePage($page_id);
 
-		Alert::success('Page deleted')->flash();
+		Alert::success('Page deleted (and ' . $kids_deleted . ' children)')->flash();
 		return Redirect::to('');
 	}
 

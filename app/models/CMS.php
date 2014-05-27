@@ -273,5 +273,47 @@ class CMS {
 			);
 	}
 
+	public function deleteChildrenOf($parent_id)
+	{
+		$kids = $this->getChildrenOf($parent_id);
+		$deleted = 0;
+
+		if(empty($kids))
+		{
+			return $deleted;
+		}
+
+		foreach($kids as $i)
+		{
+			Page::find($i['id'])->delete();
+			$deleted ++;
+		}
+
+		return $deleted;
+	}
+
+	public function getChildrenOf($id)
+	{
+		$parent = Page::find($id);
+		$parent_url = $parent->url;
+
+		// If my own URL starts with the parent's URL, we're a kid of it
+		$kids = Page::where('url', 'LIKE', $parent_url . '%')->where('url', '!=', $parent_url)->get();
+
+		return $kids;
+	}
+
+	public function deletePage($id)
+	{
+		// Get my kids and delete them first
+		$kids_deleted = $this->deleteChildrenOf($id);
+
+		// Then, delete myself
+		$page = Page::find($id);
+		$page->delete();
+
+		return $kids_deleted;
+	}
+
 }
 
