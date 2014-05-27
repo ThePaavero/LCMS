@@ -46,6 +46,11 @@ class CMS {
 	 */
 	public function getNestedSitemapArray()
 	{
+		if(Cache::has('lcms_sitemap'))
+		{
+			return Cache::get('lcms_sitemap');
+		}
+
 		if(isset($this->sitemap))
 		{
 			return $this->sitemap;
@@ -87,7 +92,11 @@ class CMS {
 
 		}
 
-		$this->sitemap = $new_pages; // "Cache" this
+		// "Cache" this
+		$this->sitemap = $new_pages;
+
+		// Actually cache the sitemap object
+		Cache::forever('lcms_sitemap', $this->sitemap);
 
 		Profiler::endTimer('LCMS getNestedSitemapArray');
 
@@ -288,6 +297,8 @@ class CMS {
 			$deleted ++;
 		}
 
+		$this->clearCachedSitemap();
+
 		return $deleted;
 	}
 
@@ -306,6 +317,8 @@ class CMS {
 			$this->unpublishPage($i['id']);
 			$unpublished ++;
 		}
+
+		$this->clearCachedSitemap();
 
 		return $unpublished;
 	}
@@ -326,6 +339,8 @@ class CMS {
 			$updated ++;
 		}
 
+		$this->clearCachedSitemap();
+
 		return $updated;
 	}
 
@@ -342,6 +357,8 @@ class CMS {
 
 		// Replace everything before our own slug with $parent_url
 		$my_new_url = $parent_url . '/' . $last_segment;
+
+		$this->clearCachedSitemap();
 
 		$me->url = $my_new_url;
 		$me->save();
@@ -367,6 +384,8 @@ class CMS {
 		$page = Page::find($id);
 		$page->delete();
 
+		$this->clearCachedSitemap();
+
 		return $kids_deleted;
 	}
 
@@ -380,6 +399,8 @@ class CMS {
         $page->published = '9999-1-1 00:00:00';
         $page->save();
 
+        $this->clearCachedSitemap();
+
         return $kids_unpublished;
 	}
 
@@ -392,6 +413,13 @@ class CMS {
 		$page = Page::find($id);
 		$page->fill($data);
 		$page->save();
+
+		$this->clearCachedSitemap();
+	}
+
+	public function clearCachedSitemap()
+	{
+		Cache::forget('lcms_sitemap');
 	}
 
 }
