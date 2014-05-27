@@ -91,6 +91,16 @@ class LcmsController extends BaseController {
 		return Redirect::to('');
 	}
 
+    public function unpublishPage($page_id)
+    {
+        $page = Page::find($page_id);
+        $page->published = '9999-1-1 00:00:00';
+        $page->save();
+
+        Alert::success('Page unpublished')->flash();
+        return Redirect::back();
+    }
+
 	public function updateContent()
 	{
 		$block_id    = Input::get('block_id');

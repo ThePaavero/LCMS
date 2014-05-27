@@ -15,6 +15,7 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/lcms/get_main_panel/{page_id?}', 'LcmsController@getMainPanel');
 Route::get('/lcms/create_page/{page_id?}', 'LcmsController@createNewPage');
+Route::get('/lcms/unpublish_page/{page_id}', 'LcmsController@unpublishPage');
 Route::get('/lcms/delete_page/{page_id}', 'LcmsController@deletePage');
 Route::post('/lcms/create_page/{page_id?}', 'LcmsController@createNewPageSubmit');
 Route::post('/lcms/update_content', 'LcmsController@updateContent');
@@ -25,3 +26,4 @@ Route::any('/elfinder/tinymce', 'Barryvdh\Elfinder\ElfinderController@showTinyMC
 Route::any('/elfinder/connector', 'Barryvdh\Elfinder\ElfinderController@showConnector');
 
 Route::get('/{segments}', 'LcmsController@loadPage')->where('segments', '(.*)');
+
