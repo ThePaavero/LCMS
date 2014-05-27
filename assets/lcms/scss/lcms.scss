@@ -152,6 +152,14 @@ $panel_wide_width: 100%;
 	}
 }
 
+.create_new_page {
+    span.label {
+        display: block;
+        float: left;
+        width: 120px;
+    }
+}
+
 
 /* css for datepicker */
 .ui-datepicker-div .ui-widget-header { margin-bottom: 8px; }
@@ -165,3 +173,4 @@ $panel_wide_width: 100%;
 .ui-datepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
 .ui-datepicker-rtl dl dt{ float: right; clear: right; }
 .ui-datepicker-rtl dl dd { margin: 0 45% 10px 10px; }
+

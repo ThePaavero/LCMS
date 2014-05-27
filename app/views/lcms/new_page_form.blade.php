@@ -22,9 +22,9 @@
 				</select>
 			</label>
 		</p>
-		<p><label>Title<input type='text' name='title'></label></p>
-		<p><label>URL segment<input type='text' name='url'></label></p>
-		<p><label>Publish date<input type='text' name='published' class='datepicker' value='{{ $data['published'] }}'></label></p>
+		<p><label><span class="label">Title</span><input type='text' name='title'></label></p>
+		<p><label><span class="label">URL segment</span><input type='text' name='url'></label></p>
+		<p><label><span class="label">Publish date</span><input type='text' name='published' class='datepicker' value='{{ $data['published'] }}'></label></p>
 		<p>
 			<input type='submit' value='Save'>
 			<input type='hidden' name='parent_id' value='{{ isset($data['parent']) ? $data['parent'] : 0 }}'>
@@ -32,3 +32,4 @@
 	{{ Form::close() }}
 
 </div><!-- lcms_modal -->
+
