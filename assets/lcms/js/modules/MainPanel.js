@@ -56,6 +56,7 @@ LCMS.Modules.MainPanel = function() {
 	};
 
 	var closePanel = function() {
+		removeDynamicContent();
 		$(panel).removeClass('open');
 		$('#lcms_container').removeClass('open');
 		localStorage.setItem('lcms_panel_state', 'closed');
@@ -105,7 +106,9 @@ LCMS.Modules.MainPanel = function() {
 	var addDynamicContent = function(content) {
 		openPanel();
 		removeDynamicContent();
+		dyn_content.hide();
 		dyn_content.append(content);
+		dyn_content.fadeIn(350);
 		dyn_content.prepend('<a class="close_dyn_content" href="#">X</a>');
 		dyn_content.find('.close_dyn_content').click(function(e){
 			e.preventDefault();
@@ -131,7 +134,7 @@ LCMS.Modules.MainPanel = function() {
 	};
 
 	var panelSizeWide = function() {
-		return; // Lets not make the sidebar wider...for now
+		// return; // Lets not make the sidebar wider...for now
 		if(!panel.hasClass('wide')) {
 			panel.addClass('wide');
 		}

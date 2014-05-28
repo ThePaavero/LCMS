@@ -1,7 +1,7 @@
 
 $lcms_gray: #333;
 $panel_width: 300px;
-$panel_wide_width: 100%;
+$panel_wide_width: 50%;
 $orange: #fa503a;
 
 @mixin lcms_panel_link_with_icon {
@@ -100,6 +100,7 @@ $orange: #fa503a;
 
 	.dyn_content {
 		display: block;
+		padding: 5%;
 
 		.close_dyn_content {
 			font-weight: bold;
@@ -179,7 +180,7 @@ $orange: #fa503a;
 			display: block;
 			background: #1c1c1c;
 			padding: 5px;
-			width: 80%;
+			width: 90%;
 			max-width: 600px;
 			font-size: 12px;
 			color: #fff;
