@@ -51,9 +51,11 @@ class CMS {
 	 */
 	public function getNestedSitemapArray()
 	{
-		if(Cache::has('lcms_sitemap'))
+		$cache_key = 'lcms_sitemap_' . ($this->isAdmin() ? 'admin' : 'guest');
+
+		if(Cache::has($cache_key))
 		{
-			return Cache::get('lcms_sitemap');
+			return Cache::get($cache_key);
 		}
 
 		if(isset($this->sitemap))
@@ -101,7 +103,7 @@ class CMS {
 		$this->sitemap = $new_pages;
 
 		// Actually cache the sitemap object
-		Cache::forever('lcms_sitemap', $this->sitemap);
+		Cache::forever($cache_key, $this->sitemap);
 
 		Profiler::endTimer('LCMS getNestedSitemapArray');
 
@@ -424,7 +426,8 @@ class CMS {
 
 	public function clearCachedSitemap()
 	{
-		Cache::forget('lcms_sitemap');
+		Cache::forget('lcms_sitemap_admin');
+		Cache::forget('lcms_sitemap_guest');
 	}
 
 	public function createNewPage($data)
