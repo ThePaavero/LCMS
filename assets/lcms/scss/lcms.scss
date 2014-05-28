@@ -221,3 +221,7 @@ $orange: #fa503a;
 	@include lcms_panel_link_with_icon;
 	background-image: url('../lcms/img/icons/appbar.clean.png');
 }
+.icon_logout {
+	@include lcms_panel_link_with_icon;
+	background-image: url('../lcms/img/icons/appbar.power.png');
+}

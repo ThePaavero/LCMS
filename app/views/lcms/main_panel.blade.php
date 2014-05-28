@@ -15,6 +15,7 @@
     		<li><a href='{{ URL::to('lcms/delete_page/' . $page_id) }}' class='noajax confirm icon_delete_page'>Delete this page</a></li>
     		@endif
     		<li><a href='{{ URL::to('lcms/flush_all_caches') }}' class='noajax icon_flush_caches'>Flush all caches</a></li>
+    		<li><a href='{{ URL::to('logout') }}' class='noajax icon_logout'>Log out</a></li>
     	</ul>
     </nav>
     <div class="dyn_content"></div>
