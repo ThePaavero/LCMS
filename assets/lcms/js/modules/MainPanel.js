@@ -92,6 +92,8 @@ LCMS.Modules.MainPanel = function() {
 				e.preventDefault();
 			}
 		});
+
+		doFlashEditableAreasListener();
 	};
 
 	var loadContent = function(url) {
@@ -163,6 +165,19 @@ LCMS.Modules.MainPanel = function() {
 		$('.datepicker').datetimepicker({
 			format: 'Y-m-d H:i:s'
 		});
+	};
+
+	var doFlashEditableAreasListener = function()
+	{
+		$('.icon_flash_editables').on('click', flashEditableAreas);
+	};
+
+	var flashEditableAreas = function(e)
+	{
+		e.preventDefault();
+
+		var flasher = new LCMS.Modules.EditablesFlasher();
+		flasher.init();
 	};
 
 };

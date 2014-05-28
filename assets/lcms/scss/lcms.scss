@@ -199,6 +199,13 @@ $orange: #fa503a;
 	}
 }
 
+.cms_editable {
+
+	&.flashing {
+		box-shadow: 0px 0px 0px 2px $orange inset;
+	}
+}
+
 .icon_create_new_page {
 	@include lcms_panel_link_with_icon;
 	background-image: url('../lcms/img/icons/appbar.page.add.png');
@@ -222,4 +229,8 @@ $orange: #fa503a;
 .icon_logout {
 	@include lcms_panel_link_with_icon;
 	background-image: url('../lcms/img/icons/appbar.power.png');
+}
+.icon_flash_editables {
+	@include lcms_panel_link_with_icon;
+	background-image: url('../lcms/img/icons/appbar.camera.flash.png');
 }
