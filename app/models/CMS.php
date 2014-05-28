@@ -2,12 +2,17 @@
 
 class CMS {
 
-	public $user_can_edit = true; // @todo Actually check for this...
+	public $user_can_edit = false;
 	public $sitemap;
 
 	public function __construct()
 	{
-		// TODO...
+		$this->user_can_edit = $this->isAdmin();
+	}
+
+	public function isAdmin()
+	{
+		return isset(Auth::user()->username);
 	}
 
 	public function getAllPages()

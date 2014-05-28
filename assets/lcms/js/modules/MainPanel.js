@@ -72,7 +72,6 @@ LCMS.Modules.MainPanel = function() {
 
 	var doListeners = function()
 	{
-		//main_links.colorbox();
 		main_links.click(function(e){
 			e.preventDefault();
 
