@@ -437,13 +437,6 @@ class CMS {
 		$page->published = $data['published'];
 		$page->template  = $template_id;
 
-		// Parent? If so, prepend its URL to ours
-		$parent_id = (int) $data['parent_id'];
-		if($parent_id > 0)
-		{
-			$page->url = $this->getUrlForPage($parent_id) . '/' . $page->url;
-		}
-
 		$page->save();
 
 		$this->clearCachedSitemap();

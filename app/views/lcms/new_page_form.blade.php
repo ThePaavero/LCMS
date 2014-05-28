@@ -21,7 +21,7 @@
 				</label>
 			</p>
 			<p><label><span class="label">Title</span><input type='text' name='title'></label></p>
-			<p><label><span class="label">URL segment</span><input type='text' name='url'></label></p>
+			<p><label><span class="label">URL</span><input type='text' name='url' value='{{ $data['parent_url'] . '/' }}'></label></p>
 			<p><label><span class="label">Publish date</span><input type='text' name='published' class='datepicker' value='{{ $data['published'] }}'></label></p>
 			<p>
 				<input type='submit' value='Save'>
