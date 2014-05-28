@@ -105,9 +105,9 @@ module.exports = function(grunt) {
 			assets_img: {
 				files: [
 					{
-						src: 'assets/lcms/img/*',
+						src: 'assets/lcms/img/**/*',
 						expand: true,
-						dest: 'public_html/assets/lcms/img/',
+						dest: 'public_html/',
 						flatten: false,
 						filter: 'isFile'
 					}
