@@ -103,6 +103,7 @@ LCMS.Modules.MainPanel = function() {
 	};
 
 	var addDynamicContent = function(content) {
+		openPanel();
 		removeDynamicContent();
 		dyn_content.append(content);
 		dyn_content.prepend('<a class="close_dyn_content" href="#">X</a>');
