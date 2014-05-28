@@ -44,14 +44,10 @@ LCMS.Modules.BlockTools = function(_block, _actions) {
 		html += '</div>';
 
 		box.innerHTML = html;
-		$('#lcms_container').prepend(box);
-
-		var top = block.offset().top - $(box).outerHeight();
-		var left = block.offset().left;
+		$(block).parent().prepend(box);
 
 		$(box).css({
-			'top' : top,
-			'left': left
+			'margin-top' : $(box).outerHeight() * -1 + 'px',
 		});
 
 		doListenersForBox();

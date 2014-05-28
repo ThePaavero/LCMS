@@ -144,12 +144,10 @@ $orange: #fa503a;
 
 .cms_block_tools {
 	position: absolute;
-	top: 0;
-	left: 0;
-	display: inline-block;
+	display: block;
 	background: $lcms_gray;
 	padding: 4px;
-	font-size: 11px;
+	font-size: 12px;
 	z-index: 2;
 
 	a {
