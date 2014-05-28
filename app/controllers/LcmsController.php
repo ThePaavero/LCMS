@@ -39,40 +39,18 @@ class LcmsController extends BaseController {
 
 	public function createNewPageSubmit()
 	{
-		$template_id = Input::get('template');
+		$data = [
+			'template'  => Input::get('template'),
+			'title'     => Input::get('title'),
+			'url'       => Input::get('url'),
+			'published' => Input::get('published'),
+			'parent_id' => Input::get('parent_id'),
+		];
 
-		$page            = new Page;
-		$page->title     = Input::get('title');
-		$page->url       = Input::get('url');
-		$page->published = Input::get('published');
-		$page->template  = $template_id;
-
-		// Parent? If so, prepend its URL to ours
-		$parent_id = (int) Input::get('parent_id');
-		if($parent_id > 0)
-		{
-			$page->url = $this->cms->getUrlForPage($parent_id) . '/' . $page->url;
-		}
-
-		$page->save();
-
-		$template = Template::find($template_id);
-
-		$template_blocktypes = TemplateBlockTypeLink::where('template', $template_id)->get()->toArray();
-
-		foreach($template_blocktypes as $template_blocktype)
-		{
-			$block_type_id = $template_blocktype['id'];
-
-			$block = new Block;
-			$block->type = $block_type_id;
-			$block->contents = BlockType::find($block_type_id)->name;
-			$block->page = $page->id;
-			$block->save();
-		}
+		$url = $this->cms->createNewPage($data);
 
 		Alert::success('Page created')->flash();
-		return Redirect::to($page->url);
+		return Redirect::to($url);
 	}
 
 	public function loadPage($uri = '')

@@ -427,5 +427,42 @@ class CMS {
 		Cache::forget('lcms_sitemap');
 	}
 
+	public function createNewPage($data)
+	{
+		$template_id = $data['template'];
+
+		$page            = new Page;
+		$page->title     = $data['title'];
+		$page->url       = $data['url'];
+		$page->published = $data['published'];
+		$page->template  = $template_id;
+
+		// Parent? If so, prepend its URL to ours
+		$parent_id = (int) $data['parent_id'];
+		if($parent_id > 0)
+		{
+			$page->url = $this->getUrlForPage($parent_id) . '/' . $page->url;
+		}
+
+		$page->save();
+
+		$this->clearCachedSitemap();
+
+		$template_blocktypes = TemplateBlockTypeLink::where('template', $template_id)->get()->toArray();
+
+		foreach($template_blocktypes as $template_blocktype)
+		{
+			$block_type_id = $template_blocktype['id'];
+
+			$block = new Block;
+			$block->type = $block_type_id;
+			$block->contents = BlockType::find($block_type_id)->name;
+			$block->page = $page->id;
+			$block->save();
+		}
+
+		return $page->url;
+	}
+
 }
 
