@@ -44,7 +44,7 @@ LCMS.Modules.BlockTools = function(_block, _actions) {
 		html += '</div>';
 
 		box.innerHTML = html;
-		$('body').prepend(box);
+		$('#lcms_container').prepend(box);
 
 		var top = block.offset().top - $(box).outerHeight();
 		var left = block.offset().left;

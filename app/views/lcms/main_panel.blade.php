@@ -3,7 +3,7 @@
 </a>
 
 <div class="content">
-    <h2>CMS</h2>
+    <h2 class='cms_title'>CMS</h2>
 
     <nav>
     	<ul>

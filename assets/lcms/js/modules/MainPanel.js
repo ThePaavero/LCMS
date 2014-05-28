@@ -26,7 +26,7 @@ LCMS.Modules.MainPanel = function() {
 			// We don't want to animate the initial state
 			setTimeout(function(){
 				$(panel).addClass('animate');
-				$('#container').addClass('animate');
+				$('#lcms_container').addClass('animate');
 			}, 200);
 
 
@@ -50,14 +50,14 @@ LCMS.Modules.MainPanel = function() {
 	};
 
 	var openPanel = function() {
-		$('#container').addClass('open');
+		$('#lcms_container').addClass('open');
 		$(panel).addClass('open');
 		localStorage.setItem('lcms_panel_state', 'open');
 	};
 
 	var closePanel = function() {
 		$(panel).removeClass('open');
-		$('#container').removeClass('open');
+		$('#lcms_container').removeClass('open');
 		localStorage.setItem('lcms_panel_state', 'closed');
 	};
 

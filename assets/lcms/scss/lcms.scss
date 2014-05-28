@@ -23,6 +23,10 @@ $orange: #fa503a;
 	color: #fff;
 	z-index: 3;
 
+	h2.cms_title {
+		color: $orange;
+	}
+
 	a {
 		color: #ffffff;
 	}
@@ -115,7 +119,7 @@ $orange: #fa503a;
 	}
 }
 
-#container {
+#lcms_container {
 	&.animate {
 		transition: 0.2s ease-in-out;
 	}

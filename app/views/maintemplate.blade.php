@@ -4,7 +4,7 @@
 
 	@include("includes.alerts")
 
-    <div id='container'>
+    <div id='lcms_container'>
 
         <div class='cms_navigation'>
             {{ $CMS->sitemapAsNavigation(false) }}
@@ -20,6 +20,6 @@
 
 		@include("includes.footer")
 
-    </div> <!-- container -->
+    </div> <!-- lcms_container -->
 </body>
 </html>
