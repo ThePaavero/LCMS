@@ -1,6 +1,7 @@
 
 LCMS.EditableTypes.Default = function() {
 
+	var self = this;
 	var block;
 	var tools;
 	var block_id;
@@ -100,7 +101,7 @@ LCMS.EditableTypes.Default = function() {
 
 	var actionHistory = function()
 	{
-		$.colorbox({href: _root + 'lcms/get_history_for_block/' + block_id});
+		LCMS.Modules.Events.dispatchEvent('openInMainPanel', {href: _root + 'lcms/get_history_for_block/' + block_id});
 	};
 
 	var restoreContent = function()

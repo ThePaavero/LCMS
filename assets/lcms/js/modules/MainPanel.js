@@ -1,6 +1,7 @@
 
 LCMS.Modules.MainPanel = function() {
 
+	var self = this;
 	var panel;
 	var dyn_content;
 	var main_links;
@@ -41,6 +42,10 @@ LCMS.Modules.MainPanel = function() {
 
 			dyn_content = $(panel).find('.dyn_content');
 			panelSizeReset();
+
+			LCMS.Modules.Events.addEventListener(self, 'openInMainPanel', function(e){
+				loadContent(e.href);
+			});
 		});
 	};
 
@@ -75,7 +80,7 @@ LCMS.Modules.MainPanel = function() {
 		main_links.click(function(e){
 			e.preventDefault();
 
-			loadContent(e.currentTarget);
+			loadContent($(e.target).attr('href'));
 		});
 
 		var confirms = panel.find('.confirm');
@@ -88,9 +93,7 @@ LCMS.Modules.MainPanel = function() {
 		});
 	};
 
-	var loadContent = function(target) {
-		var url = $(target).attr('href');
-
+	var loadContent = function(url) {
 		$.ajax({
 			url: url,
 		})
@@ -127,6 +130,7 @@ LCMS.Modules.MainPanel = function() {
 	};
 
 	var panelSizeWide = function() {
+		return; // Lets not make the sidebar wider...for now
 		if(!panel.hasClass('wide')) {
 			panel.addClass('wide');
 		}
