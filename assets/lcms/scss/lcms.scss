@@ -1,7 +1,7 @@
 
 $lcms_gray: #333;
 $panel_width: 300px;
-$panel_wide_width: 50%;
+$panel_wide_width: 600px;
 $orange: #fa503a;
 
 @mixin lcms_panel_link_with_icon {
@@ -30,22 +30,6 @@ $orange: #fa503a;
 	a {
 		color: #ffffff;
 	}
-
-	&.animate {
-		transition: 0.2s ease-in-out;
-	}
-	&.orig {
-		width: $panel_width;
-		transform: translateX($panel_width*-1);
-	}
-	&.wide {
-		width: $panel_wide_width;
-		transform: translateX($panel_wide_width*-1);
-	}
-	&.open {
-		transform: translateX(0px);
-	}
-
 	.handle {
 		text-decoration: none;
 		$handle_size: 40px;
@@ -120,14 +104,32 @@ $orange: #fa503a;
 	}
 }
 
-#lcms_container {
-	&.animate {
-		transition: 0.2s ease-in-out;
-	}
-	&.open {
-		transform: translateX($panel_width);
-	}
+/* All movement */
+body.animate #lcms_main_panel,
+body.animate #lcms_container {
+	transition: 0.2s ease-in-out;
 }
+
+/* Panel movement */
+body #lcms_main_panel {
+	width: $panel_width;
+	transform: translateX($panel_width*-1);
+}
+body.panel_open #lcms_main_panel {
+	transform: translateX(0);
+}
+body.panel_open.panel_wide #lcms_main_panel {
+	width: $panel_wide_width;;
+}
+
+/* Content movement */
+body.panel_open #lcms_container {
+	transform: translateX($panel_width);
+}
+body.panel_open.panel_wide #lcms_container {
+	transform: translateX($panel_wide_width);
+}
+
 
 .lcms_modal {
 	h2 {

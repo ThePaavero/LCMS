@@ -5,6 +5,7 @@ LCMS.Modules.MainPanel = function() {
 	var panel;
 	var dyn_content;
 	var main_links;
+	var body;
 
 	var panel_orig_width = 300;
 	var panel_open_width = 600;
@@ -12,6 +13,7 @@ LCMS.Modules.MainPanel = function() {
 	this.init = function()
 	{
 		panel = $('#lcms_main_panel');
+		body = $('body');
 
 		loadPanel(function()
 		{
@@ -19,13 +21,13 @@ LCMS.Modules.MainPanel = function() {
 			doListeners();
 
 			var panel_state = localStorage.getItem('lcms_panel_state');
-			if(panel_state === 'open') {
+			if(panel_state === 'panel_open') {
 				openPanel();
 			}
 
 			// We don't want to animate the initial state
 			setTimeout(function(){
-				$(panel).addClass('animate');
+				$(body).addClass('animate');
 				$('#lcms_container').addClass('animate');
 			}, 200);
 
@@ -33,7 +35,7 @@ LCMS.Modules.MainPanel = function() {
 			panel.find('.handle').click(function(e){
 				e.preventDefault();
 
-				if($(panel).hasClass('open')){
+				if($(body).hasClass('panel_open')){
 					closePanel();
 				} else {
 					openPanel();
@@ -50,15 +52,13 @@ LCMS.Modules.MainPanel = function() {
 	};
 
 	var openPanel = function() {
-		$('#lcms_container').addClass('open');
-		$(panel).addClass('open');
-		localStorage.setItem('lcms_panel_state', 'open');
+		$(body).addClass('panel_open');
+		localStorage.setItem('lcms_panel_state', 'panel_open');
 	};
 
 	var closePanel = function() {
 		removeDynamicContent();
-		$(panel).removeClass('open');
-		$('#lcms_container').removeClass('open');
+		$(body).removeClass('panel_open');
 		localStorage.setItem('lcms_panel_state', 'closed');
 	};
 
@@ -126,23 +126,22 @@ LCMS.Modules.MainPanel = function() {
 	};
 
 	var panelSizeReset = function() {
-		if(!panel.hasClass('orig')) {
-			panel.addClass('orig');
+		if(!body.hasClass('panel_orig_width')) {
+			body.addClass('panel_orig_width');
 		}
 
-		if(panel.hasClass('wide')) {
-			panel.removeClass('wide');
+		if(body.hasClass('panel_wide')) {
+			body.removeClass('panel_wide');
 		}
 	};
 
 	var panelSizeWide = function() {
-		// return; // Lets not make the sidebar wider...for now
-		if(!panel.hasClass('wide')) {
-			panel.addClass('wide');
+		if(!body.hasClass('panel_wide')) {
+			body.addClass('panel_wide');
 		}
 
-		if(!panel.hasClass('orig')) {
-			panel.removeClass('orig');
+		if(!body.hasClass('panel_orig_width')) {
+			body.removeClass('panel_orig_width');
 		}
 	};
 
