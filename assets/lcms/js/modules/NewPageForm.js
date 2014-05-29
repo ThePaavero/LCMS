@@ -9,6 +9,12 @@ LCMS.Modules.NewPageForm = function() {
 	this.init = function()
 	{
 		form = $('.lcms_page_form_wrapper > form');
+
+		if(form.length < 1)
+		{
+			return;
+		}
+
 		url_field = form.find('input[name=url]');
 		url_field_original_value = url_field.val();
 
