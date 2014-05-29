@@ -19,7 +19,7 @@ $orange: #fa503a;
 	position: absolute;
 	top: 0;
 	left: 0px;
-	min-height: 100%;
+	height: 100%;
 	color: #fff;
 	z-index: 3;
 
@@ -49,8 +49,10 @@ $orange: #fa503a;
 		}
 	}
 
-	.content {
+	> .content {
+		height: 100%;
 		padding: 10px;
+		overflow: auto;
 
 		nav {
 			display: block;
@@ -84,7 +86,7 @@ $orange: #fa503a;
 
 	.dyn_content {
 		display: block;
-		padding: 5%;
+		padding: 1% 1% 50px;
 
 		.close_dyn_content {
 			font-weight: bold;
@@ -108,6 +110,11 @@ $orange: #fa503a;
 body.animate #lcms_main_panel,
 body.animate #lcms_container {
 	transition: 0.2s ease-in-out;
+}
+
+body.panel_open {
+	overflow: hidden !important;
+	display: block;
 }
 
 /* Panel movement */
