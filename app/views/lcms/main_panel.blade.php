@@ -21,4 +21,3 @@
     </nav>
     <div class="dyn_content"></div>
 </div>
-
