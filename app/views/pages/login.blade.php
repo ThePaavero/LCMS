@@ -6,3 +6,10 @@
 	<p><label>Password<input type='password' name='password' /></label></p>
 	<p><input type='submit' value='Ok'/></p>
 </form> <!-- login_form -->
+
+<script>
+$(function()
+{
+	$('#login_form input[name=username]').focus();
+});
+</script>
