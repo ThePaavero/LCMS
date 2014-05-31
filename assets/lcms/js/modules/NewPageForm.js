@@ -34,7 +34,7 @@ LCMS.Modules.NewPageForm = function() {
 
 	var cloneTitleToUrl = function()
 	{
-		var base_url = url_field.val();
+		var base_url = url_field_original_value;
 
 		// If we're updating an old page, it's a bit of a different logic
 		if(updating)
@@ -46,6 +46,7 @@ LCMS.Modules.NewPageForm = function() {
 
 		var title = form.find('input[name=title]').val();
 		var slugified = base_url + (base_url !== '' ? '/' : '') + convertToSlug(title);
+		slugified = slugified.replace(/\/\//g, '/');
 
 		url_field.val(slugified);
 	};

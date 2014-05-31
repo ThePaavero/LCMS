@@ -8,6 +8,7 @@ class CMS {
 	public function __construct()
 	{
 		$this->user_can_edit = $this->isAdmin();
+		$this->pages = $this->getAllPages();
 	}
 
 	public function isAdmin()
@@ -155,11 +156,14 @@ class CMS {
 		// Return the rendered template's output
 		$page_view = View::make('lcms/templates/' . $template_data['name'], array('data' => $to_template));
 
+		// Create possible title trail
+		$title_trail = $this->buildTitleTrail($page_data);
+
 		Profiler::endTimer('LCMS Rendering of page');
 
 		return View::make('maintemplate', array(
 			'page'    => 'pages.lcms_container',
-			'title'   => $page_data['title'],
+			'title'   => $page_data['title'] . $title_trail,
 			'page_id' => $page_data['id'],
 		))->with(array('cms_template' => $page_view));
 	}
@@ -458,6 +462,38 @@ class CMS {
 		}
 
 		return $page->url;
+	}
+
+	public function buildTitleTrail($page_data)
+	{
+		$trail = '';
+
+		$page_url = $page_data['url'];
+		$depth = substr_count($page_url, '/');
+
+		if($depth < 1)
+		{
+			return '';
+		}
+
+		$segments = explode('/', $page_url);
+
+		array_pop($segments);
+
+		$parent_url = implode('/', $segments);
+
+		$pages = $this->pages;
+
+		foreach($pages as $page)
+		{
+			if($page['url'] === $parent_url)
+			{
+				$trail .= ' | ' . $page['title'];
+				$trail .= $this->buildTitleTrail($page);
+			}
+		}
+
+		return $trail;
 	}
 
 }
