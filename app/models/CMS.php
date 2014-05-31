@@ -28,6 +28,11 @@ class CMS {
 
 	public function hasRole($titles = '')
 	{
+		if( ! isset(Auth::user()->role))
+		{
+			return false;
+		}
+
 		if($titles === '')
 		{
 			// Any role will do

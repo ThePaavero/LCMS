@@ -9,6 +9,8 @@ class LcmsController extends BaseController {
 
 	public function getMainPanel($page_id = 0)
 	{
+		$this->requireAdminRights();
+
 		$data = null;
 
 		if($page_id > 0)
@@ -21,6 +23,8 @@ class LcmsController extends BaseController {
 
 	public function createNewPage($page_id = 0)
 	{
+		$this->requireAdminRights();
+
 		$date = new DateTime;
 		$published = $date->format('Y-m-d H:i:s');
 		$data = array(
@@ -39,6 +43,8 @@ class LcmsController extends BaseController {
 
 	public function createNewPageSubmit()
 	{
+		$this->requireAdminRights();
+
 		$data = [
 			'template'  => Input::get('template'),
 			'title'     => Input::get('title'),
@@ -60,6 +66,8 @@ class LcmsController extends BaseController {
 
 	public function deletePage($page_id)
 	{
+		$this->requireAdminRights();
+
 		$kids_deleted = $this->cms->deletePage($page_id);
 
 		Alert::success('Page deleted (and ' . $kids_deleted . ' children)')->flash();
@@ -68,6 +76,8 @@ class LcmsController extends BaseController {
 
     public function unpublishPage($page_id)
     {
+    	$this->requireAdminRights();
+
         $kids_unpublished = $this->cms->unpublishPage($page_id);
 
         Alert::success('Page unpublished (and ' . $kids_unpublished . ' children)')->flash();
@@ -76,6 +86,8 @@ class LcmsController extends BaseController {
 
 	public function updateContent()
 	{
+		$this->requireAdminRights();
+
 		$block_id    = Input::get('block_id');
 		$new_content = Input::get('content');
 
@@ -91,6 +103,8 @@ class LcmsController extends BaseController {
 
 	public function getHistoryForBlock($block_id)
 	{
+		$this->requireAdminRights();
+
 		$data = array(
 				'history'     => Block::find($block_id)->hasHistory()->get()->toArray(),
 				'block_id'    => $block_id,
@@ -102,17 +116,23 @@ class LcmsController extends BaseController {
 
 	public function getVersionForBlock($history_id)
 	{
+		$this->requireAdminRights();
+
 		return BlockHistory::find($history_id)->toJson();
 	}
 
 	public function editPageProperties($page_id)
 	{
+		$this->requireAdminRights();
+
 		$data = $this->cms->getPageProperties($page_id);
 		return View::make('lcms.page_properties')->with(array('data' => $data));
 	}
 
 	public function editPagePropertiesSubmit()
 	{
+		$this->requireAdminRights();
+
 		$page_id = Input::get('page_id');
 
 		$this->cms->updatePage($page_id, array(
@@ -129,10 +149,30 @@ class LcmsController extends BaseController {
 
 	public function flushAllCaches()
 	{
+		$this->requireAdminRights();
+
 		Cache::flush();
 
 		Alert::success('All caches flushed')->flash();
 		return Redirect::back();
+	}
+
+	private function requireAdminRights()
+	{
+		if( ! $this->cms->isAdmin())
+		{
+			App::abort(404, 'Page not found');
+			exit;
+		}
+	}
+
+	private function requireRootRights()
+	{
+		if( ! $this->cms->isRoot())
+		{
+			App::abort(404, 'Page not found');
+			exit;
+		}
 	}
 
 }
