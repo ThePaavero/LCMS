@@ -201,6 +201,13 @@ END;
 				'published' => new DateTime,
 				'template'  => 1
 			]);
+
+		$cms->createNewPage([
+				'title'     => 'HTML 6',
+				'url'       => 'our_services/web_development/html_6',
+				'published' => '9999-1-1 00:00:00',
+				'template'  => 1
+			]);
 	}
 
 }
