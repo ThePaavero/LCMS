@@ -366,10 +366,12 @@ class CMS {
 	{
 		$page = Page::find($page_id)->toArray();
 		$templates = $this->getAllTemplates();
+		$is_public = $this->pageIsPublishedNow($page);
 
 		return array(
 				'page' => $page,
-				'templates' => $templates
+				'templates' => $templates,
+				'is_public' => $is_public
 			);
 	}
 
@@ -496,6 +498,15 @@ class CMS {
         return $kids_unpublished;
 	}
 
+	public function publishPage($page_id)
+	{
+		$page = Page::find($page_id);
+        $page->published = new DateTime;
+        $page->save();
+
+        $this->clearCachedSitemap();
+	}
+
 	public function updatePage($id, $data)
 	{
 		// Get my kids and update their URLs first
@@ -597,9 +608,10 @@ class CMS {
 		return $markup;
 	}
 
-	public function pageIsPublishedNow()
+	public function pageIsPublishedNow($page = '')
 	{
-		$published = new DateTime($this->page_data['published']);
+		$published = $page !== '' ? $page['published'] : $this->page_data['published'];
+		$published = new DateTime($published);
 		$now = new DateTime();
 
 		return $now > $published;

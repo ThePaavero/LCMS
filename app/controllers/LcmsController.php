@@ -15,7 +15,7 @@ class LcmsController extends BaseController {
 
 		if($page_id > 0)
 		{
-			$data = Page::find($page_id);
+			$data = $this->cms->getPageProperties($page_id);
 		}
 
         return View::make('lcms.main_panel')->with(array('data' => $data, 'page_id' => $page_id));
@@ -81,6 +81,16 @@ class LcmsController extends BaseController {
         $kids_unpublished = $this->cms->unpublishPage($page_id);
 
         Alert::success('Page unpublished (and ' . $kids_unpublished . ' children)')->flash();
+        return Redirect::back();
+    }
+
+    public function publishPage($page_id)
+    {
+    	$this->requireAdminRights();
+
+        $this->cms->publishPage($page_id);
+
+        Alert::success('Page published')->flash();
         return Redirect::back();
     }
 
