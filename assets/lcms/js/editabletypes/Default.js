@@ -72,12 +72,16 @@ LCMS.EditableTypes.Default = function() {
 
 	var actionSave = function()
 	{
+		NProgress.start();
+		NProgress.set(0.4);
+
 		console.log('Saving...');
 		tinymce.remove('#' + block.attr('id'));
 		var new_content = block.html();
 		updateContent(new_content, function()
 		{
 			stopEditing();
+			NProgress.done();
 		});
 	};
 
