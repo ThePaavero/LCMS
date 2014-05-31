@@ -7,10 +7,13 @@ class CMS {
 
 	public function __construct()
 	{
+		$this->notifications_to_template = [];
+
 		if( ! App::runningInConsole())
 		{
 			$this->pages = $this->getAllPages();
 			$this->roles = $this->getRoles();
+			$this->page_data = [];
 
 			$this->user_can_edit = $this->isAdmin();
 		}
@@ -187,6 +190,8 @@ class CMS {
 		$page = Page::find($page_id);
 		$page_data = $page->toArray();
 
+		$this->page_data = $page_data;
+
 		// Gather all blocks for this page
 		$blocks = $page->blocks()->get()->toArray();
 		$rendered_blocks = array();
@@ -221,13 +226,21 @@ class CMS {
 		// Create possible title trail
 		$title_trail = $this->buildTitleTrail($page_data);
 
+		// If this page isn't visible to the public, notify that
+		if( ! $this->pageIsPublishedNow())
+		{
+			$this->notifications_to_template[] = 'This page is not publicly visible';
+		}
+
+		$cms_notifications = $this->getNotificationsToTemplate();
+
 		Profiler::endTimer('LCMS Rendering of page');
 
 		return View::make('maintemplate', array(
 			'page'    => 'pages.lcms_container',
 			'title'   => $page_data['title'] . $title_trail,
 			'page_id' => $page_data['id'],
-		))->with(array('cms_template' => $page_view));
+		))->with(array('cms_template' => $page_view, 'cms_notifications' => $cms_notifications));
 	}
 
 	public function uriToPageId($uri = '')
@@ -563,6 +576,33 @@ class CMS {
 		}
 
 		return $trail;
+	}
+
+	public function getNotificationsToTemplate()
+	{
+		if( ! $this->isAdmin() || empty($this->notifications_to_template))
+		{
+			return '';
+		}
+
+		$markup = '<ul class="lcms_notification_list">';
+
+		foreach($this->notifications_to_template as $notification)
+		{
+			$markup .= '<li>' . $notification . '</li>';
+		}
+
+		$markup .= '</ul>';
+
+		return $markup;
+	}
+
+	public function pageIsPublishedNow()
+	{
+		$published = new DateTime($this->page_data['published']);
+		$now = new DateTime();
+
+		return $now > $published;
 	}
 
 }
