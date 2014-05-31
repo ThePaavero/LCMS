@@ -26,7 +26,7 @@ class LcmsController extends BaseController {
 		$this->requireAdminRights();
 
 		$date = new DateTime;
-		$published = $date->format('Y-m-d H:i:s');
+		$published = '9999-1-1 00:00:00'; // "unpublished" as default
 		$data = array(
 				'templates' => Template::all()->toArray(),
 				'published' => $published

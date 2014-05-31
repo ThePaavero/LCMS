@@ -549,7 +549,7 @@ class CMS {
 
 			$block = new Block;
 			$block->type = $block_type_id;
-			$block->contents = BlockType::find($block_type_id)->name;
+			$block->contents = BlockType::find($block_type_id)->name . ' for ' . $page->title;
 			$block->page = $page->id;
 			$block->save();
 		}

@@ -1,10 +1,14 @@
 <?php // echo '<pre>'; print_r($data); echo '</pre>'; ?>
-<a href="#" class="handle">
-    <span class="handle_content">≡</span>
+<a href='#' class='handle'>
+    <span class='handle_content'>≡</span>
 </a>
 
-<div class="content">
+<div class='content'>
     <h2 class='cms_title'>CMS</h2>
+
+    <p class='lcms_panel_meta'>
+    	You're logged in as "{{ Auth::user()->username }}"
+    </p>
 
     <nav>
     	<ul>
@@ -24,5 +28,5 @@
     		<li><a href='{{ URL::to('logout') }}' class='noajax icon_logout'>Log out</a></li>
     	</ul>
     </nav>
-    <div class="dyn_content"></div>
+    <div class='dyn_content'></div>
 </div>
