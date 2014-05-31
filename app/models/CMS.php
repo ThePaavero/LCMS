@@ -18,7 +18,16 @@ class CMS {
 
 	public function getAllPages()
 	{
-		return Page::all()->toArray();
+		if(Cache::has('lcms_all_pages'))
+		{
+			return Cache::get('lcms_all_pages');
+		}
+
+		$pages = Page::all()->toArray();
+
+		Cache::forever('lcms_all_pages', $pages);
+
+		return $pages;
 	}
 
 	public function getPublicPages()
@@ -430,6 +439,7 @@ class CMS {
 
 	public function clearCachedSitemap()
 	{
+		Cache::forget('lcms_all_pages');
 		Cache::forget('lcms_sitemap_admin');
 		Cache::forget('lcms_sitemap_guest');
 	}
