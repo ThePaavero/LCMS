@@ -174,6 +174,7 @@ END;
 		$this->call('migrate');
 		$this->call('db:seed');
 		$this->createBasicSitemap();
+		$this->info('Created default pages');
 	}
 
 	public function createBasicSitemap()

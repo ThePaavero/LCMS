@@ -324,6 +324,12 @@ class CMS {
 		}
 
 		$html = "<ul>\n";
+
+		if($home === true)
+		{
+			$html .= "<li><a href='" . URL::to('') . "'>Home</a></li>";
+		}
+
 		$html .= echoChildren($this->sitemap, 0, '');
 		$html .= "</ul>\n";
 
