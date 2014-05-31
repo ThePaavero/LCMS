@@ -7,10 +7,13 @@ class CMS {
 
 	public function __construct()
 	{
-		$this->pages = $this->getAllPages();
-		$this->roles = $this->getRoles();
+		if( ! App::runningInConsole())
+		{
+			$this->pages = $this->getAllPages();
+			$this->roles = $this->getRoles();
 
-		$this->user_can_edit = $this->isAdmin();
+			$this->user_can_edit = $this->isAdmin();
+		}
 	}
 
 	public function isRoot()

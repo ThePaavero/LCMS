@@ -173,6 +173,33 @@ END;
 
 		$this->call('migrate');
 		$this->call('db:seed');
+		$this->createBasicSitemap();
+	}
+
+	public function createBasicSitemap()
+	{
+		$cms = new CMS;
+
+		$cms->createNewPage([
+				'title'     => 'About US',
+				'url'       => 'about_us',
+				'published' => new DateTime,
+				'template'  => 1
+			]);
+
+		$cms->createNewPage([
+				'title'     => 'Our Services',
+				'url'       => 'our_services',
+				'published' => new DateTime,
+				'template'  => 1
+			]);
+
+		$cms->createNewPage([
+				'title'     => 'Web Development',
+				'url'       => 'our_services/web_development',
+				'published' => new DateTime,
+				'template'  => 1
+			]);
 	}
 
 }

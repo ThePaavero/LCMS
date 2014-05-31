@@ -1,7 +1,7 @@
 
 <footer id='common_footer'>
 
-	{{ $CMS->block(6) }}
+	{{ $CMS->block(2) }}
 
 	@if(isset(Auth::user()->username))
 	<p>
