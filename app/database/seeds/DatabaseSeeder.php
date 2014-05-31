@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder {
 		$this->call('TemplateBlockTypeLinkTableSeeder');
 		$this->command->info('Template Block Type Link seeded');
 
+		$this->call('UserRoleSeeder');
+		$this->command->info('User roles seeded');
+
 		$this->call('UserSeeder');
 		$this->command->info('Users seeded');
 	}

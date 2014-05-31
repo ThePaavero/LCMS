@@ -7,13 +7,58 @@ class CMS {
 
 	public function __construct()
 	{
-		$this->user_can_edit = $this->isAdmin();
 		$this->pages = $this->getAllPages();
+		$this->roles = $this->getRoles();
+
+		$this->user_can_edit = $this->isAdmin();
+	}
+
+	public function isRoot()
+	{
+		return $this->hasRole('Root');
 	}
 
 	public function isAdmin()
 	{
-		return isset(Auth::user()->username);
+		return $this->hasRole('Root, Admin');
+	}
+
+	public function hasRole($titles = '')
+	{
+		if($titles === '')
+		{
+			// Any role will do
+			return isset(Auth::user()->role);
+		}
+
+		// CSV into array
+		$titles = explode(',', $titles);
+
+		$user_role_id = Auth::user()->role;
+
+		$user_role_title = $this->roles[$user_role_id];
+
+		foreach($titles as $id => $val)
+		{
+			$title = trim($val);
+			if($title === $user_role_title)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public function getRoles()
+	{
+		$roles = UserRole::all()->toArray();
+		$assoc = [];
+		foreach($roles as $role)
+		{
+			$assoc[$role['id']] = $role['title'];
+		}
+		return $assoc;
 	}
 
 	public function getAllPages()
