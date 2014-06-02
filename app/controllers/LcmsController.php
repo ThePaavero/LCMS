@@ -243,6 +243,8 @@ class LcmsController extends BaseController {
 
 	public function deleteUser($id)
 	{
+		$this->requireRootRights();
+
 		$this->cms->deleteUser($id);
 
 		Alert::success('User deleted')->flash();
