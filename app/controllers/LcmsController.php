@@ -224,6 +224,10 @@ class LcmsController extends BaseController {
 		{
 			$data['password'] = Hash::make($data['password']);
 		}
+		else
+		{
+			$data['password'] = Auth::user()->password;
+		}
 
 		$user = User::find($id);
 		$user->fill($data);

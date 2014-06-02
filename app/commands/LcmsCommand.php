@@ -172,6 +172,7 @@ END;
 		if($role_id < 1)
 		{
 			$this->error('Role "' . $rolename . '" does not exist.');
+			return;
 		}
 
 		if(is_null($email))

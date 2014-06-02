@@ -191,7 +191,8 @@ body.panel_open.panel_wide #lcms_container {
 	form {
 
 		input[type=text],
-		input[type=email] {
+		input[type=email],
+		input[type=password] {
 			display: block;
 			background: #1c1c1c;
 			padding: 5px;

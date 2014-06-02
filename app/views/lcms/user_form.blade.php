@@ -9,6 +9,7 @@
 		<input type='hidden' name='id' value='{{ $data['user']['id'] }}'/>
 		<p><label>Username<input type='text' name='username' value='{{ $data['user']['username'] }}' /></label></p>
 		<p><label>Email<input type='email' name='email' value='{{ $data['user']['email'] }}' /></label></p>
+		<p><label>Password (leave empty for no change)<input type='password' name='password' value='' /></label></p>
 		<p>
 			<label>Role
 				<select name='role'>
