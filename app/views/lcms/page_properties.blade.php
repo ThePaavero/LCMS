@@ -3,7 +3,7 @@
 
 	<h1>Page Properties</h1>
 
-	<div class='lcms_page_form_wrapper'>
+	<div class='lcms_form_wrapper'>
 		{{ Form::open(array('url' => 'lcms/update_page')) }}
 		<input type ='hidden' name='page_id' value='{{ $data['page']['id'] }}'/>
 			<p>
@@ -23,7 +23,7 @@
 				<input type='hidden' name='parent_id' value='{{ isset($data['parent']) ? $data['parent'] : 0 }}'>
 			</p>
 		{{ Form::close() }}
-	</div><!-- lcms_page_form_wrapper -->
+	</div><!-- lcms_form_wrapper -->
 
 </div><!-- lcms_modal -->
 

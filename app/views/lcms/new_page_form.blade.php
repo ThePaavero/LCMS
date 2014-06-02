@@ -1,13 +1,7 @@
 
 <div class='lcms_modal create_new_page'>
 
-	<h1>Create New Page</h1>
-
-	@if (isset($data['parent_url']))
-	<h2>Create a new page under "{{ $data['parent_url'] }}"</h2>
-	@else
-	<h2>Create a new page</h2>
-	@endif
+	<h1>Create New Page Here</h1>
 
 	<div class='lcms_form_wrapper'>
 		{{ Form::open(array('url' => 'lcms/create_page')) }}

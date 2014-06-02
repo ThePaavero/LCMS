@@ -8,7 +8,7 @@ LCMS.Modules.NewPageForm = function() {
 
 	this.init = function()
 	{
-		form = $('.lcms_page_form_wrapper > form');
+		form = $('.lcms_form_wrapper > form');
 
 		if(form.length < 1)
 		{

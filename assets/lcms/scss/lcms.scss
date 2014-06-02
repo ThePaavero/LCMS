@@ -2,6 +2,7 @@ $lcms_gray: #333;
 $panel_width: 300px;
 $panel_wide_width: 600px;
 $orange: #fa503a;
+$orange_muted: #6f3c35;
 
 @import 'includes/nprogress';
 
@@ -272,4 +273,13 @@ body.panel_open.panel_wide #lcms_container {
 .delete_user {
 	color: $orange !important;
 	text-decoration: none;
+}
+
+.lcms_modal_note {
+	margin: 3% 0;
+	background: $orange_muted;
+	padding: 2%;
+	color: #fff;
+	font-size: 12px;
+	opacity: 0.6;
 }
