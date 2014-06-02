@@ -650,5 +650,11 @@ class CMS {
 		return $user;
 	}
 
+	public function deleteUser($id)
+	{
+		$user = User::find($id);
+		$user->delete();
+	}
+
 }
 

@@ -241,5 +241,13 @@ class LcmsController extends BaseController {
 		return Redirect::back();
 	}
 
+	public function deleteUser($id)
+	{
+		$this->cms->deleteUser($id);
+
+		Alert::success('User deleted')->flash();
+		return Redirect::back();
+	}
+
 }
 

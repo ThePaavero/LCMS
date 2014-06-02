@@ -25,6 +25,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('/lcms/list_users', 'LcmsController@listUsers');
 	Route::get('/lcms/user_form/{user_id}', 'LcmsController@getUserForm');
 	Route::post('/lcms/user_form', 'LcmsController@submitUserForm');
+	Route::get('/lcms/delete_user/{user_id}', 'LcmsController@deleteUser');
 
 	Route::get('/lcms/create_page/{page_id?}', 'LcmsController@createNewPage');
 	Route::post('/lcms/create_page/{page_id?}', 'LcmsController@createNewPageSubmit');

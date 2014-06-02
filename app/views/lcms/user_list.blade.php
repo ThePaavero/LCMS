@@ -5,6 +5,7 @@
 	@foreach($data['users'] as $user)
 	<li>
 		<a href='{{ URL::to('lcms/user_form/' . $user['id']) }}'>{{ $user['username'] }} ({{ $user['role_name'] }})</a>
+		<a href='{{ URL::to('lcms/delete_user/' . $user['id']) }}' class='delete_user confirm'>×</a>
 	</li>
 	@endforeach
 </ul>
