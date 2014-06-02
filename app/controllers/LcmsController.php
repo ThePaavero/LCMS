@@ -90,6 +90,10 @@ class LcmsController extends BaseController {
 
         $this->cms->publishPage($page_id);
 
+		// Laravel's caching of views doesn't remove the
+		// "This page is not publicly visible" message... so sleep a sec.
+        sleep(1);
+
         Alert::success('Page published')->flash();
         return Redirect::back();
     }
