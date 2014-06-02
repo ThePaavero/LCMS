@@ -25,6 +25,7 @@ LCMS.Modules.NewPageForm = function() {
 		}
 
 		doListeners();
+		doFocus();
 	};
 
 	var doListeners = function()
@@ -60,6 +61,11 @@ LCMS.Modules.NewPageForm = function() {
 		.replace(/å/g,'a')
 		.replace(/ /g,'_')
 		.replace(/[^\w-]+/g,'');
+	};
+
+	var doFocus = function()
+	{
+		form.find('input[name=title]').focus();
 	};
 
 };
