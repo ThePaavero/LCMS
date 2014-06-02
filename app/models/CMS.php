@@ -72,6 +72,19 @@ class CMS {
 		return $assoc;
 	}
 
+	public function getRoleIdByName($match_name)
+	{
+		foreach($this->getRoles() as $id => $name)
+		{
+			if($name === $match_name)
+			{
+				return $id;
+			}
+		}
+
+		return 0;
+	}
+
 	public function getAllPages()
 	{
 		if(Cache::has('lcms_all_pages'))

@@ -53,6 +53,10 @@ class LcmsCommand extends Command {
 				$this->createBlock();
 				break;
 
+			case 'adduser':
+				$this->createUser();
+				break;
+
 			case 'nukedb':
 				$this->nukeDb();
 				break;
@@ -150,6 +154,39 @@ END;
 		$id = $block->id;
 
 		$this->info('Block ID: ' . $id);
+	}
+
+	public function createUser()
+	{
+		$cms = new CMS;
+
+		$username = $this->ask('Username?');
+		$default_email = $username . '@localhost';
+
+		$email    = $this->ask('Email? (Leave empty for "' . $default_email . '")');
+		$password = $this->secret('Password?');
+		$rolename = $this->ask('Role name? (Case sensitive)');
+
+		$role_id = $cms->getRoleIdByName($rolename);
+
+		if($role_id < 1)
+		{
+			$this->error('Role "' . $rolename . '" does not exist.');
+		}
+
+		if(is_null($email))
+		{
+			$email = $default_email;
+		}
+
+		$user = new User;
+		$user->username = $username;
+		$user->email    = $email;
+		$user->password = Hash::make($password);
+		$user->role     = $role_id;
+		$user->save();
+
+		$this->info('User "' . $username . '" created.');
 	}
 
 	public function nukeDb()
