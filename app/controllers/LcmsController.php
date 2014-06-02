@@ -124,6 +124,29 @@ class LcmsController extends BaseController {
 		return View::make('lcms.history_for_block')->with(array('data' => $data));
 	}
 
+	public function listUsers()
+	{
+		$this->requireRootRights();
+
+		$data = array(
+				'users' => $this->cms->getAllUsers()
+			);
+
+		return View::make('lcms.user_list')->with(array('data' => $data));
+	}
+
+	public function getUserForm($user_id)
+	{
+		$this->requireRootRights();
+
+		$data = array(
+				'user' => $this->cms->getSingleUser($user_id),
+				'roles' => $this->cms->getRoles()
+			);
+
+		return View::make('lcms.user_form')->with(array('data' => $data));
+	}
+
 	public function getVersionForBlock($history_id)
 	{
 		$this->requireAdminRights();
@@ -183,6 +206,31 @@ class LcmsController extends BaseController {
 			App::abort(404, 'Page not found');
 			exit;
 		}
+	}
+
+	public function submitUserForm()
+	{
+		$this->requireRootRights();
+		$id = (int) Input::get('id');
+
+		$data = [
+			'username' => Input::get('username'),
+			'email'    => Input::get('email'),
+			'role'     => Input::get('role'),
+			'password' => Input::get('password')
+		];
+
+		if($data['password'] !== '')
+		{
+			$data['password'] = Hash::make($data['password']);
+		}
+
+		$user = User::find($id);
+		$user->fill($data);
+		$user->save();
+
+		Alert::success('User updated')->flash();
+		return Redirect::back();
 	}
 
 }

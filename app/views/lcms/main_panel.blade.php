@@ -12,6 +12,9 @@
 
 	<nav>
 		<ul>
+			@if($CMS->isRoot())
+			<li><a href='{{ URL::to('lcms/list_users') }}' class='icon_users'>Manage users</a></li>
+			@endif
 			<li><a href='{{ URL::to('lcms/create_page/' . (isset($page_id) ? $page_id : 0)) }}' class='icon_create_new_page'>Create new page here</a></li>
 			@if(isset($page_id) && $page_id > 0)
 			<li><a href='{{ URL::to('lcms/edit_page_properties/' . $page_id) }}' class='icon_page_properties'>Page properties</a></li>

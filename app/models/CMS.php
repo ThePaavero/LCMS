@@ -617,5 +617,25 @@ class CMS {
 		return $now > $published;
 	}
 
+	public function getAllUsers()
+	{
+		$users = User::all()->toArray();
+
+		foreach($users as $key => $val)
+		{
+			$users[$key]['role_name'] = $this->roles[$val['role']];
+		}
+
+		return $users;
+	}
+
+	public function getSingleUser($id)
+	{
+		$user = User::find($id)->toArray();
+		$user['role_name'] = $this->roles[$user['role']];
+
+		return $user;
+	}
+
 }
 

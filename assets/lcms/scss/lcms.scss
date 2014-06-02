@@ -186,11 +186,12 @@ body.panel_open.panel_wide #lcms_container {
 .ui-datepicker-rtl dl dt{ float: right; clear: right; }
 .ui-datepicker-rtl dl dd { margin: 0 45% 10px 10px; }
 
-.lcms_page_form_wrapper {
+.lcms_form_wrapper {
 
 	form {
 
-		input[type=text] {
+		input[type=text],
+		input[type=email] {
 			display: block;
 			background: #1c1c1c;
 			padding: 5px;
@@ -251,6 +252,10 @@ body.panel_open.panel_wide #lcms_container {
 .icon_flash_editables {
 	@include lcms_panel_link_with_icon;
 	background-image: url('../lcms/img/icons/appbar.camera.flash.png');
+}
+.icon_users {
+	@include lcms_panel_link_with_icon;
+	background-image: url('../lcms/img/icons/appbar.group.png');
 }
 
 .lcms_notification_list {

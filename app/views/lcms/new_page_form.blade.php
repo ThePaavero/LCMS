@@ -9,7 +9,7 @@
 	<h2>Create a new page</h2>
 	@endif
 
-	<div class='lcms_page_form_wrapper'>
+	<div class='lcms_form_wrapper'>
 		{{ Form::open(array('url' => 'lcms/create_page')) }}
 			<p>
 				<label>Template
@@ -28,7 +28,7 @@
 				<input type='hidden' name='parent_id' value='{{ isset($data['parent']) ? $data['parent'] : 0 }}'>
 			</p>
 		{{ Form::close() }}
-	</div><!-- lcms_page_form_wrapper -->
+	</div><!-- lcms_form_wrapper -->
 
 </div><!-- lcms_modal -->
 

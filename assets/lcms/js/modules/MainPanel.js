@@ -18,7 +18,6 @@ LCMS.Modules.MainPanel = function() {
 		loadPanel(function()
 		{
 			main_links = panel.find('nav > ul > li > a').not('.noajax');
-			doListeners();
 
 			var panel_state = localStorage.getItem('lcms_panel_state');
 			if(panel_state === 'panel_open') {
@@ -44,6 +43,7 @@ LCMS.Modules.MainPanel = function() {
 
 			dyn_content = $(panel).find('.dyn_content');
 			panelSizeReset();
+			doListeners();
 
 			LCMS.Modules.Events.addEventListener(self, 'openInMainPanel', function(e){
 				loadContent(e.href);
@@ -78,13 +78,18 @@ LCMS.Modules.MainPanel = function() {
 
 	var doListeners = function()
 	{
-		main_links.click(function(e){
-			e.preventDefault();
+		var add_these = dyn_content.find('a').not('.noajax, .close_dyn_content');
+		main_links = main_links.add(add_these);
 
+		main_links.off('click');
+		main_links.on('click', function(e)
+		{
+			e.preventDefault();
 			loadContent($(e.target).attr('href'));
 		});
 
 		var confirms = panel.find('.confirm');
+		confirms.off('click');
 		confirms.on('click', function(e)
 		{
 			if( ! window.confirm('Are you sure?'))
@@ -97,11 +102,15 @@ LCMS.Modules.MainPanel = function() {
 	};
 
 	var loadContent = function(url) {
+		NProgress.start();
+
 		$.ajax({
 			url: url,
 		})
 		.done(function( data ) {
 			addDynamicContent(data);
+			NProgress.done();
+			doListeners();
 		});
 	};
 
