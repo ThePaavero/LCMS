@@ -57,6 +57,10 @@ class LcmsCommand extends Command {
 				$this->createUser();
 				break;
 
+			case 'addrole':
+				$this->createRole();
+				break;
+
 			case 'nukedb':
 				$this->nukeDb();
 				break;
@@ -188,6 +192,16 @@ END;
 		$user->save();
 
 		$this->info('User "' . $username . '" created.');
+	}
+
+	public function createRole()
+	{
+		$title = $this->ask('Name of role?');
+		$role = new UserRole;
+		$role->title = $title;
+		$role->save();
+
+		$this->info('Role "' . $title . '" created.');
 	}
 
 	public function nukeDb()

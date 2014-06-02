@@ -12,5 +12,5 @@
 <?php // echo '<pre>'; print_r($data); echo '</pre>'; ?>
 
 <p class='lcms_modal_note'>
-	NOTE: To create new users, use artisan.
+	NOTE: To create new users or roles, use artisan.
 </p><!-- lcms_modal_note -->
