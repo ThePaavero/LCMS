@@ -11,7 +11,7 @@ class CreateComponentTypesTable extends Migration {
 			$table->increments('id');
 			$table->timestamps();
 			$table->softDeletes();
-			$table->text('name');
+			$table->string('name', 20)->index();
 		});
 	}
 

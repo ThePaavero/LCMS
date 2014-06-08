@@ -15,6 +15,8 @@ LCMS.Modules.MainPanel = function() {
 		panel = $('#lcms_main_panel');
 		body = $('body');
 
+		replaceTokens();
+
 		loadPanel(function()
 		{
 			main_links = panel.find('nav > ul > li > a').not('.noajax');
@@ -186,6 +188,21 @@ LCMS.Modules.MainPanel = function() {
 
 		var flasher = new LCMS.Modules.EditablesFlasher();
 		flasher.init();
+	};
+
+	var replaceTokens = function()
+	{
+		var page_id = getCurrentPageId();
+
+		$('a').each(function()
+		{
+			if( ! $(this).attr('href'))
+			{
+				return true;
+			}
+
+			$(this).attr('href', $(this).attr('href').replace('[LCMS_PAGE_ID]', page_id));
+		});
 	};
 
 };

@@ -241,6 +241,7 @@ class CMS {
 		{
 			// Get component's type data
 			$component_type = $component->isOfType()->get()->toArray()[0];
+			$component_type_id = $component['type'];
 			$blocks = $component->blocks()->get()->toArray();
 			$contents = [];
 
@@ -253,6 +254,7 @@ class CMS {
 			$contents['admin_tools'] = $this->user_can_edit ? $this->getComponentAdminTools($component, $page_id) : '';
 
 			$rendered_components[$component_type['name']][] = $contents;
+			$rendered_components['add'][$component_type['name']] = $this->user_can_edit ? $this->getComponentAdminAddLink($component_type_id, $page_id) : '';
 		}
 
 		// Get the template
@@ -303,6 +305,33 @@ class CMS {
 	public function getComponentAdminTools($component, $page_id)
 	{
 		return View::make('lcms.component_admin_tools')->with(['data' => $component->toArray(), 'page_id' => $page_id]);
+	}
+
+	public function getComponentAdminAddLink($component_type_id, $page_id)
+	{
+		$type = ComponentType::find($component_type_id);
+		$component_type_name = $type->name;
+
+		return View::make('lcms.component_admin_add_new')->with([
+				'component_type_name' => $component_type_name,
+				'component_type_id'   => $component_type_id,
+				'page_id'             => $page_id
+			]);
+	}
+
+	public function getAddComponent($name)
+	{
+		if( ! $this->user_can_edit)
+		{
+			return '';
+		}
+
+		$type = ComponentType::where('name', '=', $name)->first();
+
+		return View::make('lcms.component_admin_add_new')->with([
+				'component_type_name' => $type->name,
+				'component_type_id'   => $type->id
+			]);
 	}
 
 	public function uriToPageId($uri = '')
@@ -719,6 +748,11 @@ class CMS {
 		$comp = Component::find($component_id);
 		$comp->page = 0;
 		$comp->save();
+	}
+
+	public function createNewComponent($component_type_id, $page_id)
+	{
+		// TODO...
 	}
 
 }

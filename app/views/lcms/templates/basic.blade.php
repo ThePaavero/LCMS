@@ -1,7 +1,7 @@
 
 <!-- Template "basic" starts -->
 
-<?php // echo '<pre>'; print_r($data); echo '</pre>'; ?>
+<?php // echo '<pre>'; print_r($data['components']); echo '</pre>'; ?>
 
 <h1>{{ @$data['blocks']['Title']['contents'] }}</h1>
 
@@ -16,5 +16,6 @@
 	</div><!-- teaser_box -->
 	@endforeach
 @endif
+{{ $CMS->getAddComponent('Teaser box') }}
 
 <!-- Template "basic" ends -->

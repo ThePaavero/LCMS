@@ -261,5 +261,15 @@ class LcmsController extends BaseController {
 		return Redirect::back();
 	}
 
+	public function createNewComponent($component_type_id, $page_id)
+	{
+		$this->requireAdminRights();
+
+		$this->cms->createNewComponent($component_type_id, $page_id);
+
+		Alert::success('Component created')->flash();
+		return Redirect::back();
+	}
+
 }
 
