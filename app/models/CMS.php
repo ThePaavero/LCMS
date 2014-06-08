@@ -193,6 +193,18 @@ class CMS {
 	{
 		Profiler::startTimer('LCMS Rendering of page');
 
+		$cache_key = 'page_' . $uri;
+
+		if($this->user_can_edit)
+		{
+			Cache::forget($cache_key);
+		}
+
+		if(Cache::has($cache_key) && ! $this->user_can_edit)
+		{
+			return Cache::get($cache_key);
+		}
+
 		// Make sure this is a valid URI
 		if( ! $page_id = $this->uriToPageId($uri))
 		{
@@ -274,11 +286,18 @@ class CMS {
 
 		Profiler::endTimer('LCMS Rendering of page');
 
-		return View::make('maintemplate', array(
+		$view = View::make('maintemplate', array(
 			'page'    => 'pages.lcms_container',
 			'title'   => $page_data['title'] . $title_trail,
 			'page_id' => $page_data['id'],
 		))->with(array('cms_template' => $page_view, 'cms_notifications' => $cms_notifications));
+
+		if( ! $this->user_can_edit)
+		{
+			Cache::forever($cache_key, $view->render());
+		}
+
+		return $view;
 	}
 
 	public function getComponentAdminTools($component, $page_id)
@@ -327,6 +346,8 @@ class CMS {
 		$block = Block::find($block_id);
 		$block->contents = $new_content;
 		$block->save();
+
+		$this->clearAllCaches();
 	}
 
 	public function cloneBlockToHistory($block_id)
@@ -352,37 +373,39 @@ class CMS {
 		return $block->contents;
 	}
 
+	private function echoChildren($item, $nestlevel, $html)
+    {
+    	if(isset($item['title']))
+    	{
+    		$html .= "<li>\n";
+    		$html .= "<a href='" . URL::to($item['url']) . "'>\n";
+    		$html .= $item['title'] . "\n";
+    		$html .= "</a>\n";
+    		$html .= "</li>\n";
+    	}
+
+		foreach ($item as $child)
+        {
+            if(is_array($child))
+            {
+            	$is_new_list = isset($child[0]['title']) && $nestlevel > 0;
+
+            	if($is_new_list) $html .= "<ul>\n";
+
+                $html .= $this->echoChildren($child, $nestlevel+1, '');
+
+                if($is_new_list) $html .= "</ul>\n";
+            }
+		}
+
+		return $html;
+	}
+
 	public function sitemapAsNavigation($home = false)
 	{
 		$this->sitemap = $this->getNestedSitemapArray();
 
-        function echoChildren($item, $nestlevel, $html)
-        {
-        	if(isset($item['title']))
-        	{
-        		$html .= "<li>\n";
-        		$html .= "<a href='" . URL::to($item['url']) . "'>\n";
-        		$html .= $item['title'] . "\n";
-        		$html .= "</a>\n";
-        		$html .= "</li>\n";
-        	}
 
-			foreach ($item as $child)
-            {
-                if(is_array($child))
-                {
-                	$is_new_list = isset($child[0]['title']) && $nestlevel > 0;
-
-                	if($is_new_list) $html .= "<ul>\n";
-
-                    $html .= echoChildren($child, $nestlevel+1, '');
-
-                    if($is_new_list) $html .= "</ul>\n";
-                }
-			}
-
-			return $html;
-		}
 
 		$html = "<ul>\n";
 
@@ -391,7 +414,7 @@ class CMS {
 			$html .= "<li><a href='" . URL::to('') . "'>Home</a></li>";
 		}
 
-		$html .= echoChildren($this->sitemap, 0, '');
+		$html .= $this->echoChildren($this->sitemap, 0, '');
 		$html .= "</ul>\n";
 
 		return $html;
@@ -568,6 +591,11 @@ class CMS {
 		Cache::forget('lcms_all_pages');
 		Cache::forget('lcms_sitemap_admin');
 		Cache::forget('lcms_sitemap_guest');
+	}
+
+	public function clearAllCaches()
+	{
+		Cache::flush();
 	}
 
 	public function createNewPage($data)
