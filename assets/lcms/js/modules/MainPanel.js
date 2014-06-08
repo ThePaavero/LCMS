@@ -88,7 +88,7 @@ LCMS.Modules.MainPanel = function() {
 			loadContent($(e.target).attr('href'));
 		});
 
-		var confirms = panel.find('.confirm');
+		var confirms = $('.lcms_confirm');
 		confirms.off('click');
 		confirms.on('click', function(e)
 		{

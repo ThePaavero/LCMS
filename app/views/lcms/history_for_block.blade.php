@@ -6,7 +6,7 @@
 <ul class='block_history_list' id='hl_{{ $data['instance_id'] }}'>
 	@foreach($data['history'] as $i)
 	<li>
-		<a href='#{{ $i['id'] }}'>{{ $i['created_at'] }}</a>
+		<a href='#{{ $i['id'] }}' class='noajax'>{{ $i['created_at'] }}</a>
 	</li>
 	@endforeach
 </ul><!-- block_history_list -->

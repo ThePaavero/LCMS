@@ -23,5 +23,8 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('UserSeeder');
 		$this->command->info('Users seeded');
+
+		$this->call('ComponentSeeder');
+		$this->command->info('Components seeded');
 	}
 }

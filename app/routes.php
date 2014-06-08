@@ -30,6 +30,8 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('/lcms/create_page/{page_id?}', 'LcmsController@createNewPage');
 	Route::post('/lcms/create_page/{page_id?}', 'LcmsController@createNewPageSubmit');
 
+	Route::get('/lcms/delete_component/{component_id}/{page_id}', 'LcmsController@deleteComponent');
+
 	Route::get('/lcms/unpublish_page/{page_id}', 'LcmsController@unpublishPage');
 	Route::get('/lcms/publish_page/{page_id}', 'LcmsController@publishPage');
 	Route::get('/lcms/delete_page/{page_id}', 'LcmsController@deletePage');

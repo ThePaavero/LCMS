@@ -207,16 +207,40 @@ class CMS {
 
 		// Gather all blocks for this page
 		$blocks = $page->blocks()->get()->toArray();
-		$rendered_blocks = array();
+		$rendered_blocks = [];
+
+		// Gather possible components for this page
+		// $components = $page->components()->get()->toArray();
+		$components = $page->components()->get();
+		$rendered_components = [];
 
 		// Set editable flag
-		$editable = true; // @todo This should be true only if admin is logged
+		$editable = $this->user_can_edit;
 
-		// Iterate them and render their output
+		// Iterate template blocks and render their output
 		foreach($blocks as $i)
 		{
 			$type = BlockType::find($i['type']);
 			$rendered_blocks[$type['name']] = $this->renderBlockType($type['name'], $i, $editable);
+		}
+
+		// Iterate components and render their output
+		foreach($components as $component)
+		{
+			// Get component's type data
+			$component_type = $component->isOfType()->get()->toArray()[0];
+			$blocks = $component->blocks()->get()->toArray();
+			$contents = [];
+
+			foreach($blocks as $block)
+			{
+				$type = BlockType::find($block['type']);
+				$contents[$type['name']] = $this->renderBlockType($type['name'], $block, $editable);
+			}
+
+			$contents['admin_tools'] = $this->user_can_edit ? $this->getComponentAdminTools($component, $page_id) : '';
+
+			$rendered_components[$component_type['name']][] = $contents;
 		}
 
 		// Get the template
@@ -230,7 +254,8 @@ class CMS {
 
 		// Throw all of our rendered output to the template
 		$to_template = [
-			'blocks' => $rendered_blocks
+			'blocks' => $rendered_blocks,
+			'components' => $rendered_components
 		];
 
 		// Return the rendered template's output
@@ -254,6 +279,11 @@ class CMS {
 			'title'   => $page_data['title'] . $title_trail,
 			'page_id' => $page_data['id'],
 		))->with(array('cms_template' => $page_view, 'cms_notifications' => $cms_notifications));
+	}
+
+	public function getComponentAdminTools($component, $page_id)
+	{
+		return View::make('lcms.component_admin_tools')->with(['data' => $component->toArray(), 'page_id' => $page_id]);
 	}
 
 	public function uriToPageId($uri = '')
@@ -654,6 +684,13 @@ class CMS {
 	{
 		$user = User::find($id);
 		$user->delete();
+	}
+
+	public function unlinkComponentFromPage($component_id, $page_id)
+	{
+		$comp = Component::find($component_id);
+		$comp->page = 0;
+		$comp->save();
 	}
 
 }

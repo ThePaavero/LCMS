@@ -3,23 +3,21 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateBlocksTable extends Migration {
+class CreateComponentsTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('blocks', function(Blueprint $table) {
+		Schema::create('components', function(Blueprint $table) {
 			$table->increments('id');
 			$table->timestamps();
 			$table->softDeletes();
+			$table->integer('page')->unsigned()->index();
 			$table->integer('type')->unsigned()->index();
-			$table->integer('page')->unsigned()->nullable()->index();
-			$table->integer('component')->unsigned()->nullable()->index();
-			$table->text('contents');
 		});
 	}
 
 	public function down()
 	{
-		Schema::drop('blocks');
+		Schema::drop('components');
 	}
 }

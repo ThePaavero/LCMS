@@ -251,5 +251,15 @@ class LcmsController extends BaseController {
 		return Redirect::back();
 	}
 
+	public function deleteComponent($component_id, $page_id)
+	{
+		$this->requireAdminRights();
+
+		$this->cms->unlinkComponentFromPage($component_id, $page_id);
+
+		Alert::success('Component deleted')->flash();
+		return Redirect::back();
+	}
+
 }
 

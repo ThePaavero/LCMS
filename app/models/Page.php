@@ -12,6 +12,11 @@ class Page extends Eloquent {
 		return $this->hasMany('Block', 'page');
 	}
 
+	public function components()
+	{
+		return $this->hasMany('Component', 'page');
+	}
+
 	public function template()
 	{
 		return $this->belongsTo('Template', 'template');

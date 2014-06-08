@@ -283,3 +283,25 @@ body.panel_open.panel_wide #lcms_container {
 	font-size: 12px;
 	opacity: 0.6;
 }
+
+.lcms_component_admin_tools {
+	float: right;
+	background: $lcms_gray;
+	opacity: 0.2;
+
+	&:hover {
+		opacity: 1;
+	}
+
+	a {
+		text-decoration: none;
+		font-size: 11px;
+		display: inline-block;
+		padding: 4px;
+
+		&.delete_component {
+			color: $orange;
+		}
+	}
+
+}
