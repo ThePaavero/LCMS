@@ -297,10 +297,14 @@ body.panel_open.panel_wide #lcms_container {
 		text-decoration: none;
 		font-size: 11px;
 		display: inline-block;
-		padding: 4px;
+		text-align: center;
 
 		&.delete_component {
+			width: 18px;
+			height: 18px;
+			line-height: 18px;
 			color: $orange;
+			font-size: 18px;
 		}
 	}
 

@@ -188,7 +188,7 @@ class LcmsController extends BaseController {
 	{
 		$this->requireAdminRights();
 
-		Cache::flush();
+		$this->cms->clearAllCaches();
 
 		Alert::success('All caches flushed')->flash();
 		return Redirect::back();
