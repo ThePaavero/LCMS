@@ -9,3 +9,4 @@ public_html/assets/*
 vendor/
 app/database/*.sqlite
 composer.phar
+.idea
