@@ -28,7 +28,7 @@ $app->redirectIfTrailingSlash();
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('*.local', 'local.*', '192.*', '*localhost*', '*127.0.0.1*', '*pekka.fi*', '*.demo'),
+	'local' => array('homestead'),
 
 ));
 

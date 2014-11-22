@@ -380,7 +380,7 @@ class Application extends Container implements HttpKernelInterface, ResponsePrep
     }
     public static function getBootstrapFile()
     {
-        return 'D:\\vagrant\\ubuntu1310\\shared\\lcms\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation' . '/start.php';
+        return '/var/www/LCMS/vendor/laravel/framework/src/Illuminate/Foundation' . '/start.php';
     }
     public function startExceptionHandling()
     {
@@ -3688,10 +3688,10 @@ class ErrorHandler
         }
         if ($this->displayErrors && error_reporting() & $level && $this->level & $level) {
             if (!class_exists('Symfony\\Component\\Debug\\Exception\\ContextErrorException')) {
-                require 'D:\\vagrant\\ubuntu1310\\shared\\lcms\\vendor\\symfony\\debug\\Symfony\\Component\\Debug' . '/Exception/ContextErrorException.php';
+                require '/var/www/LCMS/vendor/symfony/debug/Symfony/Component/Debug' . '/Exception/ContextErrorException.php';
             }
             if (!class_exists('Symfony\\Component\\Debug\\Exception\\FlattenException')) {
-                require 'D:\\vagrant\\ubuntu1310\\shared\\lcms\\vendor\\symfony\\debug\\Symfony\\Component\\Debug' . '/Exception/FlattenException.php';
+                require '/var/www/LCMS/vendor/symfony/debug/Symfony/Component/Debug' . '/Exception/FlattenException.php';
             }
             if (PHP_VERSION_ID < 50400 && isset($context['GLOBALS']) && is_array($context)) {
                 unset($context['GLOBALS']);
@@ -3704,7 +3704,7 @@ class ErrorHandler
             if (is_array($exceptionHandler) && $exceptionHandler[0] instanceof ExceptionHandler) {
                 $exceptionHandler[0]->handle($exception);
                 if (!class_exists('Symfony\\Component\\Debug\\Exception\\DummyException')) {
-                    require 'D:\\vagrant\\ubuntu1310\\shared\\lcms\\vendor\\symfony\\debug\\Symfony\\Component\\Debug' . '/Exception/DummyException.php';
+                    require '/var/www/LCMS/vendor/symfony/debug/Symfony/Component/Debug' . '/Exception/DummyException.php';
                 }
                 set_exception_handler(function (\Exception $e) use($exceptionHandler) {
                     if (!$e instanceof DummyException) {
@@ -10373,7 +10373,7 @@ class PrettyPageHandler extends Handler
             return Handler::DONE;
         }
         if (!($resources = $this->getResourcesPath())) {
-            $resources = 'D:\\vagrant\\ubuntu1310\\shared\\lcms\\vendor\\filp\\whoops\\src\\Whoops\\Handler' . '/../Resources';
+            $resources = '/var/www/LCMS/vendor/filp/whoops/src/Whoops/Handler' . '/../Resources';
         }
         $templateFile = "{$resources}/pretty-template.php";
         $cssFile = "{$resources}/pretty-page.css";
