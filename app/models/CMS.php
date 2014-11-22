@@ -638,6 +638,7 @@ class CMS
         $page->title = $data['title'];
         $page->url = $data['url'];
         $page->published = $data['published'];
+        $page->language = $data['language'];
         $page->template = $template_id;
 
         $page->save();

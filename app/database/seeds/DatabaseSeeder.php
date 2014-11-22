@@ -6,7 +6,10 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		$this->call('TemplateTableSeeder');
+        $this->call('LanguagesTableSeeder');
+        $this->command->info('Languages table seeded!');
+
+        $this->call('TemplateTableSeeder');
 		$this->command->info('Template table seeded!');
 
 		$this->call('BlockTypesTableSeeder');

@@ -5,7 +5,7 @@ class Page extends Eloquent {
 	protected $table = 'pages';
 	public $timestamps = true;
 	protected $softDelete = true;
-	protected $fillable = array('url', 'title', 'description', 'template', 'published');
+	protected $fillable = array('language', 'url', 'title', 'description', 'template', 'published');
 
 	public function blocks()
 	{
@@ -17,9 +17,14 @@ class Page extends Eloquent {
 		return $this->hasMany('Component', 'page');
 	}
 
-	public function template()
-	{
-		return $this->belongsTo('Template', 'template');
-	}
+    public function template()
+    {
+        return $this->belongsTo('Template', 'template');
+    }
+
+    public function language()
+    {
+        return $this->belongsTo('Language', 'language');
+    }
 
 }

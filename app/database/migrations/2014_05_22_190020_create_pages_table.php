@@ -14,6 +14,7 @@ class CreatePagesTable extends Migration {
 			$table->string('url', 80)->unique();
 			$table->string('title');
 			$table->text('description')->nullable();
+			$table->integer('language')->unsigned()->index();
 			$table->integer('template')->unsigned()->index();
 			$table->datetime('published');
 		});
