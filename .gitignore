@@ -1,0 +1,12 @@
+node_modules
+bower_components
+phpmyadmin
+.DS_Store
+.sass-cache
+vagrant
+.tmp
+public_html/assets/*
+vendor/
+app/database/*.sqlite
+composer.phar
+.idea
