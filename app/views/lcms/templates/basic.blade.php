@@ -1,7 +1,7 @@
 
 <!-- Template "basic" starts -->
 
-<?php // echo '<pre>'; print_r($data['components']); echo '</pre>'; ?>
+{{--{{ dd($data) }}--}}
 
 <h1>{{ @$data['blocks']['Title']['contents'] }}</h1>
 

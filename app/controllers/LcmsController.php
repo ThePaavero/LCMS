@@ -30,13 +30,17 @@ class LcmsController extends BaseController
         $published = '9999-1-1 00:00:00'; // "unpublished" as default
         $data = array (
             'templates' => Template::all()->toArray(),
-            'published' => $published
+            'published' => $published,
+            'languages' => Language::all()->toArray()
         );
 
         if ($page_id > 0)
         {
+            $page = Page::find($page_id);
+
             $data['parent'] = $page_id;
-            $data['parent_url'] = Page::find($page_id)->url;
+            $data['parent_url'] = $page->url;
+            $data['parent_language'] = $page->language()->get()->toArray()[0]['id'];
         }
 
         return View::make('lcms.new_page_form')->with(array ('data' => $data));

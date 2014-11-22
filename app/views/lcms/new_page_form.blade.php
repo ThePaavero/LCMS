@@ -18,7 +18,7 @@
             <label>Language
                 <select name='language'>
                     @foreach($data['languages'] as $i)
-                    <option value='{{ $i['id'] }}'>{{ $i['name'] }}</option>
+                    <option value='{{ $i['id'] }}'@if($i['id'] === $data['parent_language']) selected @endif>{{ $i['name'] }}</option>
                     @endforeach
                 </select>
             </label>
