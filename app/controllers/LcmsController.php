@@ -9,13 +9,20 @@ class LcmsController extends BaseController {
 
 	public function getMainPanel($page_id = 0)
 	{
+<<<<<<< HEAD
 		$this->requireAdminRights();
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		$data = null;
 
 		if($page_id > 0)
 		{
+<<<<<<< HEAD
 			$data = $this->cms->getPageProperties($page_id);
+=======
+			$data = Page::find($page_id);
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		}
 
         return View::make('lcms.main_panel')->with(array('data' => $data, 'page_id' => $page_id));
@@ -23,10 +30,15 @@ class LcmsController extends BaseController {
 
 	public function createNewPage($page_id = 0)
 	{
+<<<<<<< HEAD
 		$this->requireAdminRights();
 
 		$date = new DateTime;
 		$published = '9999-1-1 00:00:00'; // "unpublished" as default
+=======
+		$date = new DateTime;
+		$published = $date->format('Y-m-d H:i:s');
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		$data = array(
 				'templates' => Template::all()->toArray(),
 				'published' => $published
@@ -43,8 +55,11 @@ class LcmsController extends BaseController {
 
 	public function createNewPageSubmit()
 	{
+<<<<<<< HEAD
 		$this->requireAdminRights();
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		$data = [
 			'template'  => Input::get('template'),
 			'title'     => Input::get('title'),
@@ -66,8 +81,11 @@ class LcmsController extends BaseController {
 
 	public function deletePage($page_id)
 	{
+<<<<<<< HEAD
 		$this->requireAdminRights();
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		$kids_deleted = $this->cms->deletePage($page_id);
 
 		Alert::success('Page deleted (and ' . $kids_deleted . ' children)')->flash();
@@ -76,14 +94,18 @@ class LcmsController extends BaseController {
 
     public function unpublishPage($page_id)
     {
+<<<<<<< HEAD
     	$this->requireAdminRights();
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
         $kids_unpublished = $this->cms->unpublishPage($page_id);
 
         Alert::success('Page unpublished (and ' . $kids_unpublished . ' children)')->flash();
         return Redirect::back();
     }
 
+<<<<<<< HEAD
     public function publishPage($page_id)
     {
     	$this->requireAdminRights();
@@ -102,6 +124,10 @@ class LcmsController extends BaseController {
 	{
 		$this->requireAdminRights();
 
+=======
+	public function updateContent()
+	{
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		$block_id    = Input::get('block_id');
 		$new_content = Input::get('content');
 
@@ -117,8 +143,11 @@ class LcmsController extends BaseController {
 
 	public function getHistoryForBlock($block_id)
 	{
+<<<<<<< HEAD
 		$this->requireAdminRights();
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		$data = array(
 				'history'     => Block::find($block_id)->hasHistory()->get()->toArray(),
 				'block_id'    => $block_id,
@@ -128,6 +157,7 @@ class LcmsController extends BaseController {
 		return View::make('lcms.history_for_block')->with(array('data' => $data));
 	}
 
+<<<<<<< HEAD
 	public function listUsers()
 	{
 		$this->requireRootRights();
@@ -155,21 +185,31 @@ class LcmsController extends BaseController {
 	{
 		$this->requireAdminRights();
 
+=======
+	public function getVersionForBlock($history_id)
+	{
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		return BlockHistory::find($history_id)->toJson();
 	}
 
 	public function editPageProperties($page_id)
 	{
+<<<<<<< HEAD
 		$this->requireAdminRights();
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		$data = $this->cms->getPageProperties($page_id);
 		return View::make('lcms.page_properties')->with(array('data' => $data));
 	}
 
 	public function editPagePropertiesSubmit()
 	{
+<<<<<<< HEAD
 		$this->requireAdminRights();
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		$page_id = Input::get('page_id');
 
 		$this->cms->updatePage($page_id, array(
@@ -186,14 +226,19 @@ class LcmsController extends BaseController {
 
 	public function flushAllCaches()
 	{
+<<<<<<< HEAD
 		$this->requireAdminRights();
 
 		$this->cms->clearAllCaches();
+=======
+		Cache::flush();
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 
 		Alert::success('All caches flushed')->flash();
 		return Redirect::back();
 	}
 
+<<<<<<< HEAD
 	private function requireAdminRights()
 	{
 		if( ! $this->cms->isAdmin())
@@ -271,5 +316,7 @@ class LcmsController extends BaseController {
 		return Redirect::back();
 	}
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 }
 

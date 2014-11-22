@@ -8,5 +8,9 @@ vagrant
 public_html/assets/*
 vendor/
 app/database/*.sqlite
+<<<<<<< HEAD
 composer.phar
 .idea
+=======
+composer.phar
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f

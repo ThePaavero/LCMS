@@ -8,7 +8,11 @@ LCMS.Modules.NewPageForm = function() {
 
 	this.init = function()
 	{
+<<<<<<< HEAD
 		form = $('.lcms_form_wrapper > form');
+=======
+		form = $('.lcms_page_form_wrapper > form');
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 
 		if(form.length < 1)
 		{
@@ -25,7 +29,10 @@ LCMS.Modules.NewPageForm = function() {
 		}
 
 		doListeners();
+<<<<<<< HEAD
 		doFocus();
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 	};
 
 	var doListeners = function()
@@ -35,7 +42,11 @@ LCMS.Modules.NewPageForm = function() {
 
 	var cloneTitleToUrl = function()
 	{
+<<<<<<< HEAD
 		var base_url = url_field_original_value;
+=======
+		var base_url = url_field.val();
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 
 		// If we're updating an old page, it's a bit of a different logic
 		if(updating)
@@ -47,7 +58,10 @@ LCMS.Modules.NewPageForm = function() {
 
 		var title = form.find('input[name=title]').val();
 		var slugified = base_url + (base_url !== '' ? '/' : '') + convertToSlug(title);
+<<<<<<< HEAD
 		slugified = slugified.replace(/\/\//g, '/');
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 
 		url_field.val(slugified);
 	};
@@ -63,9 +77,12 @@ LCMS.Modules.NewPageForm = function() {
 		.replace(/[^\w-]+/g,'');
 	};
 
+<<<<<<< HEAD
 	var doFocus = function()
 	{
 		form.find('input[name=title]').focus();
 	};
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 };

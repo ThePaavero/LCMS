@@ -1,10 +1,17 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 $lcms_gray: #333;
 $panel_width: 300px;
 $panel_wide_width: 600px;
 $orange: #fa503a;
+<<<<<<< HEAD
 $orange_muted: #6f3c35;
 
 @import 'includes/nprogress';
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 
 @mixin lcms_panel_link_with_icon {
 	display: block;
@@ -29,11 +36,14 @@ $orange_muted: #6f3c35;
 		color: $orange;
 	}
 
+<<<<<<< HEAD
 	.lcms_panel_meta {
 		opacity: 0.4;
 		font-size: 12px;
 	}
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 	a {
 		color: #ffffff;
 	}
@@ -187,6 +197,7 @@ body.panel_open.panel_wide #lcms_container {
 .ui-datepicker-rtl dl dt{ float: right; clear: right; }
 .ui-datepicker-rtl dl dd { margin: 0 45% 10px 10px; }
 
+<<<<<<< HEAD
 .lcms_form_wrapper {
 
 	form {
@@ -194,6 +205,13 @@ body.panel_open.panel_wide #lcms_container {
 		input[type=text],
 		input[type=email],
 		input[type=password] {
+=======
+.lcms_page_form_wrapper {
+
+	form {
+
+		input[type=text] {
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 			display: block;
 			background: #1c1c1c;
 			padding: 5px;
@@ -231,6 +249,7 @@ body.panel_open.panel_wide #lcms_container {
 	@include lcms_panel_link_with_icon;
 	background-image: url('../lcms/img/icons/appbar.page.edit.png');
 }
+<<<<<<< HEAD
 .icon_publish_page {
 	@include lcms_panel_link_with_icon;
 	background-image: url('../lcms/img/icons/appbar.checkmark.pencil.png');
@@ -238,6 +257,11 @@ body.panel_open.panel_wide #lcms_container {
 .icon_unpublish_page {
 	@include lcms_panel_link_with_icon;
 	background-image: url('../lcms/img/icons/appbar.cancel.png');
+=======
+.icon_unpublish_page {
+	@include lcms_panel_link_with_icon;
+	background-image: url('../lcms/img/icons/appbar.noentry.png');
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 }
 .icon_delete_page {
 	@include lcms_panel_link_with_icon;
@@ -255,6 +279,7 @@ body.panel_open.panel_wide #lcms_container {
 	@include lcms_panel_link_with_icon;
 	background-image: url('../lcms/img/icons/appbar.camera.flash.png');
 }
+<<<<<<< HEAD
 .icon_users {
 	@include lcms_panel_link_with_icon;
 	background-image: url('../lcms/img/icons/appbar.group.png');
@@ -309,3 +334,5 @@ body.panel_open.panel_wide #lcms_container {
 	}
 
 }
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f

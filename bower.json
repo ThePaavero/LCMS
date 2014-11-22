@@ -19,7 +19,11 @@
     "jquery-colorbox": "1.5.9",
     "tinymce-builded": "4.0.23",
     "jquery-ui": "1.10.3",
+<<<<<<< HEAD
     "datetimepicker": "2.2.8",
     "nprogress" : "0.1.3"
+=======
+    "datetimepicker": "2.2.8"
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
   }
 }

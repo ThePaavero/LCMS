@@ -53,6 +53,7 @@ class LcmsCommand extends Command {
 				$this->createBlock();
 				break;
 
+<<<<<<< HEAD
 			case 'adduser':
 				$this->createUser();
 				break;
@@ -61,6 +62,8 @@ class LcmsCommand extends Command {
 				$this->createRole();
 				break;
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 			case 'nukedb':
 				$this->nukeDb();
 				break;
@@ -160,6 +163,7 @@ END;
 		$this->info('Block ID: ' . $id);
 	}
 
+<<<<<<< HEAD
 	public function createUser()
 	{
 		$cms = new CMS;
@@ -204,6 +208,8 @@ END;
 		$this->info('Role "' . $title . '" created.');
 	}
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 	public function nukeDb()
 	{
 		if( ! $this->confirm('Really reset entire database? [yes|no]'))
@@ -225,6 +231,7 @@ END;
 
 		$this->call('migrate');
 		$this->call('db:seed');
+<<<<<<< HEAD
 		$this->createBasicSitemap();
 		$this->info('Created default pages');
 	}
@@ -260,6 +267,8 @@ END;
 				'published' => '9999-1-1 00:00:00',
 				'template'  => 1
 			]);
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 	}
 
 }

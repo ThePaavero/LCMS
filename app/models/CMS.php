@@ -7,6 +7,7 @@ class CMS {
 
 	public function __construct()
 	{
+<<<<<<< HEAD
 		$this->notifications_to_template = [];
 
 		if( ! App::runningInConsole())
@@ -22,10 +23,14 @@ class CMS {
 	public function isRoot()
 	{
 		return $this->hasRole('Root');
+=======
+		$this->user_can_edit = $this->isAdmin();
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 	}
 
 	public function isAdmin()
 	{
+<<<<<<< HEAD
 		return $this->hasRole('Root, Admin');
 	}
 
@@ -83,10 +88,14 @@ class CMS {
 		}
 
 		return 0;
+=======
+		return isset(Auth::user()->username);
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 	}
 
 	public function getAllPages()
 	{
+<<<<<<< HEAD
 		if(Cache::has('lcms_all_pages'))
 		{
 			return Cache::get('lcms_all_pages');
@@ -97,6 +106,9 @@ class CMS {
 		Cache::forever('lcms_all_pages', $pages);
 
 		return $pages;
+=======
+		return Page::all()->toArray();
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 	}
 
 	public function getPublicPages()
@@ -193,6 +205,7 @@ class CMS {
 	{
 		Profiler::startTimer('LCMS Rendering of page');
 
+<<<<<<< HEAD
 		$cache_key = 'page_' . $uri;
 
 		if($this->user_can_edit)
@@ -205,6 +218,8 @@ class CMS {
 			return Cache::get($cache_key);
 		}
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		// Make sure this is a valid URI
 		if( ! $page_id = $this->uriToPageId($uri))
 		{
@@ -215,6 +230,7 @@ class CMS {
 		$page = Page::find($page_id);
 		$page_data = $page->toArray();
 
+<<<<<<< HEAD
 		$this->page_data = $page_data;
 
 		// Gather all blocks for this page
@@ -230,12 +246,23 @@ class CMS {
 		$editable = $this->user_can_edit;
 
 		// Iterate template blocks and render their output
+=======
+		// Gather all blocks for this page
+		$blocks = $page->blocks()->get()->toArray();
+		$rendered_blocks = array();
+
+		// Set editable flag
+		$editable = true; // @todo This should be true only if admin is logged
+
+		// Iterate them and render their output
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		foreach($blocks as $i)
 		{
 			$type = BlockType::find($i['type']);
 			$rendered_blocks[$type['name']] = $this->renderBlockType($type['name'], $i, $editable);
 		}
 
+<<<<<<< HEAD
 		// Iterate components and render their output
 		foreach($components as $component)
 		{
@@ -257,6 +284,8 @@ class CMS {
 			$rendered_components['add'][$component_type['name']] = $this->user_can_edit ? $this->getComponentAdminAddLink($component_type_id, $page_id) : '';
 		}
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		// Get the template
 		$template_data      = $page->template()->get()->toArray()[0];
 		$template_file_path = app_path() . '/views/lcms/templates/' . $template_data['name'] . '.blade.php';
@@ -268,13 +297,18 @@ class CMS {
 
 		// Throw all of our rendered output to the template
 		$to_template = [
+<<<<<<< HEAD
 			'blocks' => $rendered_blocks,
 			'components' => $rendered_components
+=======
+			'blocks' => $rendered_blocks
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		];
 
 		// Return the rendered template's output
 		$page_view = View::make('lcms/templates/' . $template_data['name'], array('data' => $to_template));
 
+<<<<<<< HEAD
 		// Create possible title trail
 		$title_trail = $this->buildTitleTrail($page_data);
 
@@ -332,6 +366,15 @@ class CMS {
 				'component_type_name' => $type->name,
 				'component_type_id'   => $type->id
 			]);
+=======
+		Profiler::endTimer('LCMS Rendering of page');
+
+		return View::make('maintemplate', array(
+			'page'    => 'pages.lcms_container',
+			'title'   => $page_data['title'],
+			'page_id' => $page_data['id'],
+		))->with(array('cms_template' => $page_view));
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 	}
 
 	public function uriToPageId($uri = '')
@@ -375,8 +418,11 @@ class CMS {
 		$block = Block::find($block_id);
 		$block->contents = $new_content;
 		$block->save();
+<<<<<<< HEAD
 
 		$this->clearAllCaches();
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 	}
 
 	public function cloneBlockToHistory($block_id)
@@ -402,6 +448,7 @@ class CMS {
 		return $block->contents;
 	}
 
+<<<<<<< HEAD
 	private function echoChildren($item, $nestlevel, $html)
     {
     	if(isset($item['title']))
@@ -430,10 +477,13 @@ class CMS {
 		return $html;
 	}
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 	public function sitemapAsNavigation($home = false)
 	{
 		$this->sitemap = $this->getNestedSitemapArray();
 
+<<<<<<< HEAD
 
 
 		$html = "<ul>\n";
@@ -444,6 +494,38 @@ class CMS {
 		}
 
 		$html .= $this->echoChildren($this->sitemap, 0, '');
+=======
+        function echoChildren($item, $nestlevel, $html)
+        {
+        	if(isset($item['title']))
+        	{
+        		$html .= "<li>\n";
+        		$html .= "<a href='" . URL::to($item['url']) . "'>\n";
+        		$html .= $item['title'] . "\n";
+        		$html .= "</a>\n";
+        		$html .= "</li>\n";
+        	}
+
+			foreach ($item as $child)
+            {
+                if(is_array($child))
+                {
+                	$is_new_list = isset($child[0]['title']) && $nestlevel > 0;
+
+                	if($is_new_list) $html .= "<ul>\n";
+
+                    $html .= echoChildren($child, $nestlevel+1, '');
+
+                    if($is_new_list) $html .= "</ul>\n";
+                }
+			}
+
+			return $html;
+		}
+
+		$html = "<ul>\n";
+		$html .= echoChildren($this->sitemap, 0, '');
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		$html .= "</ul>\n";
 
 		return $html;
@@ -461,12 +543,19 @@ class CMS {
 	{
 		$page = Page::find($page_id)->toArray();
 		$templates = $this->getAllTemplates();
+<<<<<<< HEAD
 		$is_public = $this->pageIsPublishedNow($page);
 
 		return array(
 				'page' => $page,
 				'templates' => $templates,
 				'is_public' => $is_public
+=======
+
+		return array(
+				'page' => $page,
+				'templates' => $templates
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 			);
 	}
 
@@ -593,6 +682,7 @@ class CMS {
         return $kids_unpublished;
 	}
 
+<<<<<<< HEAD
 	public function publishPage($page_id)
 	{
 		$page = Page::find($page_id);
@@ -602,6 +692,8 @@ class CMS {
         $this->clearCachedSitemap();
 	}
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 	public function updatePage($id, $data)
 	{
 		// Get my kids and update their URLs first
@@ -617,16 +709,22 @@ class CMS {
 
 	public function clearCachedSitemap()
 	{
+<<<<<<< HEAD
 		Cache::forget('lcms_all_pages');
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		Cache::forget('lcms_sitemap_admin');
 		Cache::forget('lcms_sitemap_guest');
 	}
 
+<<<<<<< HEAD
 	public function clearAllCaches()
 	{
 		Cache::flush();
 	}
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 	public function createNewPage($data)
 	{
 		$template_id = $data['template'];
@@ -649,7 +747,11 @@ class CMS {
 
 			$block = new Block;
 			$block->type = $block_type_id;
+<<<<<<< HEAD
 			$block->contents = BlockType::find($block_type_id)->name . ' for ' . $page->title;
+=======
+			$block->contents = BlockType::find($block_type_id)->name;
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 			$block->page = $page->id;
 			$block->save();
 		}
@@ -657,6 +759,7 @@ class CMS {
 		return $page->url;
 	}
 
+<<<<<<< HEAD
 	public function buildTitleTrail($page_data)
 	{
 		$trail = '';
@@ -755,5 +858,7 @@ class CMS {
 		// TODO...
 	}
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 }
 

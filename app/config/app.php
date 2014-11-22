@@ -206,4 +206,5 @@ return array(
 		// 'Former'       => 'Former\Facades\Former',
 		// 'Sentry'       => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 	),
+
 );

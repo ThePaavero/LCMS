@@ -6,6 +6,7 @@ class UserSeeder extends DatabaseSeeder {
   {
     $users = [
       [
+<<<<<<< HEAD
       	'role' => 1,
         'username' => 'root',
         'password' => Hash::make('root'),
@@ -13,6 +14,8 @@ class UserSeeder extends DatabaseSeeder {
       ],
       [
       	'role' => 2,
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
         'username' => 'admin',
         'password' => Hash::make('admin'),
         'email'    => 'admin@example.com'

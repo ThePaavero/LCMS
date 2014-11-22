@@ -72,15 +72,21 @@ LCMS.EditableTypes.Default = function() {
 
 	var actionSave = function()
 	{
+<<<<<<< HEAD
 		NProgress.start();
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		console.log('Saving...');
 		tinymce.remove('#' + block.attr('id'));
 		var new_content = block.html();
 		updateContent(new_content, function()
 		{
 			stopEditing();
+<<<<<<< HEAD
 			NProgress.done();
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		});
 	};
 

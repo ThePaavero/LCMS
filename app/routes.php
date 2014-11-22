@@ -22,6 +22,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('/lcms/get_main_panel/{page_id?}', 'LcmsController@getMainPanel');
 	Route::get('/lcms/flush_all_caches', 'LcmsController@flushAllCaches');
 
+<<<<<<< HEAD
 	Route::get('/lcms/list_users', 'LcmsController@listUsers');
 	Route::get('/lcms/user_form/{user_id}', 'LcmsController@getUserForm');
 	Route::post('/lcms/user_form', 'LcmsController@submitUserForm');
@@ -35,6 +36,12 @@ Route::group(array('before' => 'auth'), function()
 
 	Route::get('/lcms/unpublish_page/{page_id}', 'LcmsController@unpublishPage');
 	Route::get('/lcms/publish_page/{page_id}', 'LcmsController@publishPage');
+=======
+	Route::get('/lcms/create_page/{page_id?}', 'LcmsController@createNewPage');
+	Route::post('/lcms/create_page/{page_id?}', 'LcmsController@createNewPageSubmit');
+
+	Route::get('/lcms/unpublish_page/{page_id}', 'LcmsController@unpublishPage');
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 	Route::get('/lcms/delete_page/{page_id}', 'LcmsController@deletePage');
 
 	Route::get('/lcms/edit_page_properties/{page_id}', 'LcmsController@editPageProperties');

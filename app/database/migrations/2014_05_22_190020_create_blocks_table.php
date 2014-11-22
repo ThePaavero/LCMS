@@ -12,8 +12,12 @@ class CreateBlocksTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 			$table->integer('type')->unsigned()->index();
+<<<<<<< HEAD
 			$table->integer('page')->unsigned()->nullable()->index();
 			$table->integer('component')->unsigned()->nullable()->index();
+=======
+			$table->integer('page')->unsigned()->index();
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 			$table->text('contents');
 		});
 	}

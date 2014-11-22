@@ -13,7 +13,11 @@
 
 $app = new Illuminate\Foundation\Application;
 
+<<<<<<< HEAD
 //$app->redirectIfTrailingSlash();
+=======
+$app->redirectIfTrailingSlash();
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +32,11 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
+<<<<<<< HEAD
 	'local' => array('homestead'),
+=======
+	'local' => array('*.local', 'local.*', '192.*', '*localhost*', '*127.0.0.1*', '*pekka.fi*', '*.demo'),
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 
 ));
 

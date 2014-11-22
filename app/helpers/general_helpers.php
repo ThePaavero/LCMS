@@ -31,4 +31,8 @@ function subval_sort($a,$subkey) {
 		$c[] = $a[$key];
 	}
 	return $c;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f

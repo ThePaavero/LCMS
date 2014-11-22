@@ -1,9 +1,21 @@
 
 <div class='lcms_modal create_new_page'>
 
+<<<<<<< HEAD
 	<h1>Create New Page Here</h1>
 
 	<div class='lcms_form_wrapper'>
+=======
+	<h1>Create New Page</h1>
+
+	@if (isset($data['parent_url']))
+	<h2>Create a new page under "{{ $data['parent_url'] }}"</h2>
+	@else
+	<h2>Create a new page</h2>
+	@endif
+
+	<div class='lcms_page_form_wrapper'>
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		{{ Form::open(array('url' => 'lcms/create_page')) }}
 			<p>
 				<label>Template
@@ -22,7 +34,11 @@
 				<input type='hidden' name='parent_id' value='{{ isset($data['parent']) ? $data['parent'] : 0 }}'>
 			</p>
 		{{ Form::close() }}
+<<<<<<< HEAD
 	</div><!-- lcms_form_wrapper -->
+=======
+	</div><!-- lcms_page_form_wrapper -->
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 
 </div><!-- lcms_modal -->
 

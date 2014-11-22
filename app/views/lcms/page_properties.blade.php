@@ -3,7 +3,11 @@
 
 	<h1>Page Properties</h1>
 
+<<<<<<< HEAD
 	<div class='lcms_form_wrapper'>
+=======
+	<div class='lcms_page_form_wrapper'>
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		{{ Form::open(array('url' => 'lcms/update_page')) }}
 		<input type ='hidden' name='page_id' value='{{ $data['page']['id'] }}'/>
 			<p>
@@ -23,7 +27,11 @@
 				<input type='hidden' name='parent_id' value='{{ isset($data['parent']) ? $data['parent'] : 0 }}'>
 			</p>
 		{{ Form::close() }}
+<<<<<<< HEAD
 	</div><!-- lcms_form_wrapper -->
+=======
+	</div><!-- lcms_page_form_wrapper -->
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 
 </div><!-- lcms_modal -->
 

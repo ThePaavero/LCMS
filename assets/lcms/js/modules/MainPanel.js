@@ -15,11 +15,18 @@ LCMS.Modules.MainPanel = function() {
 		panel = $('#lcms_main_panel');
 		body = $('body');
 
+<<<<<<< HEAD
 		replaceTokens();
 
 		loadPanel(function()
 		{
 			main_links = panel.find('nav > ul > li > a').not('.noajax');
+=======
+		loadPanel(function()
+		{
+			main_links = panel.find('nav > ul > li > a').not('.noajax');
+			doListeners();
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 
 			var panel_state = localStorage.getItem('lcms_panel_state');
 			if(panel_state === 'panel_open') {
@@ -45,7 +52,10 @@ LCMS.Modules.MainPanel = function() {
 
 			dyn_content = $(panel).find('.dyn_content');
 			panelSizeReset();
+<<<<<<< HEAD
 			doListeners();
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 
 			LCMS.Modules.Events.addEventListener(self, 'openInMainPanel', function(e){
 				loadContent(e.href);
@@ -80,6 +90,7 @@ LCMS.Modules.MainPanel = function() {
 
 	var doListeners = function()
 	{
+<<<<<<< HEAD
 		var add_these = dyn_content.find('a').not('.noajax, .close_dyn_content');
 		main_links = main_links.add(add_these);
 
@@ -92,6 +103,15 @@ LCMS.Modules.MainPanel = function() {
 
 		var confirms = $('.lcms_confirm');
 		confirms.off('click');
+=======
+		main_links.click(function(e){
+			e.preventDefault();
+
+			loadContent($(e.target).attr('href'));
+		});
+
+		var confirms = panel.find('.confirm');
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		confirms.on('click', function(e)
 		{
 			if( ! window.confirm('Are you sure?'))
@@ -104,15 +124,21 @@ LCMS.Modules.MainPanel = function() {
 	};
 
 	var loadContent = function(url) {
+<<<<<<< HEAD
 		NProgress.start();
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		$.ajax({
 			url: url,
 		})
 		.done(function( data ) {
 			addDynamicContent(data);
+<<<<<<< HEAD
 			NProgress.done();
 			doListeners();
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 		});
 	};
 
@@ -190,6 +216,7 @@ LCMS.Modules.MainPanel = function() {
 		flasher.init();
 	};
 
+<<<<<<< HEAD
 	var replaceTokens = function()
 	{
 		var page_id = getCurrentPageId();
@@ -205,4 +232,6 @@ LCMS.Modules.MainPanel = function() {
 		});
 	};
 
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 };

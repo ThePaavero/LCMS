@@ -121,6 +121,9 @@ return array(
 	*/
 
 	'domain' => null,
+<<<<<<< HEAD
     'expire_on_close'=>false
+=======
+>>>>>>> 369acc76ddfcffd9f3a374c208ac186999d6134f
 
 );
