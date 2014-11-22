@@ -462,12 +462,17 @@ class CMS
 
     public function getPageProperties($page_id)
     {
-        $page = Page::find($page_id)->toArray();
+        $pageObject = Page::find($page_id);
+        $page = $pageObject->toArray();
         $templates = $this->getAllTemplates();
         $is_public = $this->pageIsPublishedNow($page);
+        $language = $pageObject->language()->get()->toArray()[0];
+        $languages = Language::all()->toArray();
 
         return array (
             'page' => $page,
+            'language' => $language,
+            'languages' => $languages,
             'templates' => $templates,
             'is_public' => $is_public
         );
@@ -579,6 +584,14 @@ class CMS
         $this->clearCachedSitemap();
 
         return $kids_deleted;
+    }
+
+    public function deleteLanguage($id)
+    {
+        // TODO: Check if pages are connected to this language and warn before deleting
+
+        $lang = Language::find($id);
+        $lang->delete();
     }
 
     public function unpublishPage($page_id)

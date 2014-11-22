@@ -31,6 +31,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::post('/lcms/create_page/{page_id?}', 'LcmsController@createNewPageSubmit');
 
     Route::get('/lcms/list_languages', 'LcmsController@languagesListAndForm');
+    Route::get('/lcms/delete_language/{language_id}', 'LcmsController@deleteLanguage');
 	Route::post('/lcms/create_language', 'LcmsController@createNewLanguage');
 
 	Route::get('/lcms/delete_component/{component_id}/{page_id}', 'LcmsController@deleteComponent');

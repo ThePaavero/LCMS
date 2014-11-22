@@ -14,6 +14,15 @@
 					</select>
 				</label>
 			</p>
+			<p>
+            <label>Language
+                <select name='language'>
+                    @foreach($data['languages'] as $i)
+                    <option value='{{ $i['id'] }}'>{{ $i['name'] }}</option>
+                    @endforeach
+                </select>
+            </label>
+            </p>
 			<p><label><span class="label">Title</span><input type='text' name='title'></label></p>
 			<p><label><span class="label">URL</span><input type='text' name='url' value='{{ isset($data['parent_url']) ? $data['parent_url'] . '/' : ''}}'></label></p>
 			<p><label><span class="label">Publish date</span><input type='text' name='published' class='datepicker' value='{{ $data['published'] }}'></label></p>

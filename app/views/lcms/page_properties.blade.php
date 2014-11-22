@@ -8,9 +8,18 @@
 		<input type ='hidden' name='page_id' value='{{ $data['page']['id'] }}'/>
 			<p>
 				<label>Template
-					<select name='template'>
+            		<select name='template'>
 						@foreach($data['templates'] as $i)
 						<option value='{{ $i['id'] }}'@if($i['id'] === $data['page']['template']) selected @endif>{{ $i['description'] }}</option>
+						@endforeach
+					</select>
+				</label>
+			</p>
+            <p>
+				<label>Language
+					<select name='language'>
+						@foreach($data['languages'] as $i)
+						<option value='{{ $i['id'] }}'@if($i['id'] === $data['page']['language']) selected @endif>{{ $i['name'] }}</option>
 						@endforeach
 					</select>
 				</label>
