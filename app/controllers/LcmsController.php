@@ -271,5 +271,11 @@ class LcmsController extends BaseController {
 		return Redirect::back();
 	}
 
+    public function languagesListAndForm()
+    {
+        $data = [];
+        return View::make('lcms.language_list_and_form')->with(array('data' => $data));
+    }
+
 }
 

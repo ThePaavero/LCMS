@@ -14,6 +14,7 @@
 		<ul>
 			@if($CMS->isRoot())
 			<li><a href='{{ URL::to('lcms/list_users') }}' class='icon_users'>Manage users</a></li>
+			<li><a href='{{ URL::to('lcms/list_languages') }}' class='icon_languages'>Manage languages</a></li>
 			@endif
 			<li><a href='{{ URL::to('lcms/create_page/' . (isset($page_id) ? $page_id : 0)) }}' class='icon_create_new_page'>Create new page here</a></li>
 			@if(isset($page_id) && $page_id > 0)

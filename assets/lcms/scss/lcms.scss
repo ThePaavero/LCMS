@@ -256,8 +256,12 @@ body.panel_open.panel_wide #lcms_container {
 	background-image: url('../lcms/img/icons/appbar.camera.flash.png');
 }
 .icon_users {
-	@include lcms_panel_link_with_icon;
-	background-image: url('../lcms/img/icons/appbar.group.png');
+  @include lcms_panel_link_with_icon;
+  background-image: url('../lcms/img/icons/appbar.group.png');
+}
+.icon_languages {
+  @include lcms_panel_link_with_icon;
+  background-image: url('../lcms/img/icons/appbar.globe.png');
 }
 
 .lcms_notification_list {
