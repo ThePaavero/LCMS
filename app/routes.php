@@ -21,6 +21,7 @@ Route::group(array('before' => 'auth'), function()
 {
 	Route::get('/lcms/get_main_panel/{page_id?}', 'LcmsController@getMainPanel');
 	Route::get('/lcms/flush_all_caches', 'LcmsController@flushAllCaches');
+	Route::get('/lcms/manage_page_order', 'LcmsController@managePageOrder');
 
 	Route::get('/lcms/list_users', 'LcmsController@listUsers');
 	Route::get('/lcms/user_form/{user_id}', 'LcmsController@getUserForm');

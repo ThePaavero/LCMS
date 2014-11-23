@@ -263,6 +263,10 @@ body.panel_open.panel_wide #lcms_container {
   @include lcms_panel_link_with_icon;
   background-image: url('../lcms/img/icons/appbar.globe.png');
 }
+.icon_page_order {
+  @include lcms_panel_link_with_icon;
+  background-image: url('../lcms/img/icons/appbar.list.reorder.png');
+}
 
 .lcms_notification_list {
 	background: $lcms_gray;

@@ -27,6 +27,7 @@
 			<li><a href='{{ URL::to('lcms/delete_page/' . $page_id) }}' class='noajax lcms_confirm icon_delete_page'>Delete this page</a></li>
 			@endif
 			<li><a href='{{ URL::to('lcms/flush_all_caches') }}' class='noajax icon_flush_caches'>Flush all caches</a></li>
+			<li><a href='{{ URL::to('lcms/manage_page_order') }}' class='icon_page_order'>Manage page order</a></li>
 			<li><a href='#' class='noajax icon_flash_editables'>Flash editable areas</a></li>
 			<li><a href='{{ URL::to('logout') }}' class='noajax icon_logout'>Log out</a></li>
 		</ul>

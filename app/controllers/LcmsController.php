@@ -279,6 +279,8 @@ class LcmsController extends BaseController
 
     public function languagesListAndForm()
     {
+        $this->requireAdminRights();
+
         $data = [
             'languages' => Language::all()->toArray()
         ];
@@ -312,6 +314,17 @@ class LcmsController extends BaseController
 
         Alert::success('Language deleted')->flash();
         return Redirect::back();
+    }
+
+    public function managePageOrder()
+    {
+        $this->requireAdminRights();
+
+        $data = [
+            'pages' => $this->cms->getNestedSitemapArray()
+        ];
+
+        return View::make('lcms.manage_page_order')->with(array ('data' => $data));
     }
 
 }
