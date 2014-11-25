@@ -5,315 +5,363 @@ $orange: #fa503a;
 $orange_muted: #6f3c35;
 
 @import 'includes/nprogress';
+@import 'includes/sortable';
 
 @mixin lcms_panel_link_with_icon {
-	display: block;
-	background-size: contain;
-	text-indent: 36px;
-	background-repeat: no-repeat;
-	background-position: center left;
+  display: block;
+  background-size: contain;
+  text-indent: 36px;
+  background-repeat: no-repeat;
+  background-position: center left;
 }
 
 #lcms_main_panel {
-	font-family: Arial, sans-serif;
-	font-size: 13px;
-	background: $lcms_gray;
-	position: fixed;
-	top: 0;
-	left: 0px;
-	height: 100%;
-	color: #fff;
-	z-index: 3;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  background: $lcms_gray;
+  position: fixed;
+  top: 0;
+  left: 0px;
+  height: 100%;
+  color: #fff;
+  z-index: 3;
 
-	h2.cms_title {
-		color: $orange;
-	}
+  h2.cms_title {
+    color: $orange;
+  }
 
-	.lcms_panel_meta {
-		opacity: 0.4;
-		font-size: 12px;
-	}
+  .lcms_panel_meta {
+    opacity: 0.4;
+    font-size: 12px;
+  }
 
-	a {
-		color: #ffffff;
-	}
-	.handle {
-		text-decoration: none;
-		$handle_size: 40px;
-		display: block;
-		background: $lcms_gray;
-		float: right;
-		text-align: center;
-		margin-right: $handle_size * -1;
+  a {
+    color: #ffffff;
+  }
+  .handle {
+    text-decoration: none;
+    $handle_size: 40px;
+    display: block;
+    background: $lcms_gray;
+    float: right;
+    text-align: center;
+    margin-right: $handle_size * -1;
 
-		.handle_content {
-			width: $handle_size;
-			height: $handle_size - 13;
-			display: block;
-			color: #fff;
-			padding: 10px 0 5px;
-			font-size: 20px;
-		}
-	}
+    .handle_content {
+      width: $handle_size;
+      height: $handle_size - 13;
+      display: block;
+      color: #fff;
+      padding: 10px 0 5px;
+      font-size: 20px;
+    }
+  }
 
-	> .content {
-		height: 100%;
-		padding: 10px;
-		overflow: auto;
+  > .content {
+    height: 100%;
+    padding: 10px;
+    overflow: auto;
 
-		nav {
-			display: block;
+    nav {
+      display: block;
 
-			ul {
-				list-style: none;
-				margin: 0;
-				padding: 0;
-				display: block;
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: block;
 
-				li {
-					display: block;
-					margin-top: -1px;
-					border-top: 1px solid #666;
-					border-bottom: 1px solid #666;
+        li {
+          display: block;
+          margin-top: -1px;
+          border-top: 1px solid #666;
+          border-bottom: 1px solid #666;
 
-					a {
-						display: block;
-						padding: 15px 10px;
-						text-decoration: none;
-						outline: none;
+          a {
+            display: block;
+            padding: 15px 10px;
+            text-decoration: none;
+            outline: none;
 
-						&:hover {
-							background-color: #666;
-						}
-					}
-				}
-			}
-		}
-	}
+            &:hover {
+              background-color: #666;
+            }
+          }
+        }
+      }
+    }
+  }
 
-	.dyn_content {
-		display: block;
-		padding: 1% 1% 50px;
+  .dyn_content {
+    display: block;
+    padding: 1% 1% 50px;
 
-		.close_dyn_content {
-			font-weight: bold;
-			text-decoration: none;
-			float: right;
-			color: #fff;
-			padding: 10px 15px;
-			margin: 5px;
-			border: 1px solid $orange;
+    .close_dyn_content {
+      font-weight: bold;
+      text-decoration: none;
+      float: right;
+      color: #fff;
+      padding: 10px 15px;
+      margin: 5px;
+      border: 1px solid $orange;
 
-			&:hover {
-				color: $lcms_gray;
-				border: 1px solid $lcms_gray;
-				background: $orange;
-			}
-		}
-	}
+      &:hover {
+        color: $lcms_gray;
+        border: 1px solid $lcms_gray;
+        background: $orange;
+      }
+    }
+  }
 }
 
 /* All movement */
 body.animate #lcms_main_panel,
 body.animate #lcms_container {
-	transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 body.panel_open {
-	display: block;
+  display: block;
 }
 
 /* Panel movement */
 body #lcms_main_panel {
-	width: $panel_width;
-	transform: translateX($panel_width*-1);
+  width: $panel_width;
+  transform: translateX($panel_width*-1);
 }
+
 body.panel_open #lcms_main_panel {
-	transform: translateX(0);
+  transform: translateX(0);
 }
+
 body.panel_open.panel_wide #lcms_main_panel {
-	width: $panel_wide_width;;
+  width: $panel_wide_width;;
 }
 
 /* Content movement */
 body.panel_open #lcms_container {
-	transform: translateX($panel_width);
-}
-body.panel_open.panel_wide #lcms_container {
-	transform: translateX($panel_wide_width);
+  transform: translateX($panel_width);
 }
 
+body.panel_open.panel_wide #lcms_container {
+  transform: translateX($panel_wide_width);
+}
 
 .lcms_modal {
-	h2 {
-		font-size: 14px;
-		font-weight: bold;
-		display: inline-block;
-		color: $orange;
-		display: block;
-	}
+  h2 {
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    color: $orange;
+    display: block;
+  }
 }
 
 .contenteditable {
-	box-shadow: 0px 0px 1px 0px red inset;
+  box-shadow: 0px 0px 1px 0px red inset;
 }
 
 .cms_block_tools {
-	position: absolute;
-	display: block;
-	background: $lcms_gray;
-	padding: 4px;
-	font-size: 12px;
-	z-index: 2;
+  position: absolute;
+  display: block;
+  background: $lcms_gray;
+  padding: 4px;
+  font-size: 12px;
+  z-index: 2;
 
-	a {
-		text-decoration: none;
-		display: inline-block;
-		padding: 0 5px;
-		color: #fff;
-	}
+  a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 0 5px;
+    color: #fff;
+  }
 }
 
 /* css for datepicker */
-.ui-datepicker-div .ui-widget-header { margin-bottom: 8px; }
-.ui-datepicker-div dl { text-align: left; }
-.ui-datepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
-.ui-datepicker-div dl dd { margin: 0 10px 10px 45%; }
-.ui-datepicker-div td { font-size: 90%; }
-.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+.ui-datepicker-div .ui-widget-header {
+  margin-bottom: 8px;
+}
 
-.ui-datepicker-rtl{ direction: rtl; }
-.ui-datepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
-.ui-datepicker-rtl dl dt{ float: right; clear: right; }
-.ui-datepicker-rtl dl dd { margin: 0 45% 10px 10px; }
+.ui-datepicker-div dl {
+  text-align: left;
+}
+
+.ui-datepicker-div dl dt {
+  float: left;
+  clear: left;
+  padding: 0 0 0 5px;
+}
+
+.ui-datepicker-div dl dd {
+  margin: 0 10px 10px 45%;
+}
+
+.ui-datepicker-div td {
+  font-size: 90%;
+}
+
+.ui-tpicker-grid-label {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ui-datepicker-rtl {
+  direction: rtl;
+}
+
+.ui-datepicker-rtl dl {
+  text-align: right;
+  padding: 0 5px 0 0;
+}
+
+.ui-datepicker-rtl dl dt {
+  float: right;
+  clear: right;
+}
+
+.ui-datepicker-rtl dl dd {
+  margin: 0 45% 10px 10px;
+}
 
 .lcms_form_wrapper {
 
-	form {
+  form {
 
-		input[type=text],
-		input[type=email],
-		input[type=password] {
-			display: block;
-			background: #1c1c1c;
-			padding: 5px;
-			width: 90%;
-			max-width: 600px;
-			font-size: 12px;
-			color: #fff;
-			border: solid 1px #525252;
-		}
+    input[type=text],
+    input[type=email],
+    input[type=password] {
+      display: block;
+      background: #1c1c1c;
+      padding: 5px;
+      width: 90%;
+      max-width: 600px;
+      font-size: 12px;
+      color: #fff;
+      border: solid 1px #525252;
+    }
 
-		input[type=submit] {
-			background: $orange;
-			display: inline-block;
-			padding: 5px 10px;
-			color: #000;
-			border: none;
-			text-transform: uppercase;
-			font-weight: bold;
-		}
-	}
+    input[type=submit] {
+      background: $orange;
+      display: inline-block;
+      padding: 5px 10px;
+      color: #000;
+      border: none;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
 }
 
 .cms_editable {
 
-	&.flashing {
-		box-shadow: 0px 0px 0px 2px $orange inset;
-	}
+  &.flashing {
+    box-shadow: 0px 0px 0px 2px $orange inset;
+  }
 }
 
 .icon_create_new_page {
-	@include lcms_panel_link_with_icon;
-	background-image: url('../lcms/img/icons/appbar.page.add.png');
+  @include lcms_panel_link_with_icon;
+  background-image: url('../lcms/img/icons/appbar.page.add.png');
 }
+
 .icon_page_properties {
-	@include lcms_panel_link_with_icon;
-	background-image: url('../lcms/img/icons/appbar.page.edit.png');
+  @include lcms_panel_link_with_icon;
+  background-image: url('../lcms/img/icons/appbar.page.edit.png');
 }
+
 .icon_publish_page {
-	@include lcms_panel_link_with_icon;
-	background-image: url('../lcms/img/icons/appbar.checkmark.pencil.png');
+  @include lcms_panel_link_with_icon;
+  background-image: url('../lcms/img/icons/appbar.checkmark.pencil.png');
 }
+
 .icon_unpublish_page {
-	@include lcms_panel_link_with_icon;
-	background-image: url('../lcms/img/icons/appbar.cancel.png');
+  @include lcms_panel_link_with_icon;
+  background-image: url('../lcms/img/icons/appbar.cancel.png');
 }
+
 .icon_delete_page {
-	@include lcms_panel_link_with_icon;
-	background-image: url('../lcms/img/icons/appbar.page.delete.png');
+  @include lcms_panel_link_with_icon;
+  background-image: url('../lcms/img/icons/appbar.page.delete.png');
 }
+
 .icon_flush_caches {
-	@include lcms_panel_link_with_icon;
-	background-image: url('../lcms/img/icons/appbar.clean.png');
+  @include lcms_panel_link_with_icon;
+  background-image: url('../lcms/img/icons/appbar.clean.png');
 }
+
 .icon_logout {
-	@include lcms_panel_link_with_icon;
-	background-image: url('../lcms/img/icons/appbar.power.png');
+  @include lcms_panel_link_with_icon;
+  background-image: url('../lcms/img/icons/appbar.power.png');
 }
+
 .icon_flash_editables {
-	@include lcms_panel_link_with_icon;
-	background-image: url('../lcms/img/icons/appbar.camera.flash.png');
+  @include lcms_panel_link_with_icon;
+  background-image: url('../lcms/img/icons/appbar.camera.flash.png');
 }
+
 .icon_users {
   @include lcms_panel_link_with_icon;
   background-image: url('../lcms/img/icons/appbar.group.png');
 }
+
 .icon_languages {
   @include lcms_panel_link_with_icon;
   background-image: url('../lcms/img/icons/appbar.globe.png');
 }
+
 .icon_page_order {
   @include lcms_panel_link_with_icon;
   background-image: url('../lcms/img/icons/appbar.list.reorder.png');
 }
 
 .lcms_notification_list {
-	background: $lcms_gray;
-	padding: 10px;
-	color: #fff;
+  background: $lcms_gray;
+  padding: 10px;
+  color: #fff;
 
-	li {
-		//
-	}
+  li {
+    //
+  }
 }
 
 .delete_user {
-	color: $orange !important;
-	text-decoration: none;
+  color: $orange !important;
+  text-decoration: none;
 }
 
 .lcms_modal_note {
-	margin: 3% 0;
-	background: $orange_muted;
-	padding: 2%;
-	color: #fff;
-	font-size: 12px;
-	opacity: 0.6;
+  margin: 3% 0;
+  background: $orange_muted;
+  padding: 2%;
+  color: #fff;
+  font-size: 12px;
+  opacity: 0.6;
 }
 
 .lcms_component_admin_tools {
-	float: right;
-	background: $lcms_gray;
-	opacity: 0.2;
+  float: right;
+  background: $lcms_gray;
+  opacity: 0.2;
 
-	&:hover {
-		opacity: 1;
-	}
+  &:hover {
+    opacity: 1;
+  }
 
-	a {
-		text-decoration: none;
-		font-size: 11px;
-		display: inline-block;
-		text-align: center;
+  a {
+    text-decoration: none;
+    font-size: 11px;
+    display: inline-block;
+    text-align: center;
 
-		&.delete_component {
-			width: 18px;
-			height: 18px;
-			line-height: 18px;
-			color: $orange;
-			font-size: 18px;
-		}
-	}
+    &.delete_component {
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+      color: $orange;
+      font-size: 18px;
+    }
+  }
 
 }

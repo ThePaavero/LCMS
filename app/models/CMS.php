@@ -4,6 +4,7 @@ class CMS
 {
     public $user_can_edit = false;
     public $sitemap;
+    public $language;
 
     public function __construct()
     {
@@ -101,13 +102,15 @@ class CMS
 
     public function getPublicPages()
     {
+        $language = ! empty($this->language) ? $this->language : $this->getDefaultLanguageId();
+
         if ($this->user_can_edit)
         {
-            $pages = Page::all()->toArray();
+            $pages = Page::where('language', '=', $language)->get()->toArray();
         }
         else
         {
-            $pages = Page::where('published', '<=', new DateTime)->get()->toArray();
+            $pages = Page::where('language', '=', $language)->where('published', '<=', new DateTime)->get()->toArray();
         }
 
         return $pages;
@@ -134,7 +137,7 @@ class CMS
 
         if (Cache::has($cache_key))
         {
-            return Cache::get($cache_key);
+//            return Cache::get($cache_key);
         }
 
         if (isset($this->sitemap))
@@ -165,7 +168,6 @@ class CMS
             $current = &$new_pages;
             for ($i = 0; $i < count($segments); $i ++)
             {
-
                 $segment = $segments[$i];
                 if ( ! isset($current[$segment]))
                 {
@@ -196,6 +198,7 @@ class CMS
     public function renderPage($uri = '')
     {
         Profiler::startTimer('LCMS Rendering of page');
+        Log::info('CMS rendering page with URI "' . $uri . '"');
 
         $cache_key = 'page_' . $uri;
 
@@ -220,6 +223,9 @@ class CMS
         $page_data = $page->toArray();
 
         $this->page_data = $page_data;
+
+        // Set our language
+        $this->setLanguage($page_data['language']);
 
         // Gather all blocks for this page
         $blocks = $page->blocks()->get()->toArray();
@@ -411,7 +417,7 @@ class CMS
         if (isset($item['title']))
         {
             $html .= "<li>\n";
-            $html .= "<a href='" . URL::to($item['url']) . "'>\n";
+            $html .= "<a href='" . URL::to($item['url']) . "' data-id='" . $item['id'] . "'>\n";
             $html .= $item['title'] . "\n";
             $html .= "</a>\n";
             $html .= "</li>\n";
@@ -787,6 +793,17 @@ class CMS
             'contents' => 'Body',
             'component' => $comp->id
         ]);
+    }
+
+    public function getDefaultLanguageId()
+    {
+        return 1; // TODO
+    }
+
+    public function setLanguage($id)
+    {
+        Log::info('Set language to ' . $id);
+        $this->language = $id;
     }
 
 }

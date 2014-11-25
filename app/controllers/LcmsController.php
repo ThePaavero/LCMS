@@ -321,7 +321,7 @@ class LcmsController extends BaseController
         $this->requireAdminRights();
 
         $data = [
-            'pages' => $this->cms->getNestedSitemapArray()
+            'pages' => $this->cms->sitemapAsNavigation()
         ];
 
         return View::make('lcms.manage_page_order')->with(array ('data' => $data));

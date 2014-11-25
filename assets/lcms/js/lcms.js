@@ -14,7 +14,7 @@ $(function()
 	editables.init();
 	window.LCMS.globalInstances.editables = editables;
 
-	var sortablesitemap = new LCMS.Modules.SortableSitemap();
-	sortablesitemap.init();
-	window.LCMS.globalInstances.sortablesitemap = sortablesitemap;
+	//var sortablesitemap = new LCMS.Modules.SortableSitemap();
+	//sortablesitemap.init();
+	//window.LCMS.globalInstadata-ytta-idnces.sortablesitemap = sortablesitemap;
 });

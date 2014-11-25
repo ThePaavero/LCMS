@@ -1,0 +1,29 @@
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+ul.nested-sortable li {
+  position: relative;
+}
+
+ul.nested-sortable li.placeholder {
+  position: relative;
+  /** More li styles **/
+
+  &:before {
+    position: absolute;
+    /** Define arrowhead **/
+  }
+}
+
+.dd-handle {
+  position: absolute;
+  z-index: 100;
+  background: #ccc;
+}
