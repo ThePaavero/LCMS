@@ -13,7 +13,7 @@
 
     <link rel='stylesheet' href="{{ URL::to('assets/css/project.css') }}">
 
-    {{-- <meta name='viewport' content='width=device-width,initial-scale=1'> --}}
+     {{--<meta name='viewport' content='width=device-width,initial-scale=1'>--}}
 
     <!--[if lt IE 9]>
     <script src='{{ URL::to('/assets/js/system/html5.js') }}'></script>

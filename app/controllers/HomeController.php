@@ -1,7 +1,5 @@
 <?php
 
-use Demo\Demo\DemoInterface;
-
 class HomeController extends BaseController {
 
 	public function index()

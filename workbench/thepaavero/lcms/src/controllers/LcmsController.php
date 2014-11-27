@@ -5,6 +5,9 @@ class LcmsController extends BaseController
 
     public function __construct()
     {
+        $this->cms = new Lcms;
+        View::share('CMS', $this->cms);
+
         parent::__construct();
     }
 

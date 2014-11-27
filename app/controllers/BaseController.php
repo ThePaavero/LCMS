@@ -4,7 +4,7 @@ class BaseController extends Controller {
 
 	public function __construct()
 	{
-		$this->cms = new CMS;
+		$this->cms = new Lcms;
 		View::share('CMS', $this->cms);
 	}
 

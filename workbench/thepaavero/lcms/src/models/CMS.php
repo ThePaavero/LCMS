@@ -1,6 +1,6 @@
 <?php
 
-class CMS
+class Lcms
 {
     public $user_can_edit = false;
     public $sitemap;

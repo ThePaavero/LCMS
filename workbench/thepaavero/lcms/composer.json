@@ -1,0 +1,23 @@
+{
+    "name": "thepaavero/lcms",
+    "description": "Prototype for a CMS built on top of Laravel",
+    "authors": [
+        {
+            "name": "Pekka Siiriäinen",
+            "email": "pekka@astudios.org"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Thepaavero\\Lcms\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
