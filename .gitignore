@@ -10,3 +10,4 @@ vendor/
 app/database/*.sqlite
 composer.phar
 .idea
+tests/_output/*
