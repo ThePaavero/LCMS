@@ -163,7 +163,7 @@ END;
 
     public function createUser()
     {
-        $cms = new CMS;
+        $cms = new Lcms;
 
         $username = $this->ask('Username?');
         $default_email = $username . '@localhost';
@@ -232,7 +232,7 @@ END;
 
     public function createBasicSitemap()
     {
-        $cms = new CMS;
+        $cms = new Lcms;
 
         $cms->createNewPage([
             'title' => 'About US',

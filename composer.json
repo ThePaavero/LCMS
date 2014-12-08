@@ -4,7 +4,7 @@
 	"keywords": ["framework", "laravel"],
 	"require": {
 		"laravel/framework": "4.0.*",
-		"way/generators": "dev-master",
+        "way/generators": "~2.0",
 		"way/phpunit-wrappers": "dev-master",
 		"prologue/alerts": "dev-master",
 		"intervention/image": "dev-master",
