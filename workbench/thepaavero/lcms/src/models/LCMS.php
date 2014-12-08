@@ -338,10 +338,21 @@ class Lcms
 
         $type = ComponentType::where('name', '=', $name)->first();
 
+        $componentItems = $this->getComponentsOfTtype($type);
+
         return View::make('lcms.component_admin_add_new')->with([
             'component_type_name' => $type->name,
-            'component_type_id' => $type->id
+            'component_type_id' => $type->id,
+            'componentItems' => $componentItems
         ]);
+    }
+
+    public function getComponentsOfTtype($type)
+    {
+        $comps = new Component;
+        $matches = $comps->isOfType($type);
+
+        return $matches;
     }
 
     public function uriToPageId($uri = '')
