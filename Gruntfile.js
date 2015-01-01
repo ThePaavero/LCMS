@@ -113,6 +113,17 @@ module.exports = function(grunt) {
 					}
 				]
 			},
+			assets_fonts: {
+				files: [
+					{
+						src: 'assets/lcms/fonts/**/*',
+						expand: true,
+						dest: 'public_html/',
+						flatten: false,
+						filter: 'isFile'
+					}
+				]
+			},
 			colorbox: {
 				files: [
 					{

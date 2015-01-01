@@ -6,13 +6,15 @@ $orange_muted: #6f3c35;
 
 @import 'includes/nprogress';
 @import 'includes/sortable';
+@import 'includes/font-awesome';
 
 @mixin lcms_panel_link_with_icon {
-  display: block;
-  background-size: contain;
-  text-indent: 36px;
-  background-repeat: no-repeat;
-  background-position: center left;
+
+  &:before {
+    font-family: 'FontAwesome';
+    font-size: 20px;
+    padding-right: 20px;
+  }
 }
 
 #lcms_main_panel {
@@ -263,57 +265,79 @@ body.panel_open.panel_wide #lcms_container {
 
 .icon_create_new_page {
   @include lcms_panel_link_with_icon;
-  background-image: url('../lcms/img/icons/appbar.page.add.png');
+  &:before {
+    content: "\f0fe";
+  }
 }
 
 .icon_page_properties {
   @include lcms_panel_link_with_icon;
-  background-image: url('../lcms/img/icons/appbar.page.edit.png');
+  &:before {
+    content: "\f044";
+  }
 }
 
 .icon_publish_page {
   @include lcms_panel_link_with_icon;
-  background-image: url('../lcms/img/icons/appbar.checkmark.pencil.png');
+  &:before {
+    content: "\f00c";
+  }
 }
 
 .icon_unpublish_page {
   @include lcms_panel_link_with_icon;
-  background-image: url('../lcms/img/icons/appbar.cancel.png');
+  &:before {
+    content: "\f05e";
+  }
 }
 
 .icon_delete_page {
   @include lcms_panel_link_with_icon;
-  background-image: url('../lcms/img/icons/appbar.page.delete.png');
+  &:before {
+    content: "\f00d";
+  }
 }
 
 .icon_flush_caches {
   @include lcms_panel_link_with_icon;
-  background-image: url('../lcms/img/icons/appbar.clean.png');
+  &:before {
+    content: "\f021";
+  }
 }
 
 .icon_logout {
   @include lcms_panel_link_with_icon;
-  background-image: url('../lcms/img/icons/appbar.power.png');
+  &:before {
+    content: "\f08b";
+  }
 }
 
 .icon_flash_editables {
   @include lcms_panel_link_with_icon;
-  background-image: url('../lcms/img/icons/appbar.camera.flash.png');
+  &:before {
+    content: "\f0e7";
+  }
 }
 
 .icon_users {
   @include lcms_panel_link_with_icon;
-  background-image: url('../lcms/img/icons/appbar.group.png');
+  &:before {
+    content: "\f0c0";
+  }
 }
 
 .icon_languages {
   @include lcms_panel_link_with_icon;
-  background-image: url('../lcms/img/icons/appbar.globe.png');
+  &:before {
+    content: "\f0ac";
+  }
 }
 
 .icon_page_order {
   @include lcms_panel_link_with_icon;
-  background-image: url('../lcms/img/icons/appbar.list.reorder.png');
+  &:before {
+    content: "\f047";
+  }
 }
 
 .lcms_notification_list {
